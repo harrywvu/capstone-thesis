@@ -19,7 +19,7 @@ Laoag City appears in the current data-source plan as a **candidate** study area
 .
 ├── knowledge/                         # Canonical project definition, decisions, and manuscript map
 ├── latex-template-ccis-paper-v2/      # Official CCIS BSIT LaTeX manuscript template
-├── sentinel-demo/                     # Interactive Sentinel prototype (separate Git repository)
+├── sentinel-demo/                     # Interactive Sentinel prototype
 ├── assets/                            # Source/reference materials
 └── DATA SOURCES AND TOOLS FOR SENTINEL.md
                                       # Candidate data sources and data-management plan
@@ -85,7 +85,7 @@ npm run lint
 npm run format
 ```
 
-`sentinel-demo` is a separate Git repository. Commit application changes from within that directory, then commit the updated repository reference from this parent repository when appropriate.
+`sentinel-demo` is part of this repository. Run its Node.js commands from that directory, then stage and commit its changes from the repository root.
 
 ## Data direction
 
