@@ -1,0 +1,56 @@
+%
+%   LaTex Document for
+%   Thesis & Capstone Project
+%	College of Computing and Information Sciences
+%	Version 2
+%
+
+% --- BS Information Technology capstone ---
+\documentclass[bsit]{ccispaper}
+\addbibresource{references/bibliography.bib}
+
+% --- Paper Metadata ---
+% The project name "Sentinel" is tentative. Use the accepted descriptive title
+% until a final system name is approved.
+\papertitle{A 2D SIMULATION-BASED DECISION SUPPORT SYSTEM FOR FLOOD EVACUATION PLANNING}
+\paperauthors{JOHN HAROLD A. ALEJO \\ CYRUS KIRBY GAOR \\ BRADLEY KJIEL PASALO \\ JOSHEARIE KRISTOFFER LANDICHO}
+\pubmonth{August}
+\pubyear{2026}
+
+% --- Adviser Name ---
+\adviser{ADVISER A. ADVISER}
+
+% --- Dean Name ---
+% \dean{SATURNINA F. NISPEROS}
+
+\begin{document}
+	
+	% --- Generate Front Pages Automatically ---
+	\makecoverpage
+	\maketitlepage
+	
+	% --- Approval Sheet: Replace with the names of your Panel Members ---
+	\makeapprovalsheet{PANEL A. ONE}{PANEL B. TWO}{PANEL C. THREE}
+	
+	% --- Front Matter (Acknowledgment, Abstract, etc.) ---
+	\input{sections/acknowledgment}
+	\input{sections/abstract}
+	\input{sections/toc}
+	
+	% --- Main Content (Chapters 1 to 5) ---
+	\inputchapter{chapter1}
+	\inputchapter{chapter2}
+	\inputchapter{chapter3}
+	\inputchapter{chapter4}
+	\inputchapter{chapter5}
+	
+	% --- Bibliography ---
+	\input{sections/bibliography}
+	
+	% --- Appendices ---
+	\input{sections/appendices}
+	
+	% --- Curriculum Vitae ---
+	\input{sections/curriculumvitae}
+	
+\end{document}

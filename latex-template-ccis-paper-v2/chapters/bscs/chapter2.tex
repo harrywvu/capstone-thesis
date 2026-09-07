@@ -1,0 +1,73 @@
+\newpage
+\section{Review of Related Literature}
+\label{Review of Related Literature} 
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\subsection{RRL Topic 1}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\subsubsection{RRL Topic 1.1}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\subsubsection{RRL Topic 1.2}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\subsection{RRL Topic 2}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. \\
+
+\begin{algorithm}
+	\caption{SEKM Rekeying Algorithm - $O(N)$}
+	\label{SEKMRekeyingAlgorithm}
+	\begin{algorithmic}[1]
+		\State Select $k-1$ degree polynomial.
+		\State Broadcast witness polynomials and its hashed signature to the server group.
+		\State For each $j$ server in the server group.
+		\State Compute each $S_{i \rightarrow j}$ and send it together with its hashed signature to the server group.
+		\State For each server $i$ in the server group.
+		\State Compute new share ${S_j}^\textrm' = S_j + S_{i \rightarrow j}$.
+		\State Replace the old share with the new share.
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{RRL Topic 3}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. \\
+
+\begin{align*}
+	K_{{sr}_i}^\textrm' = \left\{ 
+	\begin{array}{l l}
+		K_{{sr}_j}^\textrm' & \enspace \text{if $n_j > n_i$}\\
+		K_{{sr}_i}^\textrm' & \enspace \text{\textit{otherwise}}
+	\end{array}
+	\right.
+\end{align*} 
+
+\subsection{RRL Topic 4}
+Lorem Ipsum\cite{DUMMY:1} is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. \\
+
+\begin{table}[H]
+	\caption{Key Management Scheme Notations}
+	\label{CXSenseKeyManagementSchemeNotations}
+	\centering
+	\begin{tabular}{l | p{8cm}}
+		\hline \hline
+		Notation & Description \\ [0.5ex]
+		\hline
+		$g,p$ & Generator and prime values \\
+		$a,b$ & Random numbers \\
+		$A,B$ & Node $A$ and $B$ identifiers \\
+		$N$ & All nodes \\
+		$N_f$ & The first node to reply from the network \\
+		$ID_i$ & ID of node $i$ \\
+		$n_i$ & Local time of generation (\textit{LTOG}) node $i$ \\
+		$n_g$ & Group \textit{LTOG} \\
+		$P$ & Password \\
+		$K_{sk}$ & Session Key \\
+		$K_{sr}$ & Shared Session Key \\
+		$H<x>$ & Digest of message $x$ \\
+		$K<y>$ & Encrypted message $y$ using key $K$ \\
+		$C_A$ & Challenge of Node $A$ \\
+		$C_B$ & Challenge of Node $B$ \\
+		$|$ & Concatenation symbol \\
+		\hline
+	\end{tabular}
+\end{table}

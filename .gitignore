@@ -1,0 +1,25 @@
+# Generated manuscript output
+/output/
+
+# Local build artifacts, render previews, and downloaded tools/cache
+/tmp/
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
