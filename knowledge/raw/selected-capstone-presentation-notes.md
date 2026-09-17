@@ -10,8 +10,8 @@ No project content.
 
 ## Slide 2 - Project identification
 
-- Working label: **Sentinel**.
-- Subtitle: **A 2D Simulation-Based Decision Support System for Flood Evacuation Planning**.
+- Working label: **Sentinel** (now approved as **OverFlow**).
+- Subtitle: **A Geospatial Decision Support System for Flood Evacuation Planning**.
 - Team: John Harold A. Alejo, Cyrus Kirby Gaor, Bradley Kjiel Pasalo, and Joshearie Kristoffer Landicho.
 
 ## Slide 3 - Motivation

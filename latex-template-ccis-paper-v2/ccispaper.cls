@@ -34,12 +34,11 @@
 \graphicspath{{graphics/}}
 
 % --- Typography ---
-\RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage{mathptmx}
+\RequirePackage{newtxtext,newtxmath}
 
 % --- Bibliography ---
-\RequirePackage[backend=biber, sorting=none, style=ieee]{biblatex}
+\RequirePackage[backend=biber, sorting=none, style=numeric]{biblatex}
 
 % --- Heading Formatting ---
 \RequirePackage{titlesec}

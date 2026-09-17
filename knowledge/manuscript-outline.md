@@ -13,7 +13,7 @@ This index maps the official CCIS BSIT LaTeX template to the current capstone fo
 
 Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter1.tex`
 
-- Project Context
+- Project Context (drafted)
 - Purpose and Description
 - Objectives of the Study
 - Significance of the Study
@@ -35,6 +35,8 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter2.tex`
 
 Evidence required: scholarly literature, official disaster/geographic sources, standards where applicable, and verified documentation for approved technologies.
 
+Architecture and data reference: `knowledge/architecture/` (system overview, rendering, computation, water simulation), `knowledge/data/` (data sources, DEM processing).
+
 ## Chapter 3 - Methodology
 
 Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter3.tex`
@@ -46,6 +48,8 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter3.tex`
 - Statistical Treatment of Data
 
 Decisions required: study site, partner organization, design, datasets, algorithms, participants/validators, instruments, baselines, metrics, statistics, ethics, and deployment.
+
+Architecture and data reference: Methodology draws on `knowledge/architecture/` for the system design (split architecture, D8 algorithm, API endpoints) and `knowledge/data/` for the data pipeline (DEM processing, OSM export, GeoJSON standardization).
 
 ## Chapter 4 - Results and Discussion
 

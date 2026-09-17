@@ -1,50 +1,98 @@
-% Chapter 1 outline only. Do not turn these notes into polished manuscript
-% prose until the open questions in knowledge/00-capstone-definition.md are
-% resolved and the adviser confirms the intended content.
-
 \section{Introduction}
 \label{Introduction}
-% Establish the flood-evacuation planning context and accepted system concept
-% without claiming an unconfirmed locality or flood model.
-% Sources:
-% - knowledge/00-capstone-definition.md: Sections 2-4
-% - assets/selected capstone.pdf: slides 3-6
-% - Future scholarly and official sources
+
+Flooding is one of the environmental hazards that can significantly affect communities, particularly in areas where heavy rainfall, inadequate drainage, and low-lying terrain may contribute to the accumulation of floodwater. During flooding events, roads may become difficult or unsafe to pass through, while residents may need to evacuate to designated areas. The situation can become more difficult when people do not have sufficient information about which roads may be affected, which areas are vulnerable to flooding, and which evacuation centers may be suitable during a particular flood scenario. These circumstances highlight the overwhelming gap in flood-resistant infrastructure in major Philippine communities, and the need for tools that assist first-responders in evacuation planning and decision systems during times of systemic and governing crisis.
+
+Traditional maps and available geographic information can provide important information about locations, roads, and other physical features. However, static information may not be sufficient when users need to understand how a flood scenario could affect an area and its road network. A simulation-based approach can provide a more interactive way of representing possible flood conditions and their effects on selected areas. By combining relevant geographical, road, altitude, and evacuation-site information, a simulation system can help first-responders better understand possible flood situations and support preparation and evacuation planning.
+
+The proposed study, entitled ``OverFlow: A 2D Flood Simulation System for [Proposed Study Area],'' aims to develop a performance-first system that can represent flood scenarios in a two-dimensional procedurally-generated simulated environment and provide information that can assist in evaluating affected areas and possible evacuation routes. The proposed study will initially consider a selected area within Laoag City, Ilocos Norte, as its study location, subject to confirmation during the succeeding stages of the research. The system is intended to serve as a decision-support tool that can help users examine simulated flood conditions and consider possible evacuation options based on available data.
 
 \subsection{Project Context}
-% Explain road disruption, evacuation demand, route decisions, center capacity,
-% resource allocation, and the limitation of static maps for what-if testing.
-% Required before drafting:
-% - confirmed study area and target organization;
-% - verified local problem evidence;
-% - scholarly and official sources.
+
+The Philippines is frequently affected by typhoons and heavy rainfall that can result in flooding, particularly in low-lying and urban areas. Although flood-control structures, drainage systems, and related infrastructure are intended to reduce these risks, their coverage and capacity may vary across communities. In areas where such infrastructure is limited or unable to fully accommodate severe rainfall events, flooding can disrupt transportation, restrict road access, and require the evacuation of affected residents.
+
+These conditions emphasize the importance of preparedness measures that complement physical flood-control infrastructure. Local disaster risk reduction and management offices are responsible for planning and coordinating evacuation operations, yet these tasks become more complex when flood conditions, road accessibility, affected populations, and evacuation-center capacities change from one scenario to another. The ability to examine such conditions before an actual emergency can support more informed evacuation planning.
+
+Existing geographic information systems can provide maps, hazard information, and infrastructure data, but they may offer limited support for interactively evaluating and comparing evacuation scenarios under changing flood conditions. This presents an opportunity for a geospatial decision-support system that combines spatial information with scenario-based analysis to assist disaster planners in examining possible evacuation conditions.
+
+In response, this project proposes **OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning**. The system is intended to support local disaster planners by allowing them to visualize flood-affected areas, examine road accessibility, identify affected communities, consider evacuation-center capacities, and compare alternative evacuation scenarios within a geospatial environment. OverFlow is designed as a supplementary planning tool and does not replace existing flood-control infrastructure or the judgment of authorized disaster management personnel.
+
+The system will use geographic information such as terrain elevation, road networks, evacuation-center locations, barangay boundaries, and population data to represent the study area and support scenario analysis. Through this approach, OverFlow aims to provide an accessible means of examining how varying flood conditions and evacuation constraints may influence evacuation planning in Laoag City, Ilocos Norte.
+
+% Note: The supplied draft contained a ``Problem Statement (soon to be added)''
+% placeholder. It is not added as a separate subsection because the official
+% BSIT Chapter 1 structure used in this template does not include it:
+% Project Context; Purpose and Description; Objectives of the Study;
+% Significance of the Study; Scope and Delimitations of the Study;
+% Operational Definition of Terms.
 
 \subsection{Purpose and Description}
-% Describe the accepted 2D simulation and decision-support concept.
-% Map the Input -> Processing -> Output chain from the canonical definition.
-% Distinguish decision support from human operational authority.
-% Required before drafting:
-% - final meaning of flood simulation;
-% - final algorithms and constraints;
-% - confirmed data sources and deployment environment;
-% - minimum accepted capabilities.
+
+The purpose of this study is to develop OverFlow, a 2D flood simulation and decision-support system that can represent possible flood scenarios and provide information related to affected areas, roads, and evacuation options. The system is intended to help users visualize how a simulated flood condition may interact with the selected geographical area and its existing features. It is designed primarily as a planning and analysis tool and is not intended to replace the decisions of authorized disaster response personnel during actual emergencies.
+
+OverFlow will use available information about the study area as inputs for the simulation. These may include geographical map data, road information, drainage-related information, and evacuation-center data. The system will process these data to create a two-dimensional representation of the selected environment and simulate a specified flood scenario. Based on the simulation, the system will present the resulting flood conditions and related information through a visual interface.
+
+The system is also intended to assist in examining possible evacuation routes and evacuation-center options. By considering simulated flood-affected areas and road conditions, users may be able to identify routes that could potentially be used for evacuation under a particular scenario. The resulting information can provide an additional reference for preparedness and planning. However, the results will depend on the accuracy, completeness, and availability of the data used by the system and should therefore be treated as simulated information rather than an exact prediction of an actual flood event.
 
 \subsection{Objectives of the Study}
-% Start from the tentative objectives in the canonical definition, Sections
-% 12-13. Do not finalize them until method and evaluation are settled.
+
+This study aims to develop OverFlow, a 2D flood simulation and decision-support system that can assist in visualizing possible flood scenarios and supporting evacuation planning within the proposed study area.
+
+Specifically, it aims to:
+\begin{enumerate}
+  \item identify the relevant flood-related information and existing challenges concerning drainage systems, road accessibility, flood-affected areas, and evacuation centers within the proposed study area;
+  \item design and develop a two-dimensional flood simulation system that incorporates available map, road, drainage, and evacuation-center information;
+  \item provide a visual representation of simulated flood scenarios and their possible effects on selected areas and road networks;
+  \item provide information that can assist users in examining possible evacuation routes and suitable evacuation-center options based on simulated flood conditions; and
+  \item evaluate the developed system based on appropriate software quality and user evaluation criteria to determine its functionality, usability, and suitability for its intended purpose.
+\end{enumerate}
 
 \subsection{Significance of the Study}
-% Organize benefits by confirmed stakeholder group.
-% Source: knowledge/00-capstone-definition.md, Sections 5 and 8.
-% Required: confirmed operating organization and measurable benefits.
+
+This study may provide benefits to different groups involved in flood preparedness and evacuation planning. The proposed OverFlow system can provide an interactive way of visualizing possible flood scenarios, allowing users to examine how simulated flooding may affect selected areas and road networks. The system may also provide additional information that can be considered when planning evacuation routes and evaluating evacuation-center options.
+
+For local government and disaster-management personnel, the system may serve as an additional planning and visualization tool for examining possible flood situations. The simulated information can help users understand potential areas of concern and consider possible evacuation alternatives. It is not intended to replace existing disaster-management procedures or the judgment of authorized personnel, but rather to provide supplementary information that may support preparedness activities.
+
+For emergency responders, the system may provide a visual reference for understanding the possible effects of simulated flooding on roads and accessible areas. This may assist in preliminary planning and scenario analysis, particularly when examining different possible flood conditions.
+
+For community residents, OverFlow may contribute to greater awareness of possible flood conditions and evacuation considerations. By presenting flood scenarios in an understandable visual form, the system may help users better recognize the possible effects of flooding on their surroundings and the importance of preparedness.
+
+For evacuation-center personnel and other stakeholders involved in evacuation planning, the system may provide information about the location and accessibility of evacuation centers in relation to simulated flood conditions. This can support the consideration of alternative evacuation options when certain areas or routes may be affected.
+
+Finally, this study may benefit future researchers and developers who intend to create similar systems related to flood simulation, geographic visualization, disaster preparedness, and evacuation planning. The study may serve as a reference for developing systems that combine environmental and geographical data with simulation-based decision-support features.
 
 \subsection{Scope and Delimitations of the Study}
-% Source: knowledge/00-capstone-definition.md, Sections 16-19.
-% Required: study area, preparedness versus emergency use, included features,
-% exclusions, and data/model/deployment boundaries.
+
+This study focuses on the development of OverFlow, a web-based 2D flood simulation and decision-support system for a proposed study area within Laoag City, Ilocos Norte. The system will incorporate available geographical map data, road information, drainage-related information, and evacuation-center data relevant to the selected study area. It will provide a visual representation of simulated flood scenarios and may identify areas and road sections that are affected under the conditions defined within the system. The system will also include features intended to assist users in examining possible evacuation routes and evacuation-center options based on the simulated flood conditions.
+
+The study will focus on simulation and visualization rather than real-time flood monitoring or direct control of physical infrastructure. The system will not directly control drainage systems, roads, or evacuation facilities. The results of the simulation will depend on the availability, completeness, and accuracy of the data provided to the system. Therefore, the simulated flood conditions should not be considered an exact prediction of actual flooding. The system will instead provide a simulated representation that can be used for analysis and preparedness planning.
+
+The exact study location and coverage within Laoag City will remain subject to confirmation as the study progresses. The study may also be limited by the availability of reliable local drainage, road, map, flood-related, and evacuation-center data. Any technical features, datasets, or simulation methods that require information not available to the researchers may be adjusted according to the data that can be legitimately obtained during the research period.
+
+The study will not be designed as a replacement for official disaster-response systems or the decisions of authorized emergency personnel. It will also not guarantee that a simulated evacuation route will remain safe or passable during an actual flood event. The system's purpose is to provide an additional reference for scenario analysis and evacuation planning rather than to provide absolute emergency instructions.
 
 \subsection{Operational Definition of Terms}
-% Define only terms used operationally in the study. Initial candidates:
-% decision-support system, scenario, evacuation route, evacuation-center
-% allocation, flood simulation, and deployment.
-% Source: knowledge/00-capstone-definition.md, Section 20.
+
+\textbf{2D Flood Simulation.} Refers to the representation of floodwater movement and affected areas across a two-dimensional geographical environment within the OverFlow system.
+
+\textbf{Decision-Support System.} Refers to the component of OverFlow that provides processed and visualized information to assist users in examining flood scenarios, affected roads, evacuation routes, and evacuation-center options.
+
+\textbf{Drainage System.} Refers to the network or infrastructure responsible for collecting and conveying water within the study area. In OverFlow, available drainage-related information may be incorporated as part of the data used to represent the study environment.
+
+\textbf{Evacuation Center.} Refers to a designated location where residents may seek temporary safety during a disaster. In OverFlow, evacuation centers are represented as geographical locations that may be considered during evacuation planning.
+
+\textbf{Evacuation Route.} Refers to a possible path from an affected or at-risk area toward an evacuation center. In OverFlow, routes may be examined based on the simulated flood conditions and affected road information.
+
+\textbf{Flood Scenario.} Refers to a defined set of conditions used by OverFlow to represent a possible flooding situation within the simulated environment.
+
+\textbf{Flood-Affected Area.} Refers to an area represented by the system as being affected by the simulated flood conditions.
+
+\textbf{Map Data.} Refers to geographical information used to represent the physical environment of the study area, including relevant locations and features required by the OverFlow system.
+
+\textbf{Road Network.} Refers to the connected roads within the selected study area that are represented in OverFlow and considered when examining possible flood effects and evacuation routes.
+
+\textbf{OverFlow.} Refers to the proposed 2D flood simulation and decision-support system developed in this study to visualize flood scenarios and provide information that may assist in evacuation planning.
+
+\textbf{Simulation.} Refers to the process of representing a possible real-world condition within a computer-generated environment based on defined inputs, data, and conditions.
+
+\textbf{Study Area.} Refers to the selected geographical area where the OverFlow system will be developed, tested, and evaluated. For this study, the proposed location is within Laoag City, Ilocos Norte, subject to final confirmation.

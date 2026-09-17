@@ -1,9 +1,9 @@
-# Sentinel
+# OverFlow
 
-> **Working name:** Sentinel  
+> **Project name:** OverFlow  
 > **Capstone title:** *A 2D Simulation-Based Decision Support System for Flood Evacuation Planning*
 
-Sentinel is a BS Information Technology capstone project that explores an interactive 2D decision-support system for flood-evacuation planning. It enables planners to configure and compare evacuation scenarios involving flood conditions, road closures, affected residents, evacuation-center capacity, and available resources.
+OverFlow is a BS Information Technology capstone project that explores an interactive 2D decision-support system for flood-evacuation planning. It enables planners to configure and compare evacuation scenarios involving flood conditions, road closures, affected residents, evacuation-center capacity, and available resources.
 
 The system is intended to support human planning decisions. It is not an autonomous emergency-response system, a public navigation tool, or a validated physical flood-forecasting model.
 
@@ -19,7 +19,7 @@ Laoag City appears in the current data-source plan as a **candidate** study area
 .
 ├── knowledge/                         # Canonical project definition, decisions, and manuscript map
 ├── latex-template-ccis-paper-v2/      # Official CCIS BSIT LaTeX manuscript template
-├── sentinel-demo/                     # Interactive Sentinel prototype
+├── sentinel-demo/                     # Interactive OverFlow prototype
 ├── assets/                            # Source/reference materials
 └── DATA SOURCES AND TOOLS FOR SENTINEL.md
                                       # Candidate data sources and data-management plan
@@ -69,7 +69,7 @@ The main manuscript configuration is in [`latex-template-ccis-paper-v2/main.tex`
 
 ## Prototype workflow
 
-The interactive prototype is in [`sentinel-demo/`](sentinel-demo/) and runs on Node.js **22.13.0 or later**.
+The interactive prototype is in [`sentinel-demo/`](sentinel-demo/) (the **OverFlow** demo) and runs on Node.js **22.13.0 or later**.
 
 ```bash
 cd sentinel-demo

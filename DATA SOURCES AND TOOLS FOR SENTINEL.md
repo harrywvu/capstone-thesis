@@ -2,7 +2,7 @@
 
 > **Document status (2026-09-07):** This is the team's current response to the
 > adviser's request for drainage-system, road, map, evacuation-center, and
-> deployment information. **Sentinel** is a working name. The study area,
+> deployment information. **OverFlow** is a working name. The study area,
 > operating organization, deployment environment, accessible datasets, and
 > exact flood-simulation method are not yet confirmed. Laoag City and its
 > offices are candidate choices in this plan, not approved facts.
@@ -29,13 +29,13 @@ Drainage-system data is proposed to represent drainage and water-flow features i
 * OpenStreetMap  
 * Available local flood and drainage maps
 
-### **Intended Use in Sentinel:**
+### **Intended Use in OverFlow:**
 
 At minimum, drainage data can serve as a geographic reference layer when planners define flood conditions. Using it to calculate water accumulation or physical flood movement would require a defined hydrologic or hydraulic method, appropriate input data, calibration, and validation. That higher-level modeling role is currently **unresolved**.
 
 ## **2\. Road Network Data**
 
-Road network data will be used as the primary transportation layer of the Sentinel simulation. Since the system focuses on evacuation planning, accurate road information is necessary for determining possible evacuation routes.
+Road network data will be used as the primary transportation layer of the OverFlow simulation. Since the system focuses on evacuation planning, accurate road information is necessary for determining possible evacuation routes.
 
 ### **Data to be Collected:**
 
@@ -55,13 +55,13 @@ Road network data will be used as the primary transportation layer of the Sentin
 * Laoag City Engineering Office  
 * Laoag City CDRRMO
 
-### **Intended Use in Sentinel:**
+### **Intended Use in OverFlow:**
 
 The road network will be converted into a digital map layer that can be used by the simulation to determine evacuation routes. Roads may also be marked as flooded or blocked during a simulation, allowing the system to recalculate alternative evacuation routes.
 
 ## **3\. Map and Geographic Data**
 
-Geographic and map data will provide the base environment for the Sentinel 2D simulation. The map will contain the geographic features necessary to represent the actual environment of Laoag City.
+Geographic and map data will provide the base environment for the OverFlow 2D simulation. The map will contain the geographic features necessary to represent the actual environment of Laoag City.
 
 ### **Data to be Collected:**
 
@@ -82,13 +82,13 @@ Geographic and map data will provide the base environment for the Sentinel 2D si
 * Phil-LiDAR or other available elevation datasets  
 * Local government geographic and hazard maps
 
-### **Intended Use in Sentinel:**
+### **Intended Use in OverFlow:**
 
 The geographic data will be used to create the base 2D environment of the system. Different layers will be displayed to represent roads, waterways, drainage systems, flood-affected areas, evacuation centers, and evacuation routes.
 
 ## **4\. Evacuation Center Data**
 
-Evacuation center data will be used to determine the available locations where affected residents can be directed during a simulated flood event. The data will also allow Sentinel to consider the capacity of each evacuation center.
+Evacuation center data will be used to determine the available locations where affected residents can be directed during a simulated flood event. The data will also allow OverFlow to consider the capacity of each evacuation center.
 
 ### **Data to be Collected:**
 
@@ -110,7 +110,7 @@ Evacuation center data will be used to determine the available locations where a
 * Barangay Offices  
 * Existing local disaster preparedness records
 
-### **Intended Use in Sentinel:**
+### **Intended Use in OverFlow:**
 
 The evacuation center data will allow the system to determine suitable evacuation destinations based on location, accessibility, and available capacity. The system can also simulate situations where an evacuation center reaches its capacity and recommend alternative centers.
 
@@ -118,7 +118,7 @@ The evacuation center data will allow the system to determine suitable evacuatio
 
 ## **1\. QGIS**
 
-QGIS will be used as the primary Geographic Information System (GIS) tool for preparing and processing the geographic data required by Sentinel.
+QGIS will be used as the primary Geographic Information System (GIS) tool for preparing and processing the geographic data required by OverFlow.
 
 ### **Uses:**
 
@@ -128,7 +128,7 @@ QGIS will be used as the primary Geographic Information System (GIS) tool for pr
 * Processing elevation data  
 * Creating and editing geographic features  
 * Converting geographic data into usable formats  
-* Exporting data for integration into Sentinel
+* Exporting data for integration into OverFlow
 
 ## **2\. OpenStreetMap**
 
@@ -181,7 +181,7 @@ The proposed data layers include:
 * `barangays.geojson` – barangay boundaries  
 * `flood_zones.geojson` – flood-affected or simulated flood areas
 
-These datasets will serve as the geographic foundation of the Sentinel 2D simulation.
+These datasets will serve as the geographic foundation of the OverFlow 2D simulation.
 
 # **PROPOSED STUDY AREA AND DEPLOYMENT**
 
@@ -216,7 +216,7 @@ The deployment and pilot area should be selected using documented criteria:
 
 # **OVERALL DATA FLOW**
 
-The data collection and processing flow for Sentinel will follow this general process:
+The data collection and processing flow for OverFlow will follow this general process:
 
 **Data Collection → Data Validation → GIS Processing → Data Conversion → System Integration → Scenario Configuration → Evacuation Analysis → Scenario Comparison**
 
