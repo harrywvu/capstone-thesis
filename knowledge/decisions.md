@@ -11,7 +11,7 @@ The presentation proposes a 2D system for testing flood-evacuation situations an
 
 ### Decision
 
-The project idea is accepted and will anchor later definition and manuscript work.
+The project idea is accepted and will anchor later definition and manuscript work. The planning problem remains two-dimensional, while the selected frontend may render terrain and water as 3D meshes with a top-down 2D-style analysis view.
 
 ### Reasoning
 
@@ -44,7 +44,7 @@ The name was confirmed by the team and supersedes the earlier tentative label.
 
 ### Consequences
 
-All references to **Sentinel** across the repository must be updated to **OverFlow** consistently.
+All active manuscript, knowledge-base, and prototype references should use **OverFlow** consistently. Historical source filenames may retain the former **Sentinel** label for traceability.
 
 ### Source
 
@@ -159,11 +159,11 @@ Team discussion, 2026-09-16.
 
 ### Context
 
-The system's users are disaster planners, not hydrologics. Too many technical parameters make the system hard to use; too few make it less useful.
+The system's users are disaster planners, not hydrologists. Too many technical parameters make the system hard to use; too few make it less useful. The architecture also defines a provisional flood-classification threshold for scenario comparison and sensitivity analysis.
 
 ### Decision
 
-The user configures **operational conditions**: rainfall intensity/duration, affected population per barangay, shelter status (open/closed/at capacity), and manual road/bridge closures. The system handles all technical computation (flood spread, routing, allocation, time estimation). No hydraulic or physical parameters are exposed to the user.
+The user configures **operational conditions**: rainfall intensity/duration, affected population per barangay, shelter status (open/closed/at capacity), and manual road/bridge closures. A flood-classification threshold may be exposed as an analysis control for sensitivity comparison, but hydraulic parameters are not exposed. The threshold is described as depth only if its calculation and validation support that unit. The system handles all technical computation (terrain processing, flow accumulation, routing, allocation, and time estimation).
 
 ### Reasoning
 
@@ -173,6 +173,7 @@ Disaster planners think in terms of situations ("typhoon hits, these areas flood
 
 - The user interface focuses on scenario configuration, not technical parameters.
 - The system must be capable of computing flood conditions automatically from rainfall + terrain.
+- Threshold changes are treated as scenario-analysis controls, not as a claim of calibrated physical behavior.
 - This scope is simpler to build and easier to use than a fully parameterized simulation.
 
 ### Source
@@ -190,7 +191,7 @@ The system requires both heavy numerical computation (DEM processing, flow simul
 
 ### Decision
 
-Adopt a split architecture: **Python** (FastAPI, NumPy, SciPy) handles all computation on the backend. **TypeScript** (React Three Fiber, React, shadcn/ui) handles rendering and UI on the frontend. Communication is via REST API.
+Adopt a split architecture: **Python** (FastAPI, NumPy, SciPy, with rasterio/GDAL when file-based DEM input is used) handles all computation on the backend. **TypeScript** (React Three Fiber, React, shadcn/ui, and Leaflet for area selection) handles rendering and UI on the frontend. Communication is via REST API with JSON responses.
 
 ### Reasoning
 
@@ -199,8 +200,9 @@ Python provides access to NumPy and SciPy for efficient grid operations and flow
 ### Consequences
 
 - All computation code belongs in the Python backend; the frontend is a thin rendering client.
-- API contracts must be defined between the layers (terrain, simulate, analyze endpoints).
-- The frontend receives geometry (vertices, colors, indices) and state (water depths) from the backend.
+- API contracts must be defined between the layers. The planned boundaries are `/api/terrain` for elevation/mesh data, `/api/simulate` for rainfall and water state, and `/api/analyze` for evacuation analysis.
+- The frontend receives geometry (vertices, colors, indices) and water-state or flood-indicator values from the backend; those values are called water depth only if the backend calculation and validation support that unit.
+- The frontend renders terrain, water, buildings, and roads in 3D and provides a top-down view for 2D-style analysis.
 
 ### Source
 
@@ -221,11 +223,11 @@ Implement a simplified hydrological model using:
 1. **D8 flow direction** — each cell flows to the steepest downhill neighbor.
 2. **Flow accumulation** — count upstream cells draining into each cell.
 3. **Rainfall overlay** — distribute user-specified rainfall intensity/duration uniformly.
-4. **Flood classification** — cells exceeding a depth threshold are marked as flooded.
+4. **Flood classification** — cells exceeding a documented threshold in the selected flood indicator are marked as flooded; the indicator formula, units, and threshold remain unresolved.
 
 ### Reasoning
 
-D8 is the standard terrain-based flow algorithm, well-understood and efficient to implement. Combined with flow accumulation, it identifies natural water collection points without requiring hydraulic calibration. The threshold-based flood classification is simple and user-adjustable for sensitivity analysis.
+D8 is a classic terrain-based flow-direction algorithm that is well understood and efficient to implement. Combined with contributing-area accumulation, it identifies terrain-controlled drainage paths. The project-specific rainfall overlay and threshold classification remain simplified extensions whose formula, units, and validation must be documented before they can support physical flood claims.
 
 ### Consequences
 
@@ -236,7 +238,30 @@ D8 is the standard terrain-based flow algorithm, well-understood and efficient t
 
 ### Source
 
-`knowledge/architecture/02-computation.md`; `knowledge/architecture/03-water-simulation.md`.
+O'Callaghan and Mark (1984), summarized in `knowledge/literature/07-ocallaghan-mark-1984.md`, supports the D8 drainage-direction foundation. `knowledge/architecture/02-computation.md` and `knowledge/architecture/03-water-simulation.md` describe the project-specific extension; its rainfall-to-indicator formulation, time stepping, and classification threshold remain unresolved and require validation.
+
+## Decision: Process DEM data before simulation and rendering
+
+**Status:** Accepted for the technical plan
+**Date:** 2026-09-17
+
+### Context
+
+The flood model depends on elevation data, but candidate DEM sources differ in resolution, coverage, access conditions, and file format. Raw values may also contain NoData cells or a grid that is too large for interactive rendering.
+
+### Decision
+
+The data pipeline will fetch or load a DEM for the selected bounding box, decode it into a two-dimensional NumPy elevation array, handle NoData values, optionally normalize and downsample it, and export the processed grid for backend simulation and frontend mesh generation. A 10--30 m resolution is the initial performance/detail target; the final resolution depends on the accessible source and selected area.
+
+### Consequences
+
+- DEM availability, resolution, coordinate reference system, and processing choices must be recorded for each study area.
+- A raster/GeoTIFF may be retained as the source representation, while the processed grid is exchanged through the API as JSON-compatible data.
+- Higher-resolution grids increase vertex count and may require downsampling or level-of-detail techniques.
+
+### Source
+
+`knowledge/data/00-data-sources.md`; `knowledge/data/01-dem-processing.md`.
 
 ## Decision: Adopt GeoJSON as the standard geographic data interchange format
 
@@ -249,7 +274,7 @@ Geographic data comes from multiple sources (OpenStreetMap, NAMRIA, LGU offices)
 
 ### Decision
 
-Use **GeoJSON** as the standard format for all geographic data layers: roads, bridges, drainage, evacuation centers, barangay boundaries, and flood zones.
+Use **GeoJSON** as the standard interchange format for vector geographic layers: roads, bridges, drainage reference features, evacuation centers, barangay boundaries, buildings, and flood zones. DEM rasters are handled as source raster/GeoTIFF data and converted to a NumPy grid; API responses use JSON-compatible structures.
 
 ### Reasoning
 
@@ -257,9 +282,10 @@ GeoJSON is human-readable, widely supported by GIS tools (QGIS, Leaflet, OpenStr
 
 ### Consequences
 
-- All incoming data must be converted to GeoJSON during the data preparation pipeline.
+- Incoming vector data must be converted to GeoJSON during the data preparation pipeline; DEM data follows the raster-to-grid processing path.
 - Data files follow a standardized naming convention: `roads.geojson`, `bridges.geojson`, `evacuation_centers.geojson`, etc.
 - Coordinate reference system, accuracy, and currency must be documented per dataset.
+- Candidate sources remain subject to access verification. NAMRIA and Phil-LiDAR may require formal requests, while SRTM and OpenStreetMap provide fallback/alternative sources with different resolution and coverage.
 
 ### Source
 

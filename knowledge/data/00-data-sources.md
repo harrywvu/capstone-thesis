@@ -26,7 +26,7 @@
 
 **Access:** Free via OpenStreetMap export or Overpass API. Use bounding box from user selection.
 
-### LGU Data (Laoag City)
+### Candidate LGU Data (Laoag City only if selected)
 **Priority: High — required for evacuation planning**
 
 | Data | Source | Contact |
@@ -35,6 +35,8 @@
 | Evacuation centers + capacity | CDRRMO | Formal letter required |
 | Population per barangay | PSA / Laoag LGU | May be in PSA reports |
 | Flood hazard maps (if any) | CDRRMO | For validation only |
+
+Laoag City remains a candidate study area. Replace these offices with the corresponding agencies after the team confirms the locality and operating organization.
 
 ## Data Pipeline
 

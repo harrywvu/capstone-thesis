@@ -31,12 +31,13 @@ All data processing, simulation, and analysis runs here. The frontend is a thin 
 
 ### Rainfall Distribution
 - User provides rainfall intensity (mm/hr) and duration (hours)
-- Distribute total rainfall uniformly across all cells
-- Apply flow accumulation over time steps to simulate water movement
+- Planned simplification: distribute rainfall uniformly across all cells
+- The conversion from rainfall and contributing area to stored water depth or another flood indicator remains unresolved and requires an explicit water-balance method
 
 ### Flood Threshold
-- Cells where accumulated water exceeds a threshold depth = "flooded"
-- Threshold adjustable by user for sensitivity analysis
+- Planned simplification: classify cells as flooded when the selected indicator exceeds a documented threshold
+- A depth threshold must not be used unless the computation produces defensible depth units
+- Threshold selection, calibration, and validation remain unresolved
 
 ## API Endpoints (Planned)
 
@@ -50,5 +51,5 @@ All data processing, simulation, and analysis runs here. The frontend is a thin 
 
 All responses return JSON with:
 - `terrain`: vertex positions, colors, and indices for mesh rendering
-- `water`: grid of water depth values per cell
+- `water`: grid of water-state or flood-indicator values; label values as depth only after a defensible depth calculation is defined and validated
 - `metadata`: bounds, resolution, timestamps

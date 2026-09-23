@@ -34,7 +34,9 @@ React Three Fiber (R3F)    ←API→  FastAPI
 | Map selection | Leaflet | Interactive area selection on map |
 | Backend framework | FastAPI | REST API server |
 | Computation | NumPy / SciPy | Grid operations, flow simulation |
-| Data format | GeoTIFF / JSON | DEM data interchange |
+| Raster data | GeoTIFF / NumPy grid | DEM source and backend computation |
+| Vector data | GeoJSON | Roads, centers, boundaries, and reference layers |
+| API exchange | JSON-compatible responses | Data transfer between backend and frontend |
 
 ## Key Decisions
 

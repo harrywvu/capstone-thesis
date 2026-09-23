@@ -13,9 +13,10 @@ Status labels: `CONFIRMED`, `TENTATIVE`, `UNRESOLVED`, and `CONFLICT`.
 
 - `CONFIRMED` The project idea has been accepted.
 - `CONFIRMED` **OverFlow** is the approved project name.
-- Current descriptive title: **A Geospatial Decision Support System for Flood Evacuation Planning**.
+- Current manuscript title: **A 2D Simulation-Based Decision Support System for Flood Evacuation Planning**.
+- Historical presentation subtitle: **A Geospatial Decision Support System for Flood Evacuation Planning**.
 
-**Basis:** Selected-capstone presentation, slide 2; team clarification, 2026-09-07.
+**Basis:** Current manuscript metadata in `latex-template-ccis-paper-v2/main.tex`; the historical subtitle is recorded in the selected-capstone presentation, slide 2.
 
 ## 2. One-Sentence Definition
 
@@ -36,11 +37,11 @@ Existing maps can display places and hazard areas, but the presentation identifi
 
 ## 4. Proposed Solution
 
-`CONFIRMED` The accepted concept is an interactive 2D disaster-simulation and decision-support system. A planner configures scenario conditions, the system analyzes their consequences, and the resulting evacuation options can be compared.
+`CONFIRMED` The accepted concept is an interactive geospatial disaster-simulation and decision-support system. The planning model is two-dimensional, while the frontend renders terrain and water as 3D meshes and provides a top-down view for 2D-style analysis. A planner configures scenario conditions, the system analyzes their consequences, and the resulting evacuation options can be compared.
 
 `CONFIRMED` The flood simulation uses terrain-based accumulation, not hydraulic modeling. The user inputs rainfall intensity and duration; the system computes which areas flood based on elevation data (DEM). Drainage infrastructure data serves as a reference map layer only.
 
-`CONFIRMED` The system uses a split architecture: a Python backend (FastAPI, NumPy, SciPy) for computation and a TypeScript frontend (React Three Fiber) for rendering and UI. OpenStreetMap provides road, building, and geographic data. See `knowledge/architecture/` for detailed architecture documentation.
+`CONFIRMED` The system uses a split architecture: a Python backend (FastAPI, NumPy, SciPy, with rasterio/GDAL when file-based DEM input is used) for computation and a TypeScript frontend (React Three Fiber, React, shadcn/ui, and Leaflet) for rendering and UI. OpenStreetMap provides road, building, and geographic data. Communication is through REST endpoints with JSON-compatible responses. See `knowledge/architecture/` for detailed architecture documentation.
 
 **Basis:** Selected-capstone presentation, slides 5-6; architecture documentation, `knowledge/architecture/00-overview.md`.
 
@@ -65,13 +66,15 @@ A disaster planner configures affected people, flooded roads, blocked bridges, c
 
 - `CONFIRMED` User-configurable scenario inputs: rainfall intensity/duration, affected population per barangay, shelter status (open/closed/at capacity), and manual road/bridge closures.
 - `CONFIRMED` Geographic data: local maps, roads, bridges, evacuation-center locations and capacities, available rescue resources.
-- `CONFIRMED` Elevation data (DEM/DSM): required for terrain-based flood computation. Source candidates: NAMRIA, Phil-LiDAR. Availability for Laoag City unverified.
+- `CONFIRMED` Elevation data (DEM): required for terrain-based flood computation. Source candidates are NAMRIA, Phil-LiDAR, SRTM, and Mapbox Terrain-RGB; availability for the selected study area is unverified.
 - `CONFIRMED` Drainage infrastructure: reference map layer only; not used for flood computation.
 - `TENTATIVE` Barangay boundaries, buildings, historical flood areas, accessibility, center occupancy, and facilities.
 
 ### Processing
 
-- `CONFIRMED` Compute flood-affected areas from rainfall input and elevation data using terrain-based accumulation: D8 flow direction, flow accumulation, rainfall overlay, and threshold-based flood classification. See `knowledge/architecture/03-water-simulation.md` for algorithm details.
+- `CONFIRMED` Process the selected DEM by decoding it into a two-dimensional NumPy grid, handling NoData values, optionally normalizing or downsampling it, and then compute flood-affected areas from rainfall input using terrain-based accumulation: D8 flow direction, flow accumulation, rainfall overlay, and threshold-based flood classification. See `knowledge/architecture/03-water-simulation.md` and `knowledge/data/01-dem-processing.md` for details.
+- `UNRESOLVED` The water-balance or indicator formula that converts rainfall and contributing area into the value used for flood classification, including the threshold's units, calibration, and validation.
+- `TENTATIVE` Plan backend boundaries for terrain/mesh data (`/api/terrain`), water simulation (`/api/simulate`), and evacuation analysis (`/api/analyze`), subject to implementation and validation.
 - `CONFIRMED` Identify feasible evacuation routes, assign shelter allocations, estimate clearance time, distribute resources, and compare scenarios.
 - `UNRESOLVED` Routing, allocation, travel-time, and population-behavior algorithms.
 
@@ -92,7 +95,7 @@ The intended value is testing localized "what-if" evacuation situations before t
 ## 9. Core System Capabilities
 
 - Configure and compare flood-evacuation scenarios.
-- Display local geographic and hazard information in 2D.
+- Display local geographic and hazard information in a 2D planning view with optional 3D terrain and water rendering.
 - Represent flooded roads, blocked bridges, affected people, center capacities, and resources.
 - Analyze routes, center allocation, evacuation time, and resource distribution.
 
@@ -102,7 +105,7 @@ The intended value is testing localized "what-if" evacuation situations before t
 
 ### Software product
 
-A localized interactive 2D planning environment that integrates evacuation-relevant information and supports scenario comparison.
+A localized interactive 2D planning environment with 3D terrain/water visualization that integrates evacuation-relevant information and supports scenario comparison.
 
 ### Research contribution
 
@@ -142,15 +145,15 @@ A localized interactive 2D planning environment that integrates evacuation-relev
 
 | Data category | Status | Candidate sources | Notes |
 |---|---|---|---|
-| Elevation data (DEM/DSM) | Required for flood computation | NAMRIA (1m-5m), Phil-LiDAR (1m-3m), SRTM (30m-90m), Mapbox Terrain-RGB (5-10m) | 10m-30m resolution recommended for balance of detail and performance. See `knowledge/data/01-dem-processing.md`. |
-| Roads, intersections, bridges | Required | OpenStreetMap, DPWH, local engineering office | Exported as GeoJSON via Overpass API or bounding-box export. |
-| Evacuation centers and capacity | Required; availability unverified | Local DRRM office, local government, barangays | |
-| Population or affected-person counts | Required; source unresolved | Local government or scenario input | |
-| Rescue vehicles and resources | Required; source unresolved | Local DRRM office or scenario input | |
-| Drainage infrastructure | Reference layer only; not used for flood computation | Local engineering office, DRRM office, NAMRIA, local maps | |
-| Barangay boundaries | Required for affected-population mapping | NAMRIA, OpenStreetMap, local government | |
-| Buildings | Tentative; for affected-structure representation | OpenStreetMap | |
-| Historical flood data | Optional; useful for validation | Local DRRM office, barangay records | |
+| Elevation data (DEM) | Required for flood computation | NAMRIA (1m--5m), Phil-LiDAR (1m--3m), SRTM (30m--90m), Mapbox Terrain-RGB (5m--10m) | 10m--30m resolution is the initial detail/performance target. Process by fetch/load, decode, NoData handling, optional normalization/downsampling, and export. See `knowledge/data/01-dem-processing.md`. |
+| Roads, intersections, bridges | Required | OpenStreetMap, DPWH, selected local engineering office | Convert vector data to GeoJSON via Overpass API or bounding-box export; final source and access are unverified. |
+| Evacuation centers and capacity | Required; availability unverified | Selected local DRRM office, local government, barangays | Store as geographic features with capacity/status attributes where available. |
+| Population or affected-person counts | Required; source unresolved | Selected local government, PSA, or scenario input | Barangay-level mapping is preferred where available. |
+| Rescue vehicles and resources | Required; source unresolved | Selected local DRRM office or scenario input | |
+| Drainage infrastructure | Reference layer only; not used for flood computation | Selected local engineering office, DRRM office, NAMRIA, local maps | Vector reference features may be stored as GeoJSON. |
+| Barangay boundaries | Required for affected-population mapping | NAMRIA, OpenStreetMap, selected local government | Convert to GeoJSON and document CRS, accuracy, and currency. |
+| Buildings | Tentative; for affected-structure representation | OpenStreetMap | Convert to GeoJSON when included. |
+| Historical flood data | Optional; useful for validation | Selected local DRRM office, barangay records | Use to compare simulated extent when accessible. |
 
 No candidate source has yet been verified as accessible to the team. Data pipeline and processing details: `knowledge/data/00-data-sources.md`.
 
@@ -158,17 +161,17 @@ No candidate source has yet been verified as accessible to the team. Data pipeli
 
 ### Included
 
-- `CONFIRMED` Flood-evacuation planning through interactive 2D scenario configuration and comparison.
+- `CONFIRMED` Flood-evacuation planning through interactive 2D scenario configuration and comparison, with optional 3D terrain/water visualization.
 - `CONFIRMED` Road disruption, center capacity, affected population, resource conditions, and decision-support outputs.
 - `REQUIRED BY ADVISER` Documented drainage, road, map, evacuation-center, and deployment information.
 
 ### Excluded
 
-No permanent exclusions are approved. Until confirmed, do not claim real-time flood forecasting, emergency dispatch control, public navigation, or a calibrated hydraulic model.
+The current architecture and scope do not include real-time flood forecasting, emergency dispatch control, public navigation, or a calibrated hydraulic model; formal permanent exclusions remain subject to adviser approval.
 
 ## 17. Non-Goals
 
-`UNRESOLVED` Formal non-goals are not confirmed. The system is framed as decision support, not a replacement for disaster-management authority.
+`UNRESOLVED` Formal non-goals require adviser confirmation. The system is nevertheless framed as decision support, not a replacement for disaster-management authority, and the current architecture does not provide a calibrated hydraulic model.
 
 ## 18. Constraints
 
@@ -218,7 +221,7 @@ No permanent exclusions are approved. Until confirmed, do not claim real-time fl
 3. Which organization will operate the system, and where and how will it be deployed?
 4. ~~Does drainage/elevation/water-level data drive a physical flood model or serve as reference data for user-defined conditions?~~ **Resolved:** Elevation data (DEM) drives terrain-based flood computation. Drainage infrastructure is a reference layer only.
 5. Which datasets can the team obtain, at what resolution, format, and time coverage?
-6. Which routing, allocation, time-estimation, and population-behavior algorithms will be used?
+6. Which routing, allocation, time-estimation, and population-behavior algorithms will be used, and how will rainfall and contributing area be converted into a validated flood-classification indicator?
 7. Which capabilities are minimum accepted requirements?
 8. What baselines, metrics, participants, datasets, and thresholds will be used for evaluation?
 9. Is use limited to preparedness or does it include active emergencies?
@@ -227,10 +230,11 @@ No permanent exclusions are approved. Until confirmed, do not claim real-time fl
 ## 24. Uncertainties / Contradictions in Existing Materials
 
 - `CONFLICT` The data-source draft specifies Laoag City, but the presentation and team clarification do not confirm a study area.
+- `RESOLVED` The historical presentation subtitle differs from the current manuscript title. Use **A 2D Simulation-Based Decision Support System for Flood Evacuation Planning** in active manuscript and knowledge-base references unless the team approves a later title change.
 - `RESOLVED` ~~The draft says drainage will help simulate flood movement; the presentation focuses on scenario changes and evacuation consequences and defines no hydraulic method.~~ Drainage infrastructure is now defined as a reference map layer only; flood computation uses terrain-based accumulation from DEM data.
 - `RESOLVED` ~~FastAPI, Python, and OpenStreetMap may be proposal-stage examples rather than final choices.~~ The architecture is confirmed: Python/FastAPI backend with NumPy/SciPy for computation, TypeScript/React Three Fiber frontend for rendering, and OpenStreetMap for geographic data. See `knowledge/architecture/00-overview.md`.
 - `UNRESOLVED` "Optimal routes" is not defined by an objective function and constraints.
-- `UNRESOLVED` DEM data availability and resolution for Laoag City have not been verified.
+- `UNRESOLVED` DEM data availability, resolution, and access for the selected study area have not been verified.
 
 ## Definition Integrity Test
 
@@ -238,8 +242,8 @@ No permanent exclusions are approved. Until confirmed, do not claim real-time fl
 PROBLEM: Flood conditions disrupt routes and change evacuation demand
   -> TARGET USER: Local disaster planners and responders
   -> INPUT: DEM terrain data, roads (OSM), barangay boundaries, evacuation centers, population, resources
-  -> SYSTEM: 2D scenario simulation and decision-support analysis
-  -> PROCESSING: D8 flow direction -> flow accumulation -> rainfall overlay -> flood threshold -> route/allocation/time analysis
+  -> SYSTEM: 2D scenario simulation and decision-support analysis with 3D terrain/water rendering
+  -> PROCESSING: DEM processing -> D8 flow direction -> flow accumulation -> rainfall overlay -> flood threshold -> route/allocation/time analysis
   -> OUTPUT: Evacuation options, resource plans, and scenario comparisons
   -> USER ACTION: Prepare or revise an evacuation plan
   -> MEASURABLE BENEFIT: UNRESOLVED pending evaluation design

@@ -4,7 +4,7 @@ This index maps the official CCIS BSIT LaTeX template to the current capstone fo
 
 ## Front Matter
 
-- **Title and approval pages:** Metadata in `latex-template-ccis-paper-v2/main.tex`; final project name, adviser, panel, month, and approval details remain incomplete.
+- **Title and approval pages:** Metadata in `latex-template-ccis-paper-v2/main.tex`; **OverFlow** is the approved project name. Adviser, panel, month, and approval details remain incomplete.
 - **Acknowledgment:** Complete near submission using verified names and contributions.
 - **Abstract:** Write last, based only on completed methods and results.
 - **Contents and lists:** Generated automatically by the template.
@@ -20,22 +20,22 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter1.tex`
 - Scope and Delimitations of the Study
 - Operational Definition of Terms
 
-Primary foundation: `knowledge/00-capstone-definition.md`. Drafting is blocked by the unconfirmed study area, users/partner, simulation meaning, data availability, method, and evaluation design.
+Primary foundation: `knowledge/00-capstone-definition.md`. The study area, operating organization, local data access, and evaluation design remain unresolved. The simulation meaning and core architecture are now defined: DEM-based D8 accumulation in the backend, with 3D terrain/water rendering and a top-down 2D-style analysis view.
 
 ## Chapter 2 - Review of Related Literature
 
 Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter2.tex`
 
-- Flood Evacuation Planning and Decision Support
-  - Flood Risk, Road Accessibility, and Evacuation Centers
-  - Scenario-Based Simulation, Routing, and Optimization
-- Related Systems
-- Technical Background
-- Conceptual Framework
+- Introduction
+- Flood-Aware Road Accessibility and Geospatial Decision Support
+- Shelter Capacity and Population Allocation
+- Evacuation Simulation and Related Systems
+- Terrain Processing and Evacuation Behavior
+- Synthesis and Research Gap — heading retained; content intentionally deferred
 
-Evidence required: scholarly literature, official disaster/geographic sources, standards where applicable, and verified documentation for approved technologies.
+The current review uses eight accepted sources recorded in `knowledge/literature/` and `latex-template-ccis-paper-v2/references/bibliography.bib`. Do not fill the synthesis and research-gap subsection until the team resumes it. The literature supports methodological context; it does not resolve the study area, routing/allocation algorithm, evaluation design, or deployment organization.
 
-Architecture and data reference: `knowledge/architecture/` (system overview, rendering, computation, water simulation), `knowledge/data/` (data sources, DEM processing).
+Architecture and data notes remain internal design references for Chapters 2 and 3. Claims about D8 must distinguish drainage-direction and contributing-area computation from the project's still-unvalidated rainfall-to-depth and threshold-classification steps.
 
 ## Chapter 3 - Methodology
 
@@ -47,9 +47,9 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter3.tex`
 - Data Gathering Procedures
 - Statistical Treatment of Data
 
-Decisions required: study site, partner organization, design, datasets, algorithms, participants/validators, instruments, baselines, metrics, statistics, ethics, and deployment.
+Decisions required: study site, partner organization, obtainable datasets, participants/validators, instruments, baselines, metrics, statistics, ethics, and deployment. The current technical plan already specifies the split architecture, DEM processing workflow, D8/flow-accumulation simulation, and planned `/api/terrain`, `/api/simulate`, and `/api/analyze` endpoints; these remain subject to implementation and validation.
 
-Architecture and data reference: Methodology draws on `knowledge/architecture/` for the system design (split architecture, D8 algorithm, API endpoints) and `knowledge/data/` for the data pipeline (DEM processing, OSM export, GeoJSON standardization).
+Architecture and data reference: Methodology draws on `knowledge/architecture/` for the system design (split architecture, rendering components, D8 algorithm, API endpoints) and `knowledge/data/` for the data pipeline (DEM acquisition, cleaning, normalization, resolution choice, OSM export, and GeoJSON standardization).
 
 ## Chapter 4 - Results and Discussion
 

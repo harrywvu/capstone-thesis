@@ -18,19 +18,19 @@ Simplified hydrological model based on D8 flow direction and flow accumulation. 
 - For each cell, add its accumulation value to the cell it flows into
 - Result: each cell's value represents total upstream area draining into it
 
-### Step 3: Rainfall Overlay
-- Convert rainfall intensity (mm/hr) to volume per cell based on cell area
-- Total water input per cell = intensity × duration × cell area
-- This is distributed uniformly across the terrain
+### Step 3: Rainfall Overlay (planned; formulation unresolved)
+- Rainfall intensity and duration provide a scenario-wide input.
+- Uniform rainfall is the current simplifying assumption.
+- Converting rainfall into water depth, storage, or another flood indicator requires an explicit water-balance formulation that has not yet been selected.
 
-### Step 4: Accumulation Over Time
-- Divide simulation into time steps (e.g., 1-hour increments)
-- At each step, distribute rainfall and propagate flow
-- Track water depth per cell: `depth[i][j] += rainfall_input - outflow`
+### Step 4: Accumulation Over Time (unresolved)
+- The time-step scheme, outflow rule, depression handling, and conservation checks are not yet defined.
+- D8 and flow accumulation alone provide drainage direction and contributing-area information; they do not independently produce calibrated water depth or flood timing.
 
-### Step 5: Flood Classification
-- Cells where water depth exceeds threshold (e.g., 0.3m) are classified as flooded
-- Threshold is user-adjustable for scenario comparison
+### Step 5: Flood Classification (planned; threshold unresolved)
+- Classify cells using a documented flood indicator and threshold after the indicator's units and computation are defined.
+- Treat threshold changes as sensitivity scenarios.
+- Do not label the indicator as water depth unless its calculation and validation support that unit.
 
 ## Limitations
 
@@ -39,9 +39,14 @@ Simplified hydrological model based on D8 flow direction and flow accumulation. 
 - No soil absorption or infiltration modeling
 - No drainage infrastructure (pipes, canals) modeled
 - Suitable for relative comparison between scenarios, not absolute flood prediction
+- The rainfall-to-indicator calculation and threshold have not been calibrated or validated.
 
 ## Validation
 
 - Compare simulated flood extent against known flood maps (if available from CDRRMO)
 - Sensitivity analysis: vary rainfall intensity and observe output plausibility
-- Visual inspection against real flood-prone areas in Laoag
+- Visual inspection against real flood-prone areas in the selected study area; use Laoag City only if the team confirms it
+
+## Literature Boundary
+
+O'Callaghan and Mark's D8 work supports the drainage-direction and contributing-area foundation. It does not validate the project's proposed rainfall overlay, time stepping, water-depth calculation, or flood threshold. See `knowledge/literature/07-ocallaghan-mark-1984.md`.

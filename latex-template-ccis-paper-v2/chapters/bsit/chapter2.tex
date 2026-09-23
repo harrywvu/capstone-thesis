@@ -1,67 +1,51 @@
-% Chapter 2 outline. Add prose only after collecting and evaluating reliable
-% scholarly, government, standards, and official technical sources. Do not
-% cite the selected-capstone slides as scholarly evidence.
-
 \newpage
 \section{Review of Related Literature}
 \label{Review of Related Literature}
-% Introduce the purpose, scope, organization, inclusion criteria, publication
-% period, and source types used in the review.
-% End the chapter with a synthesis that connects the literature to the actual
-% research gap and proposed contribution.
 
-\subsection{Flood Evacuation Planning and Decision Support}
-% Synthesize concepts relevant to the problem rather than listing definitions.
-% Establish how flood conditions affect accessibility, evacuation demand,
-% shelter selection, travel time, and allocation of limited resources.
+\subsection{Introduction}
 
-\subsubsection{Flood Risk, Road Accessibility, and Evacuation Centers}
-% Review evidence on:
-% - flood hazards and their effects on transportation networks;
-% - road and bridge disruption during evacuation;
-% - evacuation-center location, accessibility, capacity, and suitability;
-% - population and resource information used by local disaster planners;
-% - drainage and terrain data only after their role in this study is decided.
+This review examines the studies and systems that provide the main research and methodological foundations for a simulation-based decision support system for flood evacuation planning. The reviewed works address four connected concerns: the effect of flooding on road accessibility, the assignment of affected populations to evacuation centers, the simulation and comparison of evacuation scenarios, and the use of terrain and behavioral information in evacuation analysis. Recent studies from 2023 to 2025 are emphasized to reflect current geospatial and optimization approaches. Earlier works are retained where they establish a foundational method, document an influential related system, or provide locally relevant evidence that remains directly applicable to the study.
 
-\subsubsection{Scenario-Based Simulation, Routing, and Optimization}
-% Review evidence on:
-% - what-if and scenario-based disaster planning;
-% - decision-support systems for emergency management;
-% - graph-based evacuation routing under changing road conditions;
-% - capacity-constrained shelter assignment and resource allocation;
-% - evacuation-time estimation;
-% - hydrologic/hydraulic flood modeling only if it enters the final scope.
-% Define “simulation” and “optimal” consistently with the selected method.
+Taken together, the literature shows that flood evacuation planning is not adequately represented by a static map or a shortest route calculated under normal road conditions. A useful planning system must relate the flood condition to the road network, determine which destinations remain reachable, respect shelter capacity and other operational constraints, and allow planners to compare the consequences of different assumptions. These requirements correspond to the objectives of OverFlow: to integrate terrain, road, population, evacuation-center, and resource information; identify feasible routes and center allocations; and present alternative scenarios through an interactive geospatial interface.
 
-\subsection{Related Systems}
-% Compare existing local and international flood/evacuation tools.
-% For each system record:
-% - intended users and geographic scope;
-% - inputs and data sources;
-% - simulation and decision methods;
-% - route, shelter, time, and resource outputs;
-% - scenario-comparison capability;
-% - deployment model and limitations.
-% Use a comparison table after verified systems are selected. The synthesis
-% should show the specific gap addressed by this project without unsupported
-% novelty claims.
+\subsection{Flood-Aware Road Accessibility and Geospatial Decision Support}
 
-\subsection{Technical Background}
-% Explain only technologies that are part of the approved design:
-% - GIS concepts, coordinate reference systems, and spatial data quality;
-% - road networks represented as graphs;
-% - drainage, waterways, terrain, hazards, population, and center layers;
-% - GeoJSON or other selected formats and the validation pipeline;
-% - routing, allocation, travel-time, and scenario algorithms;
-% - system architecture, database, API, interface, and deployment environment;
-% - privacy, access control, backup, and data-update responsibilities.
-% OpenStreetMap, QGIS, Python, and FastAPI remain tentative until approved.
+Alabbad et al. developed a web-based decision support framework that evaluates road and bridge accessibility under multiple flood conditions and provides shortest-path, facility-allocation, and service-area analyses \cite{alabbad2024}. Its tests in Cedar Rapids and Charles City showed that inundation can disconnect parts of a road network, lengthen routes, and change which critical facility is nearest and reachable. The study is particularly relevant because it treats flood extent as an operational constraint on a graph rather than as a visual overlay alone. It also demonstrates that flood-related network analysis can be delivered through a web interface to users who do not operate specialist GIS software.
 
-\subsection{Conceptual Framework}
-% Present and explain the final framework using a figure based on:
-% Input -> Processing -> Output -> User Decision -> Measurable Benefit.
-% Inputs should cover only confirmed layers and scenario variables.
-% Processing must name the approved algorithms and constraints.
-% Outputs must map to the objectives and evaluation measures.
-% Source foundation: knowledge/00-capstone-definition.md, Section 7 and the
-% Definition Integrity Test.
+The framework supports OverFlow's proposed integration of flood-affected areas with road routing and its use of an accessible map-based interface. Its scope, however, is centered on transportation accessibility and emergency-facility placement. It does not provide a complete evacuation-planning model that jointly accounts for affected populations, shelter capacities, available resources, and estimated evacuation time. Its use of prepared inundation maps and two Iowa case areas also means that its results cannot be transferred directly to a Philippine locality without locally appropriate terrain, road, and population data. OverFlow can adopt the study's flood-constrained graph principle while evaluating it within a localized planning workflow.
+
+Suwanno et al. combined GIS-based flood susceptibility analysis with road-network analysis to identify suitable evacuation areas and routes in Nakhon Si Thammarat, Thailand \cite{suwanno2023}. Elevation, slope, land use, proximity to water, and other spatial criteria were used to locate flood-prone areas and assess evacuation alternatives under normal and flooded conditions. Because the case is situated in Southeast Asia, it provides a closer geographic and environmental comparison than studies based only in North America. It also confirms that the safety of a destination and the accessibility of its connecting route must be evaluated together.
+
+The study offers strong support for using GIS layers to screen evacuation centers and calculate routes, but its result is principally a set of suitable areas and paths derived from the selected criteria and weights. Such an approach is valuable for preparedness, yet it provides limited support for repeated what-if comparisons involving road closures, changing demand, center status, and resource availability. For OverFlow, the study informs the selection and spatial validation of routes and centers, while the proposed scenario mechanism extends the analysis by allowing planners to change operational conditions and compare the resulting plans.
+
+\subsection{Shelter Capacity and Population Allocation}
+
+Sharbaf et al. proposed a risk-based shelter-network design model that integrates population exposure, shelter risk, evacuation risk, pedestrian accessibility, and flood conditions in a single optimization framework \cite{sharbaf2025}. Applied in Haiti, the model seeks to maximize coverage of vulnerable populations while reducing the risks associated with shelter locations and evacuation paths. Its contribution is the recognition that a nearby shelter is not automatically an appropriate assignment: both the facility and the route leading to it may be exposed to flooding. The study therefore provides a current basis for treating evacuation-center allocation as a constrained risk problem rather than a nearest-facility lookup.
+
+This model directly supports OverFlow's objective of assigning affected populations to accessible centers while respecting safety and capacity considerations. Nevertheless, Sharbaf et al. focus on strategic shelter-network design and pedestrian evacuation, whereas OverFlow is intended to help local planners test operational scenarios involving existing centers, road interruptions, and available resources. The difference suggests that OverFlow should not claim to reproduce the study's optimization model unless the same objective function, constraints, and validation procedures are implemented. Instead, the study supplies criteria against which OverFlow's allocation method can be defined and evaluated, including capacity satisfaction, population coverage, and route exposure.
+
+Gama et al. formulated a multi-period shelter location-allocation model that determines when shelters should open, when evacuation orders should be issued, and how evacuees should be assigned as flood and road conditions change over time \cite{gama2016}. The model accounts for limited shelter capacities, time-dependent travel conditions, and the gradual availability of facilities. It is older than the preferred five-year review period, but it remains important because it connects the temporal development of a flood with capacity-constrained allocation and demonstrates why a single static assignment may be insufficient.
+
+The authors also report that exact optimization becomes computationally demanding for realistic problem sizes and therefore use a simulated-annealing heuristic. This limitation is relevant to the design of OverFlow: a planning tool must return understandable results within a practical interaction time, even when an exact optimum is expensive to compute. The study supports scenario comparison and time-sensitive allocation, while also indicating that OverFlow must define its problem size, objective function, and acceptable solution time before describing any route or allocation as optimal.
+
+\subsection{Evacuation Simulation and Related Systems}
+
+Aketa et al. developed a GIS-based evacuation action analysis system that links flood analysis with network analysis for multiple evacuees and shelters \cite{aketa2007}. The system simulates evacuation movement, considers walking speed, and searches routes across a road network to support route and shelter planning. Although published well outside the recent review window, it is retained as an early related system that demonstrates the feasibility of coupling flood conditions with network-based evacuation behavior in one geospatial environment.
+
+Its age and brief reported evaluation limit its value as evidence for current web architecture or modern local-government deployment. More significantly, the system emphasizes route and shelter analysis but does not establish the broader scenario controls, resource-allocation outputs, or comparative planning interface proposed for OverFlow. Its relevance is therefore conceptual: it shows that flood and evacuation analyses should interact, while the present study must establish a current implementation and evaluate whether planners can use its combined outputs effectively.
+
+The United States Army Corps of Engineers' LifeSim 2.0 is a more comprehensive related system for simulating population redistribution, warnings, evacuation traffic, flood exposure, and potential life loss \cite{lifesim2021}. Its agent-based model represents interactions among evacuees, roads, vehicles, and an advancing hazard; it can reroute groups when roads flood and uses repeated simulations to represent uncertainty. LifeSim demonstrates the analytical value of treating evacuation as a dynamic process and of comparing alternative warning, road, and hazard scenarios rather than relying on a single deterministic result.
+
+LifeSim also clarifies the intended boundary of OverFlow. Reproducing an agent-based traffic and life-loss model would require behavioral, vehicle, warning, hazard-intensity, and validation data beyond the confirmed scope of the project. OverFlow can apply the more limited but relevant principle of configurable scenario comparison without presenting its terrain-based accumulation output as a calibrated hydraulic forecast or its planning estimates as life-loss predictions. LifeSim therefore serves both as a design reference and as evidence for clearly documenting model assumptions and uncertainty.
+
+\subsection{Terrain Processing and Evacuation Behavior}
+
+O'Callaghan and Mark introduced the method now commonly called D8, in which each cell in a digital elevation model directs flow toward its steepest downslope neighbor, allowing drainage direction and accumulated contributing area to be derived from gridded terrain \cite{ocallaghan1984}. This is a classic methodological source rather than a recent evacuation study, and it provides the foundation for OverFlow's confirmed terrain-based accumulation approach. D8 offers a computationally straightforward way to identify likely flow paths and areas of accumulation from elevation data.
+
+The method does not by itself calculate flood depth, velocity, drainage-system behavior, or the timing of inundation. Consequently, terrain-derived accumulation should be used in OverFlow to classify scenario-specific flood-affected areas according to an explicitly documented threshold and should not be described as a calibrated hydraulic model. This distinction affects the methodology: the study must validate the digital elevation model, document preprocessing and threshold choices, and test how the resulting flood classification changes the set of usable road links.
+
+Lim et al. examined the route choices of households affected by flooding in Bagong Silangan, Quezon City, using three binary logit models based on hazard, socioeconomic, and evacuation-related variables \cite{lim2019}. Their Philippine case shows that evacuees do not necessarily select routes solely by minimum distance; departure timing, familiarity, perceived conditions, and household characteristics can influence movement. The study provides local evidence that a mathematically shortest route and an actual human route are not always equivalent.
+
+This finding is critical for interpreting OverFlow's outputs. A feasible or recommended path should be presented as a planning option derived from the available network and scenario constraints, not as a prediction of the route every resident will follow. The study also identifies a methodological opportunity for evaluation: proposed routes can be reviewed by local disaster personnel and, where data are available, compared with known routes, accessibility conditions, and community practices. Behavioral modeling may remain outside the initial implementation, but its absence should be stated as a limitation when evacuation-time estimates are interpreted.
+
+\subsection{Synthesis and Research Gap}
