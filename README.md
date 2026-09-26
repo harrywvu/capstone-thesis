@@ -71,6 +71,17 @@ The main manuscript configuration is in [`latex-template-ccis-paper-v2/main.tex`
 
 The interactive prototype is in [`sentinel-demo/`](sentinel-demo/) (the **OverFlow** demo) and runs on Node.js **22.13.0 or later**.
 
+### Offline title-defense demo
+
+The two-page defense demo uses a local FastAPI service and the frontend. Install dependencies once while online, then launch both services locally:
+
+```bash
+./scripts/setup-demo.sh
+./scripts/start-demo.sh
+```
+
+The area selector is at the frontend's local address; selecting a sector opens the 3D workspace. The Python API listens on `127.0.0.1:8000`. The defense run needs no network connection after setup. All three conceptual Laoag sectors use the same deterministic synthetic terrain and scenery. Trees, shrubs, field patches, and rocks are presentation visuals; they do not represent Laoag land use or affect flood or evacuation results. Rainfall, runoff, and depth are simulated over time on the synthetic grid, but the model has not been calibrated or validated with real data. Evacuation results remain illustrative and are not operational recommendations. See [demo-api/README.md](demo-api/README.md) for the model assumptions and limits.
+
 ```bash
 cd sentinel-demo
 npm install

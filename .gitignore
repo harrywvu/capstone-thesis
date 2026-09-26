@@ -23,3 +23,7 @@
 Thumbs.db
 .vscode/
 .idea/
+/.venv/
+__pycache__/
+*.pyc
+*.tsbuildinfo

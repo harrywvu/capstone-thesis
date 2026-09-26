@@ -34,7 +34,16 @@ const localBindingConfig = {
     : [],
 };
 
-export default defineConfig(async () => {
+export default defineConfig(async ({ command }) => {
+  if (command === 'serve') {
+    // The title-defense demo runs fully offline against the loopback FastAPI service.
+    // Hosting plugins remain enabled for production builds below.
+    return {
+      css: { postcss: { plugins: [tailwindcss()] } },
+      server: { host: '127.0.0.1', watch: isCodexSeatbeltSandbox ? { useFsEvents: false, usePolling: true } : undefined },
+      plugins: [vinext()],
+    };
+  }
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
   process.env.WRANGLER_WRITE_LOGS ??= 'false';
