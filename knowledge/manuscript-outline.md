@@ -33,7 +33,7 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter2.tex`
 - Terrain Processing and Evacuation Behavior
 - Synthesis and Research Gap — heading retained; content intentionally deferred
 
-The current review uses eight accepted sources recorded in `knowledge/literature/` and `latex-template-ccis-paper-v2/references/bibliography.bib`. Do not fill the synthesis and research-gap subsection until the team resumes it. The literature supports methodological context; it does not resolve the study area, routing/allocation algorithm, evaluation design, or deployment organization.
+The current review uses thirty-two accepted sources recorded in `knowledge/literature/` and `latex-template-ccis-paper-v2/references/bibliography.bib`. Do not fill the synthesis and research-gap subsection until the team resumes it. The literature supports methodological context; it does not resolve the study area, routing/allocation algorithm, evaluation design, or deployment organization. The added studies strengthen the review of integrated flood-evacuation planning, vulnerable-population access, risk-tested shelter selection, dynamic routing and rerouting, congestion, Philippine road vulnerability, compound hazards, open-data modeling, and relief logistics.
 
 Architecture and data notes remain internal design references for Chapters 2 and 3. Claims about D8 must distinguish drainage-direction and contributing-area computation from the project's still-unvalidated rainfall-to-depth and threshold-classification steps.
 

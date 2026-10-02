@@ -52,7 +52,7 @@
 
 ## `knowledge/literature/`
 
-- **Type:** Internal evidence notes for the eight scholarly and official technical sources currently cited in Chapter 2.
+- **Type:** Internal evidence notes for the thirty-two scholarly and official technical sources currently cited in Chapter 2.
 - **Contains:** Verified metadata, material reviewed, methods, findings, limitations, safe uses, and cautions against unsupported transfer to OverFlow.
 - **Authority:** Secondary index only. The linked journal articles and official technical documentation remain the authoritative sources.
 - **Supports:** Chapter 2 citations and later methodology decisions that explicitly adopt and validate a reviewed method.
@@ -60,4 +60,4 @@
 
 ## Source-handling note
 
-Project materials establish what the team currently proposes. They are not substitutes for scholarly literature, official dataset metadata, or empirical evidence. Eight sources are currently accepted for the Chapter 2 preliminary review; accepting them as literature does not automatically adopt their algorithms, assumptions, study areas, or performance claims for OverFlow. The template's sample bibliography entries were removed from the active BSIT outline so they cannot be mistaken for project evidence.
+Project materials establish what the team currently proposes. They are not substitutes for scholarly literature, official dataset metadata, or empirical evidence. Thirty-two sources are currently accepted for the Chapter 2 preliminary review; accepting them as literature does not automatically adopt their algorithms, assumptions, study areas, or performance claims for OverFlow. The template's sample bibliography entries were removed from the active BSIT outline so they cannot be mistaken for project evidence.
