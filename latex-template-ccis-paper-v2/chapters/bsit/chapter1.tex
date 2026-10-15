@@ -13,15 +13,15 @@ Flooding can change the conditions under which an evacuation plan must operate. 
 
 Maps can identify roads, boundaries, waterways, facilities, and hazard-related locations, but a map by itself does not show the consequences of changing several planning conditions at once. An evacuation plan may need to be reconsidered when rainfall conditions change, a road is manually closed, an evacuation center becomes unavailable or reaches capacity, the affected population increases, or fewer resources are available. Examining these conditions as configurable scenarios gives planners a structured way to compare possible evacuation arrangements before selecting or revising a plan.
 
-This project develops \textit{OverFlow}, a localized two-dimensional simulation-based decision-support system for flood evacuation planning. The system is intended for authorized local disaster planners and responders. It combines terrain, road, boundary, evacuation-center, population, and resource information in an interactive planning environment. Users configure rainfall intensity and duration, affected population, road or bridge closures, evacuation-center status and capacity, and available resources. The system then presents flood-affected conditions and analyzes feasible and alternative routes, center allocation, estimated evacuation time, and resource distribution for comparison with other scenarios.
+This project develops \textit{OverFlow}, a localized 3D geospatial decision-support system for flood evacuation planning. The system is intended for authorized local disaster planners and responders. It combines terrain, road, boundary, evacuation-center, population, and resource information in an interactive planning environment. Users configure rainfall intensity and duration, affected population, road or bridge closures, evacuation-center status and capacity, and available resources. The planned system presents flood-affected conditions and analyzes feasible and alternative routes, center allocation, estimated evacuation time, and resource distribution for comparison with other scenarios.
 
-The flood component uses a digital elevation model as its terrain input. D8 flow direction and flow accumulation represent how terrain directs and concentrates water, while a simplified rainfall overlay and threshold classify areas for scenario analysis. Drainage infrastructure may be displayed as a reference layer but is not included in the flood computation. The rainfall-to-indicator formula, classification threshold, and validation procedure still require final definition; therefore, the output must be treated as a relative scenario representation rather than a calibrated hydraulic result or exact flood forecast.
+The planned flood component uses a digital elevation model as its terrain input. D8 flow direction and flow accumulation describe terrain drainage paths and contributing area. A simplified rainfall overlay and threshold-based classification are planned for scenario analysis, but their formula, units, threshold, and validation procedure still require definition. Drainage infrastructure may be displayed as a reference layer but is not included in the computation. Until those steps are defined and evaluated, the method cannot support a calibrated flood forecast or claim exact water depth or timing.
 
 OverFlow is intended to supplement the planning process by organizing relevant conditions and showing how changes in those conditions affect evacuation options. It does not make autonomous emergency decisions, guarantee that a route will remain safe during an actual event, or replace the authority and judgment of disaster-management personnel. The final locality, geographic coverage, operating organization, accessible datasets, routing and allocation methods, and evaluation design remain subject to confirmation.
 
 \subsection{Purpose and Description}
 
-The purpose of this study is to develop \textit{OverFlow}, a localized, scenario-based decision-support system for flood-evacuation planning. A planner configures rainfall intensity and duration, affected population by barangay, evacuation-center status, center capacity, manual road or bridge closures, and available resources. Using the geographic and terrain data for the selected study area, the system represents the resulting flood and evacuation conditions in an interactive two-dimensional planning environment.
+The purpose of this study is to develop \textit{OverFlow}, a localized, scenario-based decision-support system for flood-evacuation planning. A planner configures rainfall intensity and duration, affected population by barangay, evacuation-center status, center capacity, manual road or bridge closures, and available resources. Using the geographic and terrain data for the selected study area, the planned system represents flood and evacuation conditions in an interactive 3D geospatial planning environment.
 
 For each scenario, the system identifies flood-affected areas and analyzes evacuation options under the configured constraints. It is intended to identify feasible and alternative routes, assign affected groups to available evacuation centers, estimate evacuation time, and present resource-allocation information. The planner can compare the results of different scenarios and use them as a reference in preparing or revising an evacuation plan.
 
@@ -29,14 +29,14 @@ The output is decision-support information, not an autonomous emergency decision
 
 \subsection{Objectives of the Study}
 
-The general objective of this study is to develop and evaluate a localized two-dimensional simulation-based decision-support system for creating and comparing flood-evacuation planning scenarios.
+The general objective of this study is to develop and evaluate a localized 3D geospatial decision-support system for creating and comparing flood-evacuation planning scenarios.
 
 Specifically, it aims to:
 \begin{enumerate}
   \item integrate validated local map, road, hazard, evacuation-center, population, and resource data for the selected study area;
-  \item represent flood-affected areas from DEM-based terrain accumulation using rainfall intensity and duration, together with road disruption, evacuation demand, center capacity, and resource availability;
+  \item develop and evaluate a rule for classifying flood-affected areas from DEM-based D8 terrain analysis and rainfall inputs, alongside road disruption, evacuation demand, center capacity, and resource availability;
   \item analyze feasible evacuation routes, center allocation, estimated evacuation time, and resource distribution under configured scenario constraints;
-  \item present scenario results through an interactive two-dimensional map and comparison interface; and
+  \item present scenario results through an interactive 3D geospatial view and comparison interface; and
   \item evaluate the developed system using methods and metrics to be selected for the final study.
 \end{enumerate}
 
@@ -50,7 +50,7 @@ For local engineering and planning personnel, barangay responders, and evacuatio
 
 \subsection{Scope and Delimitations of the Study}
 
-This study covers the development of \textit{OverFlow}, a localized two-dimensional flood-evacuation planning and decision-support system. It includes configurable scenario inputs for rainfall intensity and duration, affected population by barangay, evacuation-center status and capacity, manual road or bridge closures, and available rescue resources. The system uses DEM data to compute terrain-based flood-affected areas through D8 flow direction, flow accumulation, rainfall overlay, and threshold-based classification. It represents roads, bridges, barangay boundaries, evacuation centers, population information, and resource conditions to support analysis and comparison of evacuation scenarios.
+This study covers the development of \textit{OverFlow}, a localized 3D geospatial flood-evacuation planning and decision-support system. It includes configurable scenario inputs for rainfall intensity and duration, affected population by barangay, evacuation-center status and capacity, manual road or bridge closures, and available rescue resources. The planned terrain method derives D8 flow direction and flow accumulation from DEM data; a rainfall-to-indicator rule and threshold-based classification remain to be defined and validated before flood-affected areas can be defensibly reported. The system represents roads, bridges, barangay boundaries, evacuation centers, population information, and resource conditions to support analysis and comparison of evacuation scenarios.
 
 The system produces decision-support outputs that include flood-affected areas, recommended and alternative evacuation routes, center allocation, estimated evacuation time, resource-allocation information, dynamic maps, and scenario comparisons. Drainage infrastructure may be included only as a reference map layer. The final study area, deployment organization, and availability of local datasets remain subject to confirmation; the system's implemented coverage and features will be bounded by data that can be legitimately obtained and validated during the study.
 
@@ -76,6 +76,6 @@ The study excludes real-time flood forecasting, public navigation, emergency dis
 
 \textbf{Flow Accumulation.} Refers to a grid operation that counts or estimates the upstream area draining into a DEM cell, indicating locations where water may collect.
 
-\textbf{OverFlow.} Refers to the proposed localized two-dimensional, simulation-based decision-support system for flood-evacuation planning developed in this study.
+\textbf{OverFlow.} Refers to the proposed localized 3D geospatial decision-support system for flood-evacuation planning developed in this study.
 
-\textbf{Terrain-Based Flood Computation.} Refers to the simplified computation of flood-affected areas from rainfall input and DEM terrain data using D8 flow direction, flow accumulation, rainfall overlay, and threshold-based flood classification. It is not a hydraulic model.
+\textbf{Terrain-Based Flood Computation.} Refers to the proposed use of DEM-derived D8 flow direction and flow accumulation with a rainfall indicator and threshold-based classification. The rainfall rule and threshold still require definition and validation; D8 alone is not a hydraulic model or a flood-depth calculation.
