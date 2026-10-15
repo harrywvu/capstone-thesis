@@ -1,6 +1,6 @@
 # Synthetic defense-demo model
 
-This service supplies the same deterministic 65 × 65 synthetic landscape for all three conceptual Laoag sectors. The sector ID changes the label only. It never fetches or loads OSM, DEM, boundaries, real population, or shelter data.
+This service supplies the same deterministic 65 × 65 synthetic landscape for all three conceptual Laoag sectors. Laoag City is one of two candidate study areas, alongside Batac City; the demo does not select a final site. The sector ID changes the label only. It never fetches or loads OSM, DEM, boundaries, real population, or shelter data.
 
 The terrain response also includes fixed-seed trees, shrubs, field patches, and rocks for visual context. They are kept clear of demo roads, buildings, and planning nodes and are not inputs to the flood or evacuation calculations. Their positions do not claim to represent real Laoag vegetation, land use, or geology.
 
