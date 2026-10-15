@@ -2,7 +2,7 @@
 
 ## Summary
 
-OverFlow is a geospatial decision support system for flood evacuation planning. The system uses a split architecture: a Python backend for all computation and a TypeScript frontend for rendering and UI.
+OverFlow is a 3D geospatial decision-support system for flood evacuation planning. It uses a split architecture: a Python backend for computation and a TypeScript frontend for rendering and UI. The DEM is a two-dimensional elevation grid used to build terrain and support analysis.
 
 ## Core Principle
 
@@ -22,7 +22,7 @@ React Three Fiber (R3F)    ←API→  FastAPI
 ├─ Water visualization             ├─ Water simulation
 ├─ Camera/controls                 ├─ Flow direction (D8)
 ├─ UI panels                       ├─ Flow accumulation
-└─ Map selection (Leaflet)         └─ Flood analysis
+└─ Barangay selection (Leaflet)    └─ Flood analysis
 ```
 
 ## Technology Stack
@@ -31,7 +31,7 @@ React Three Fiber (R3F)    ←API→  FastAPI
 |---|---|---|
 | Frontend rendering | React Three Fiber (Three.js) | 3D terrain + water visualization |
 | Frontend UI | React + shadcn/ui | Control panels, metrics, comparison |
-| Map selection | Leaflet | Interactive area selection on map |
+| Map selection | Leaflet | Hover highlight and click selection of one or more barangay boundaries |
 | Backend framework | FastAPI | REST API server |
 | Computation | NumPy / SciPy | Grid operations, flow simulation |
 | Raster data | GeoTIFF / NumPy grid | DEM source and backend computation |
@@ -41,16 +41,16 @@ React Three Fiber (R3F)    ←API→  FastAPI
 ## Key Decisions
 
 - **DEM is the primary data source** for terrain and water simulation
-- **OSM data** provides roads, buildings, and administrative boundaries
+- **OSM data** is a candidate for roads, buildings, and administrative boundaries; completeness must be checked for the selected area
 - **Procedural terrain generation** from real DEM data (not random generation)
-- **Simplified water model**: D8 flow direction + threshold-based accumulation
+- **Terrain analysis**: D8 flow direction and contributing-area accumulation. Rainfall overlay and threshold-based flood classification remain planned and require a defined indicator and validation.
 - **React Three Fiber** chosen over raw OpenGL for faster development and React integration
 - **Python backend** chosen over JS computation for NumPy/SciPy access and academic defensibility
 
 ## Data Flow
 
-1. User selects area on Leaflet map → bounding box coordinates sent to backend
-2. Backend fetches DEM data for bounding box → processes into elevation grid
-3. Backend runs water simulation on grid → returns terrain mesh + water state
-4. Frontend receives geometry + state → renders 3D terrain and water via R3F
-5. User adjusts parameters (rainfall intensity, duration) → re-simulates via API
+1. User highlights barangay boundaries on hover and selects or deselects one or more by clicking; selected barangay identifiers are sent to the backend.
+2. Backend resolves the selected barangay geometry, loads the DEM coverage and relevant geographic layers, and prepares an elevation grid.
+3. Backend derives flow direction and accumulation; the rainfall-to-indicator and classification method must be defined before a flood state can be validated.
+4. Backend returns terrain geometry and scenario state through the API; the frontend renders 3D terrain and water via React Three Fiber.
+5. User changes scenario inputs, runs evacuation analysis, inspects routes and assignments, then saves or duplicates scenarios for comparison and exports a summary.

@@ -2,7 +2,7 @@
 
 ## Approach
 
-Simplified hydrological model based on D8 flow direction and flow accumulation. Not a full hydraulic simulation — sufficient for a decision support system demonstration.
+The planned terrain method uses D8 flow direction and flow accumulation. Those operations describe drainage paths and contributing area. The additional rainfall and flood-classification rules must be defined and evaluated before the system can present a defensible flood-affected-area result.
 
 ## Algorithm
 
@@ -10,13 +10,13 @@ Simplified hydrological model based on D8 flow direction and flow accumulation. 
 - For each cell (i, j) in the elevation grid, examine 8 neighboring cells
 - Calculate slope to each neighbor: `(elevation[i][j] - elevation[neighbor]) / distance`
 - Assign flow direction to the neighbor with steepest downward slope
-- If all neighbors are higher or equal → cell is a sink (water pools here)
+- If all neighbors are higher or equal, the cell is a sink in the D8 direction grid; actual stored water has not yet been calculated
 
 ### Step 2: Flow Accumulation
-- Initialize all cells with accumulation = 1 (each cell receives its own rainfall)
+- Initialize each valid cell with one unit of contributing area; rainfall is handled separately
 - Process cells in topological order (highest to lowest elevation)
 - For each cell, add its accumulation value to the cell it flows into
-- Result: each cell's value represents total upstream area draining into it
+- Result: each cell's value represents total upstream contributing area, not water depth or stored volume
 
 ### Step 3: Rainfall Overlay (planned; formulation unresolved)
 - Rainfall intensity and duration provide a scenario-wide input.
@@ -45,7 +45,7 @@ Simplified hydrological model based on D8 flow direction and flow accumulation. 
 
 - Compare simulated flood extent against known flood maps (if available from CDRRMO)
 - Sensitivity analysis: vary rainfall intensity and observe output plausibility
-- Visual inspection against real flood-prone areas in the selected study area; use Laoag City only if the team confirms it
+- Visual inspection against documented flood-prone areas in the selected study area
 
 ## Literature Boundary
 

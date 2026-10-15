@@ -52,7 +52,7 @@ This directory stores working evidence notes for the scholarly literature and of
 
 ## Chapter Status
 
-Chapter 2 currently contains the introduction and four thematic discussions. Section 2.6, **Synthesis and Research Gap**, is intentionally empty until the team resumes it.
+Chapter 2 contains the introduction, four thematic discussions, and Section 2.6, **Synthesis and Research Gap**. The synthesis relates the evidence to OverFlow's objectives, distinguishes modeled outcomes from real-world casualty reduction, and identifies the integration and evaluation gaps addressed by the project.
 
 ## Files
 
