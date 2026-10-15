@@ -19,16 +19,16 @@ City of Batac, Ilocos Norte
 
 Dear **[HEAD NAME]**:
 
-We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A 2D Simulation-Based Decision Support System for Flood Evacuation Planning."**
+We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning."**
 
-The system is designed to help local disaster planners visualize flood scenarios and evaluate evacuation options within [CITY NAME]. It integrates geographic, demographic, and infrastructure data to compute flood-affected areas and analyze evacuation logistics.
+The planned 3D geospatial system is intended to help local disaster planners visualize flood scenarios and evaluate evacuation options within [CITY NAME] if it is selected as the study area. It will integrate geographic, demographic, and infrastructure data. The DEM-based flood-classification method still requires definition and validation; the planning component is intended to analyze evacuation logistics.
 
 To develop the geographic and demographic components of the system, we respectfully request access to the following data:
 
 1. **Barangay boundaries** — digital maps or shapefiles showing the boundaries of all barangays within [CITY NAME].
 2. **Population data** — estimated population counts per barangay, particularly for identifying areas with high evacuation demand.
 3. **Evacuation center locations** — any existing records or maps of designated evacuation centers within [CITY NAME].
-4. **Base geographic data** — any available maps, satellite imagery, or geographic datasets covering [CITY NAME] that may support the development of the system's 2D map environment.
+4. **Base geographic data** — any available maps, satellite imagery, elevation data, or geographic datasets covering [CITY NAME] that may support the development of the system's 3D geospatial environment.
 
 We would also like to request permission to coordinate with the City Disaster Risk Reduction and Management Office (CDRRMO) and the City Engineering Office for additional data related to flood history, road networks, and drainage infrastructure.
 

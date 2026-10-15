@@ -19,9 +19,9 @@ City Disaster Risk Reduction and Management Office
 
 Dear **[HEAD NAME]**:
 
-We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A 2D Simulation-Based Decision Support System for Flood Evacuation Planning."**
+We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning."**
 
-The system is designed to help local disaster planners visualize flood scenarios and evaluate evacuation options. It computes flood-affected areas based on terrain data and rainfall conditions, then analyzes feasible evacuation routes, shelter allocations, estimated clearance times, and resource distribution.
+The planned 3D geospatial system is intended to help local disaster planners visualize flood scenarios and evaluate evacuation options. Its proposed terrain analysis uses a digital elevation model and D8 flow direction/accumulation; the rainfall-to-flood classification still requires definition and validation. The planning component is intended to analyze feasible evacuation routes, center allocations, estimated evacuation times, and resource distribution.
 
 To develop and validate the system, we respectfully request access to the following data from your office:
 

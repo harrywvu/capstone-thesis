@@ -19,9 +19,9 @@ City Engineering Office
 
 Dear **[HEAD NAME]**:
 
-We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A 2D Simulation-Based Decision Support System for Flood Evacuation Planning."**
+We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning."**
 
-The system is designed to help local disaster planners visualize flood scenarios and evaluate evacuation options. It uses elevation and terrain data to compute flood-affected areas, then analyzes evacuation routes and shelter allocations based on road network conditions.
+The planned 3D geospatial system is intended to help local disaster planners visualize flood scenarios and evaluate evacuation options. Its proposed DEM-based D8 terrain analysis will inform flood-affected-area classification once the rainfall rule is defined and validated. Road data will support evacuation-route and center-allocation analysis. Drainage information will serve as a reference map layer, not a computation input.
 
 To develop the geographic and infrastructure components of the system, we respectfully request access to the following data from your office:
 
