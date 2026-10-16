@@ -4,7 +4,11 @@
 
 The planned terrain method uses D8 flow direction and flow accumulation. Those operations describe drainage paths and contributing area. The additional rainfall and flood-classification rules must be defined and evaluated before the system can present a defensible flood-affected-area result.
 
-## Algorithm
+## Conditional SFINCS path
+
+The team now asks planning to assume access to finer bare-earth terrain, river/channel and water-boundary information, dated rainfall, and geolocated wet/dry observations for a Laoag flood event. Under that assumption, SFINCS is the **target for evaluation as the flood-scenario engine**, while D8 may remain a drainage-reference layer. The [pilot plan](../02-sfincs-pilot-plan.md) requires a physically supported boundary, numerical checks, and observed-event comparison before adoption. The [first run](../03-sfincs-pilot-results.md) and [boundary rerun](../04-sfincs-boundary-rerun-results.md) show technical feasibility and an artificial-edge sensitivity, not validated flood predictions. None of the assumed new datasets has been marked received.
+
+## Accepted D8 proposal
 
 ### Step 1: D8 Flow Direction
 - For each cell (i, j) in the elevation grid, examine 8 neighboring cells
@@ -32,7 +36,7 @@ The planned terrain method uses D8 flow direction and flow accumulation. Those o
 - Treat threshold changes as sensitivity scenarios.
 - Do not label the indicator as water depth unless its calculation and validation support that unit.
 
-## Limitations
+## Limitations of the D8 proposal
 
 - D8 only allows flow in one direction per cell (no spreading)
 - Does not model flow velocity or volume accurately
@@ -43,9 +47,9 @@ The planned terrain method uses D8 flow direction and flow accumulation. Those o
 
 ## Validation
 
-- Compare simulated flood extent against known flood maps (if available from CDRRMO)
-- Sensitivity analysis: vary rainfall intensity and observe output plausibility
-- Visual inspection against documented flood-prone areas in the selected study area
+- For the SFINCS candidate, compare a dated event run with geolocated **observed flooded and dry places**, using matching rainfall and relevant river/boundary data. Reserve independent observations or a second event for evaluation after tuning.
+- Check numerical behavior and sensitivity to terrain, boundary, infiltration, and roughness assumptions before using modeled exposure in evacuation scenarios.
+- Static hazard or susceptibility maps can provide context but cannot replace dated event observations or establish model accuracy. The D8 rainfall-classification method remains unresolved and has no validated threshold.
 
 ## Literature Boundary
 
