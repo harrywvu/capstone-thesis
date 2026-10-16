@@ -55,7 +55,7 @@ Cell spacing is horizontal sampling detail, not vertical accuracy. Check source 
 
 ### LiDAR request
 
-Request a **bare-earth digital terrain model (DTM)** for the pilot area, preferably at 1–5 m native or source-supported resolution, together with its metadata. A good 5–10 m DTM is worth evaluating if finer data is unavailable. A digital surface model (DSM) may include rooftops and vegetation and should not be assumed interchangeable with ground elevation. Request the collection date, documented vertical accuracy, horizontal and vertical reference systems, elevation units, source resolution, coverage, and permitted use. Availability remains unconfirmed while awaiting the LiDAR response.
+Request a **bare-earth digital terrain model (DTM)** for the Laoag pilot area, preferably at 1–5 m native or source-supported resolution, together with its metadata. A good 5–10 m DTM is worth evaluating if finer data is unavailable. A digital surface model (DSM) may include rooftops and vegetation and should not be assumed interchangeable with ground elevation. LiPAD replied that DTM is a distributable data type, but exact Laoag coverage, access under its NDA, native resolution, and suitability remain unconfirmed. Request the collection date, documented vertical accuracy, horizontal and vertical reference systems, elevation units, source resolution, coverage, and permitted use. See [the LiPAD response note](03-lipad-response.md).
 
 [HEC-RAS terrain guidance](https://www.hec.usace.army.mil/confluence/rasdocs/rmum/latest/terrain-layer) describes using a DTM for the bare-earth ground surface. It supports the terrain-type distinction; the resolution ranges above are project planning recommendations, not thresholds prescribed by that source.
 

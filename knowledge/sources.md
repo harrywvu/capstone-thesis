@@ -18,7 +18,7 @@
 ## Current Team Decisions
 
 - **Type:** Direct team clarification.
-- **Contains:** The approved project name and geospatial title, BSIT classification, 3D system direction, split architecture, terrain-based method, and current scope limits.
+- **Contains:** The approved project name and geospatial title, BSIT classification, confirmed Laoag City study area (2026-10-16), 3D system direction, split architecture, terrain-based method, and current scope limits.
 - **Authority:** Highest for current project choices; summarized in `knowledge/decisions.md` and `knowledge/00-capstone-definition.md`.
 
 ## `knowledge/architecture/`
@@ -37,11 +37,12 @@
 
 - **Type:** Data sourcing and processing documentation.
 - **Contains:**
-  - `00-data-sources.md` — DEM source candidates (NAMRIA, Phil-LiDAR, SRTM, Mapbox Terrain-RGB), OpenStreetMap data types, local-government data requirements, and the data pipeline.
+  - `00-data-sources.md` — Laoag data status, confirmed prospective LiPAD DTM provider, alternative DEM sources, OpenStreetMap data types, local-government data requirements, and the data pipeline.
   - `01-dem-processing.md` — DEM definition, processing steps (load or fetch, decode, clean, prepare for display, export), and resolution/performance guidance.
   - `02-laoag-city-hall-package.md` — read-only inventory and quality assessment of the supplied Laoag files, with source paths, limitations, and follow-up requests.
+  - `03-lipad-response.md` — the team's confirmed Laoag selection, LiPAD's DTM availability reply, NDA/access requirements, and the boundary between a prospective source and a delivered dataset.
 - **Important distinction:** GeoJSON is the standard for vector layers such as roads, bridges, centers, boundaries, and flood zones. DEM data may be obtained as raster/GeoTIFF and is converted to a NumPy grid; JSON-compatible structures are used for API interchange.
-- **Authority:** High for data requirements and processing workflow. The Laoag package inventory verifies file receipt and observed properties, not source fitness, permitted use, or study-area selection.
+- **Authority:** High for data requirements and processing workflow. The Laoag package inventory verifies file receipt and observed properties, not source fitness or permitted use. The team's direct confirmation establishes the study area; LiPAD's reply establishes a prospective DTM provider, not receipt of a dataset.
 - **Supports:** Chapter 2 (Technical Background — GIS and data formats), Chapter 3 (Methodology — data gathering and processing), and Section 15 of the capstone definition (Data Requirements).
 
 ## Supplied Laoag City Hall package
@@ -54,7 +55,7 @@
 ## Current repository plans and demo
 
 - `DATA SOURCES AND TOOLS FOR OVERFLOW.md` consolidates the current candidate data, processing, and deployment plan.
-- `letters/` contains draft requests and area-of-interest files for both candidate cities; these are requests, not evidence of study-area selection or data availability.
+- `letters/` contains draft requests and area-of-interest files from the earlier two-city inquiry. Laoag is now the selected study area; the Batac files remain historical request artifacts and do not imply active scope or data access.
 - `sentinel-demo/` and `demo-api/` contain a synthetic working demonstration. Its illustrative runoff solver is separate from the planned D8-based method; the folder path is retained for the existing hosting workspace.
 
 ## `knowledge/literature/`

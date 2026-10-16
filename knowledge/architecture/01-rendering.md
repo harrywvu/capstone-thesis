@@ -34,7 +34,7 @@ Responsible for all visual output: 3D terrain, water overlay, buildings, roads, 
 - Color changes based on closure status (open = gray, closed = red)
 
 ### Barangay Selection (Pre-simulation)
-- Leaflet map displays prepared barangay boundaries for the candidate study area
+- Leaflet map displays prepared barangay boundaries for the confirmed Laoag City study area
 - Hover highlights a barangay; click selects it; click again deselects it
 - Multiple barangays may be selected; no circle or polygon drawing is required
 - Sends selected barangay identifiers to the backend, which resolves geometry and DEM coverage

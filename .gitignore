@@ -1,5 +1,6 @@
 # Generated manuscript output
 /output/
+/data/
 
 # Local build artifacts, render previews, and downloaded tools/cache
 /tmp/

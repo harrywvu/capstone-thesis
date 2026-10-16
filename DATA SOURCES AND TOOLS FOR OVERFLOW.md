@@ -4,24 +4,24 @@ This is the current data-acquisition and processing plan for **OverFlow: A Geosp
 
 ## Study area and data status
 
-Laoag City and Batac City are candidate study areas. Neither is selected. The area-of-interest files in `letters/lipad-aoi/` support elevation-data requests; they do not verify data access, geographic suitability, or partner approval. The final city, pilot barangays, operating organization, and deployment arrangement remain to be agreed with the adviser and partner office.
+**Laoag City, Ilocos Norte is the confirmed study area.** Batac City was an earlier candidate and is no longer part of the active request. The area-of-interest files in `letters/lipad-aoi/` document the earlier two-city inquiry; they do not verify data access or geographic suitability. The pilot barangays, operating organization, and deployment arrangement remain unresolved. UP TCAGP/LiPAD has replied as a prospective source of DTM data, but Laoag-specific coverage, NDA clearance, metadata, and delivery remain pending. See `knowledge/data/03-lipad-response.md`.
 
 ## Core inputs to request and validate
 
 | Data | Candidate source | Planned role |
 |---|---|---|
-| Digital elevation model (DEM) | NAMRIA, Phil-LiDAR, SRTM, or another accessible provider | Terrain rendering and D8 flow direction/accumulation |
+| Digital elevation model (DEM) | Supplied Laoag City Hall raster; UP TCAGP/LiPAD as a confirmed prospective DTM provider; NAMRIA, SRTM, or another accessible provider as alternatives | Terrain rendering and D8 flow direction/accumulation |
 | Roads, intersections, and bridges | OpenStreetMap, city engineering office, DPWH | Route graph and scenario closures |
 | Barangay boundaries | City planning office, NAMRIA | Geographic units for population and results |
 | Affected population by barangay | City planning office, CDRRMO | Evacuation demand |
 | Evacuation centers, capacity, status, and location | CDRRMO, barangay offices | Candidate destinations and capacity constraints |
 | Vehicles and other available resources | CDRRMO | Scenario resource constraints |
 
-Request dataset provenance, coverage, coordinate reference system, resolution, collection/update date, completeness, accuracy, and usage permissions. Actual access and local coverage have not been established.
+Request dataset provenance, coverage, coordinate reference system, resolution, collection/update date, completeness, accuracy, and usage permissions. The City Hall package is in hand, but LiPAD DTM access and its exact Laoag coverage have not been established.
 
 ## Reference and validation inputs
 
-Drainage canals, culverts, rivers, waterways, flood-control structures, flood-prone roads, historical flood extents, buildings, and other local hazard maps should be requested where available. Drainage infrastructure is a **reference layer**, not an input to the planned D8 flood computation. Historical flood and local hazard records may help evaluate results, but their availability and suitability are unconfirmed.
+Drainage canals, culverts, rivers, waterways, flood-control structures, flood-prone roads, historical flood extents, buildings, and other local hazard maps should be requested where available. Drainage infrastructure is a **reference layer**, not an input to the planned D8 flood computation. Historical flood and local hazard records may help evaluate results, but their availability and suitability are unconfirmed. LiPAD's reply did not confirm the requested Flood Hazard Maps for Laoag.
 
 ## Processing and model boundary
 
@@ -41,7 +41,7 @@ Deployment has not been chosen. Options include an office workstation/local netw
 
 ## Decisions still needed
 
-- Select the study area, pilot coverage, partner office, and obtainable datasets.
+- Select Laoag pilot barangays, partner office, and obtainable datasets; confirm LiPAD's Laoag DTM coverage and access terms.
 - Define and validate the rainfall-to-flood-classification method.
 - Specify route, shelter-allocation, evacuation-time, and resource-allocation methods.
 - Agree on evaluation baselines, participants, metrics, and acceptance thresholds.

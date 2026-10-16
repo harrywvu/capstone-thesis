@@ -9,9 +9,9 @@ The system is intended to support human planning decisions. It is not an autonom
 
 ## Current status
 
-The repository contains the capstone foundation, manuscript workspace, and an interactive controlled-demo prototype. A Laoag City Hall package with terrain, map, and population files has been received. The final study area, partner organization, deployment environment, remaining data access, analytical methods, and evaluation design are still subject to confirmation.
+The repository contains the capstone foundation, manuscript workspace, and an interactive controlled-demo prototype. **Laoag City, Ilocos Norte is the confirmed study area.** A Laoag City Hall package with terrain, map, and population files has been received. Pilot barangays, the partner organization, deployment environment, remaining data access, analytical methods, and evaluation design are still subject to confirmation.
 
-Laoag City and Batac City are **candidate** study areas. Neither is the confirmed project site. The area-of-interest request files in `letters/lipad-aoi/` support data inquiries and do not establish a selected locality.
+UP TCAGP's LiPAD has responded as a prospective source of DTM data, but exact Laoag coverage, access under its NDA, metadata, and delivery remain pending. Its reply did not confirm Flood Hazard Map availability. The Batac area-of-interest file in `letters/lipad-aoi/` belongs to the earlier two-city inquiry and is not part of the active study area.
 
 ## Repository layout
 
@@ -49,6 +49,7 @@ Start with these files before making project or manuscript claims:
 - [Manuscript outline map](knowledge/manuscript-outline.md) — how the capstone foundation maps to the BSIT manuscript.
 - [Data sources and tools plan](DATA%20SOURCES%20AND%20TOOLS%20FOR%20OVERFLOW.md) — candidate data layers, sources, processing tools, and deployment considerations.
 - [Laoag data package assessment](knowledge/data/02-laoag-city-hall-package.md) — what the supplied files can support, quality checks, and remaining requests.
+- [LiPAD response status](knowledge/data/03-lipad-response.md) — the prospective DTM source, access conditions, and unanswered coverage questions.
 
 ## Manuscript workflow
 
@@ -83,7 +84,7 @@ The two-page defense demo uses a local FastAPI service and the frontend. Install
 ./scripts/start-demo.sh
 ```
 
-The area selector is at the frontend's local address; selecting a sector opens the 3D workspace. The Python API listens on `127.0.0.1:8000`. The defense run needs no network connection after setup. All three conceptual Laoag sectors use the same deterministic synthetic terrain and scenery. They illustrate one candidate area only and do not represent verified Laoag geography. Rainfall, runoff, and depth are simulated over time on the synthetic grid by a demo-only method that has not been calibrated or validated with real data. Evacuation results remain illustrative. See [demo-api/README.md](demo-api/README.md) for the model assumptions and limits.
+The area selector is at the frontend's local address; selecting a sector opens the 3D workspace. The Python API listens on `127.0.0.1:8000`. The defense run needs no network connection after setup. All three conceptual Laoag sectors use the same deterministic synthetic terrain and scenery. They illustrate the selected city conceptually but do not represent verified Laoag geography. Rainfall, runoff, and depth are simulated over time on the synthetic grid by a demo-only method that has not been calibrated or validated with real data. Evacuation results remain illustrative. See [demo-api/README.md](demo-api/README.md) for the model assumptions and limits.
 
 ```bash
 cd sentinel-demo
@@ -103,11 +104,11 @@ npm run format
 
 ## Data direction
 
-Required data categories include a DEM, roads and bridges, barangay boundaries, evacuation centers and capacities, affected population, and available resources. Drainage and waterways are reference layers; historical flood records can support validation. Candidate sources include OpenStreetMap, NAMRIA, Phil-LiDAR, other terrain providers, and the relevant local offices.
+Required data categories include a DEM, roads and bridges, barangay boundaries, evacuation centers and capacities, affected population, and available resources. Drainage and waterways are reference layers; historical flood records can support validation. The Laoag City Hall package is in hand, and UP TCAGP/LiPAD is a confirmed prospective DTM provider. OpenStreetMap, NAMRIA, other terrain providers, and relevant local offices remain candidate sources for other or alternative data.
 
 The supplied Laoag files cover terrain, boundaries, population, roads, flood susceptibility, and reference layers. They do not yet supply a usable evacuation-center register or current, location-specific rescue resources. See the [read-only package assessment](knowledge/data/02-laoag-city-hall-package.md).
 
-Before implementation or evaluation, document the confirmed study area, data owner, data quality, coordinate reference system, coverage, date, permissions, and update process. Do not describe drainage data as a physical flood model unless an appropriate method, calibration data, and validation are in place.
+Before implementation or evaluation, document Laoag pilot coverage, data owner, data quality, coordinate reference system, coverage, date, permissions, and update process. Do not describe drainage data as a physical flood model unless an appropriate method, calibration data, and validation are in place.
 
 ## Team
 
