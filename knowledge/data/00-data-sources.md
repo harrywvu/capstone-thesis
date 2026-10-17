@@ -43,7 +43,7 @@
 
 ### SFINCS event-evaluation package
 
-The team plans on access to the following **expected, not yet received** evidence for one dated Laoag flood event. It is required for the proposed SFINCS validation path, even though the existing evacuation workflow can be prototyped without it.
+The team plans on access to the following **expected, not yet received** evidence for one dated Laoag flood event. It is required to evaluate the selected SFINCS method, even though the existing evacuation workflow can be prototyped without it.
 
 | Expected data | Likely contact | Check on receipt |
 |---|---|---|
@@ -60,10 +60,10 @@ The supplied Laoag City Hall package verifies possession of local boundary, popu
 
 1. The planner selects one or more prepared barangay boundaries on the Leaflet map; the interface sends their identifiers to the backend, which resolves their combined geographic coverage.
 2. The backend loads or fetches the DEM and prepares an elevation grid. It also loads available road, boundary, center, and reference layers as GeoJSON.
-3. D8 flow direction and flow accumulation are derived from the DEM. The rainfall-to-flood-indicator method and classification threshold must be defined and validated before flood-affected cells are reported.
-4. Manual closures constrain the road network; any automatic closure from classified flood exposure needs a defined, validated rule. Read-only population data provides a reference, while the planner enters expected evacuees separately. Weighted routing, reachable-center capacity allocation, travel/vehicle estimates, and explicit unserved demand use these scenario values and available facility data.
+3. Prepare SFINCS terrain, rainfall, river/channel, roughness, infiltration, and water-boundary inputs. Run and check the scenario, then evaluate a dated event against independent flooded and dry observations before claiming local flood-map accuracy. D8 may provide a separate drainage-reference layer only.
+4. Planner-confirmed closures constrain the road network; any automatic closure from modeled exposure would require a separately defined and validated rule. Read-only population data provides a reference, while the planner enters expected evacuees separately. Weighted routing, reachable-center capacity allocation, travel/vehicle estimates, and explicit unserved demand use these scenario values and available facility data.
 5. JSON-compatible API responses provide terrain geometry and scenario results for 3D rendering and comparison in the frontend.
 
-The current `sentinel-demo/` and `demo-api/` prototype is a separate synthetic demonstration. Its simplified diffusion-wave-style runoff solver produces illustrative depth and does not implement or validate the proposed D8-based rainfall classification.
+The current `sentinel-demo/` and `demo-api/` prototype is a separate synthetic demonstration. Its simplified diffusion-wave-style runoff solver produces illustrative depth and does not implement or validate the selected SFINCS method.
 
-**Conditional SFINCS pipeline:** When the assumed event-evaluation package is received and checked, prepare the finer terrain and river/channel data, define a physically supported water boundary, force SFINCS with the dated rainfall and any relevant river levels/discharge, and compare the result with independent wet/dry observations. Only after passing that evaluation should its flood output be considered for planner-reviewed road exposure and evacuation scenarios. This is a proposed replacement for the unresolved D8 rainfall-classification step, not the current approved processing method.
+**Selected SFINCS pipeline:** When the assumed event-evaluation package is received and checked, prepare the finer terrain and river/channel data, define a physically supported water boundary, force SFINCS with the dated rainfall and any relevant river levels/discharge, and compare the result with independent wet/dry observations. Only after passing that evaluation should its flood output be considered for planner-reviewed road exposure and evacuation scenarios. The former D8 rainfall-classification step is no longer planned.

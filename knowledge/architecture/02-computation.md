@@ -10,6 +10,7 @@ All data processing, simulation, and analysis runs here. The frontend is a thin 
 - **NumPy** — grid operations, array math
 - **SciPy** — signal processing, interpolation if needed
 - **rasterio / GDAL** — reading GeoTIFF DEM files (if using file-based data)
+- **SFINCS** — selected flood-scenario engine, invoked from the backend after terrain and forcing preparation
 
 ## Core Algorithms
 
@@ -19,25 +20,12 @@ All data processing, simulation, and analysis runs here. The frontend is a thin 
 3. Resolve NoData values; preserve the original elevation units for computation
 4. Optionally downsample for performance
 
-### Water Simulation — D8 Flow Direction
-- For each cell in the grid, determine which of 8 neighbors is steepest downhill
-- Assign flow direction as an encoded value (1–8, one per neighbor direction)
-- No flow if cell is a local minimum (depression/sink)
-
-### Flow Accumulation
-- Starting from each cell, trace downstream following flow directions
-- Count how many upstream cells drain into each cell
-- High accumulation values indicate larger upstream contributing areas; they do not alone establish flood depth or inundation
-
-### Rainfall Distribution
-- User provides rainfall intensity (mm/hr) and duration (hours)
-- Planned simplification: distribute rainfall uniformly across all cells
-- The conversion from rainfall and contributing area to stored water depth or another flood indicator remains unresolved and requires an explicit water-balance method
-
-### Flood Threshold
-- Planned simplification: classify cells as flooded when the selected indicator exceeds a documented threshold
-- A depth threshold must not be used unless the computation produces defensible depth units
-- Threshold selection, calibration, and validation remain unresolved
+### Flood Scenarios — SFINCS
+- Prepare terrain, river/channel, active-cell, roughness, infiltration, and boundary inputs with documented units and height references.
+- Accept planner rainfall intensity/duration for hypothetical scenarios; use dated rainfall and relevant river level/discharge when replaying an observed event.
+- Run SFINCS and read its time-varying and maximum-depth outputs. Check numerical behavior, input/output alignment, and sensitivity to boundary and terrain assumptions.
+- Compare a dated run against geolocated flooded and dry observations before claiming local accuracy or using modeled exposure to guide road decisions.
+- D8 flow direction and accumulation may be offered as an optional drainage-reference analysis, not a flood-depth engine.
 
 ### Evacuation Analysis (Initial Method Direction)
 - Remove manually closed roads and bridges from the traversable road graph. Any automatic closure based on flood classification requires a separately defined and validated rule.
@@ -51,12 +39,12 @@ All data processing, simulation, and analysis runs here. The frontend is a thin 
 | Endpoint | Method | Purpose |
 |---|---|---|
 | `/api/terrain` | POST | Receive selected barangay identifiers, resolve geographic coverage, return elevation grid + mesh data |
-| `/api/simulate` | POST | Receive grid + rainfall params, return water state |
-| `/api/analyze` | POST | Receive flood state + road/building data, return evacuation analysis |
+| `/api/simulate` | POST | Configure or retrieve a SFINCS scenario and return labeled flood maps after required checks |
+| `/api/analyze` | POST | Receive selected barangays, demand, planner-confirmed road access, centers, and resources; return evacuation analysis with flood-scenario context |
 
 ## Response Format
 
 All responses return JSON with:
 - `terrain`: vertex positions, colors, and indices for mesh rendering
-- `water`: grid of water-state or flood-indicator values; label values as depth only after a defensible depth calculation is defined and validated
+- `water`: SFINCS depth/time maps with scenario, units, source, validation status, and uncertainty labels; local accuracy remains unclaimed until evaluated
 - `metadata`: bounds, resolution, timestamps

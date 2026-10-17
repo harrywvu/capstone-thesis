@@ -21,13 +21,13 @@ Status labels: `CONFIRMED`, `TENTATIVE`, and `UNRESOLVED`.
 
 The project is a BS Information Technology 3D geospatial decision-support system that lets local disaster planners configure and compare flood-evacuation scenarios using terrain, road, hazard, population, evacuation-center, and resource information to identify feasible routes, shelter allocations, estimated evacuation times, and resource plans.
 
-`CONFIRMED` Laoag City, Ilocos Norte is the selected study area (team confirmation, 2026-10-16). Batac City was an earlier candidate and is no longer part of the active data request. Barangays 38-A, 38-B, and 39 were selected for the SFINCS technical pilot; final evaluation coverage, deployment organization, and deployment coverage remain unresolved.
-`CONFIRMED` The team has received a Laoag City Hall data package with terrain, boundary, population, road, flood-susceptibility, and reference files. Receipt does not establish fitness for the final analysis. See `knowledge/data/02-laoag-city-hall-package.md`.
+`CONFIRMED` Laoag City, Ilocos Norte is the selected study area (team confirmation, 2026-10-16). Batac City was an earlier candidate and is no longer part of the active data request. Barangays 38-A, 38-B, and 39 were selected for the SFINCS technical pilot. The planned interface will make all 80 coded Laoag barangays selectable (team confirmation, 2026-10-17); this does not establish citywide SFINCS validation. Final observed-event evaluation coverage, deployment organization, and deployment coverage remain unresolved.
+`CONFIRMED` The team has received a Laoag City Hall data package with terrain, boundary, population, road, flood-susceptibility, and reference files. The team reports that formal request letters were used and that the package was largely supplied through the City Engineering Department (team clarification, 2026-10-17); the repository letters are drafts, not proof of their delivery dates. Receipt does not establish fitness for the final analysis. See `knowledge/data/02-laoag-city-hall-package.md`.
 `CONFIRMED` UP TCAGP's LiPAD has responded as a prospective source of LiDAR-derived DTM data. Exact Laoag DTM coverage and metadata, NDA completion, delivery, and adoption as a research input remain pending. LiPAD has not confirmed FHM availability in its reply. See `knowledge/data/03-lipad-response.md`.
-`CONFIRMED` The planned terrain-analysis method is D8 flow direction and flow accumulation on DEM data. The rainfall-to-flood-classification rule is not yet defined or validated.
-`CONFIRMED` For forward planning, the team assumes it can access finer bare-earth terrain with metadata, river/channel and defensible water-boundary information, dated rainfall, and observed flooded and dry locations for a Laoag event. This is a **planning assumption**, not confirmation that those datasets have been delivered or are suitable. SFINCS is the targeted flood-scenario engine for evaluation under that assumption; its adoption has not been approved. See `knowledge/02-sfincs-pilot-plan.md`.
+`CONFIRMED` The team selected **SFINCS as OverFlow's flood-scenario simulation method on 2026-10-17**. D8 flow direction and accumulation are no longer the planned rainfall-to-flood method; they may be retained only as an optional drainage-reference analysis. The method choice does not validate the existing Laoag flood maps or authorize road-safety claims. See `knowledge/02-sfincs-pilot-plan.md`.
+`CONFIRMED` For forward planning, the team assumes it can access finer bare-earth terrain with metadata, river/channel and defensible water-boundary information, dated rainfall, and observed flooded and dry locations for a Laoag event. This is a **planning assumption**, not confirmation that those datasets have been delivered or are suitable.
 
-**Basis:** Selected-capstone presentation, slides 3-6; team clarifications through 2026-10-16; LiPAD response summarized in `knowledge/data/03-lipad-response.md`.
+**Basis:** Selected-capstone presentation, slides 3-6; team clarifications through 2026-10-17; LiPAD response summarized in `knowledge/data/03-lipad-response.md`.
 
 ## 3. Problem
 
@@ -41,20 +41,20 @@ Existing maps can display places and hazard areas, but the presentation identifi
 
 `CONFIRMED` The accepted concept is an interactive 3D geospatial disaster-simulation and decision-support system. The frontend renders terrain and water in 3D and provides an overhead camera view. A planner configures scenario conditions, the system analyzes their consequences, and the resulting evacuation options can be compared. The DEM remains a two-dimensional elevation grid used for computation; its grid structure does not define the user-facing system as 2D.
 
-`CONFIRMED` The terrain method uses D8 flow direction and flow accumulation on elevation data (DEM), rather than a hydraulic model. Rainfall intensity and duration are scenario inputs; the method for converting them into a classified flood-affected area remains to be defined and validated. Drainage infrastructure data serves as a reference map layer only.
+`CONFIRMED` SFINCS is the selected engine for rainfall-driven flood scenarios. Its terrain, river/channel, rainfall, and boundary inputs must be prepared with consistent units and height references, and a dated event must be compared with observed flooded and dry locations before local accuracy is claimed. D8 may provide an optional drainage-reference layer but will not generate flood depths. Pipes and canals remain reference map layers unless a separate, documented modeling decision adds them. See `knowledge/02-sfincs-pilot-plan.md`.
 
-`TENTATIVE` If the assumed data are obtained and the observed-event test supports the results, SFINCS will replace the unresolved D8-plus-rainfall classification **as the flood-scenario engine**. D8 may remain a drainage-reference layer. SFINCS has run as a technical pilot, including a boundary diagnostic, but neither run validates a Laoag flood map. This is a proposed method revision, not a change to the accepted method today. See `knowledge/03-sfincs-pilot-results.md` and `knowledge/04-sfincs-boundary-rerun-results.md`.
+`CONFIRMED` The existing SFINCS runs are technical pilots, including a boundary diagnostic; neither validates a Laoag flood map. Selecting the method commits the team to develop and evaluate it, not to trust those pilot outputs. See `knowledge/03-sfincs-pilot-results.md` and `knowledge/04-sfincs-boundary-rerun-results.md`.
 
 `CONFIRMED` The system uses a split architecture: a Python backend (FastAPI, NumPy, SciPy, with rasterio/GDAL when file-based DEM input is used) for computation and a TypeScript frontend (React Three Fiber, React, shadcn/ui, and Leaflet) for rendering and UI. OpenStreetMap is a candidate source of road, building, and geographic data whose local completeness must be checked. Communication is through REST endpoints with JSON-compatible responses. See `knowledge/architecture/` for detailed architecture documentation.
 
-`CONFIRMED` The current working demo is a separate synthetic prototype using a simplified diffusion-wave-style runoff solver for illustrative depth. It does not implement or validate the planned D8-based rainfall classification. Its existing `sentinel-demo/` folder path is retained for the hosting workspace; the visible product name is OverFlow.
+`CONFIRMED` The current working demo is a separate synthetic prototype using a simplified diffusion-wave-style runoff solver for illustrative depth. It does not implement or validate the selected SFINCS method. Its existing `sentinel-demo/` folder path is retained for the hosting workspace; the visible product name is OverFlow.
 
 **Basis:** Team clarification, 2026-10-08; architecture documentation, `knowledge/architecture/00-overview.md`.
 
 ## 5. Primary Users and Stakeholders
 
 - `CONFIRMED` Primary users: local disaster planners and responders.
-- `UNRESOLVED` The specific operating organization has not been confirmed.
+- `UNRESOLVED` The specific operating organization has not been confirmed. Laoag CDRRMO is the proposed partner for interviews and staff evaluation, subject to its agreement; this does not establish it as the operator.
 - `TENTATIVE` Secondary stakeholders: local engineering and planning personnel, barangay responders, and evacuation-center managers.
 - `CONFIRMED` Residents are intended indirect beneficiaries.
 
@@ -64,7 +64,7 @@ Existing maps can display places and hazard areas, but the presentation identifi
 
 A disaster planner configures affected people, flooded roads, blocked bridges, center capacities, and available resources. The system analyzes route availability and capacity, estimates evacuation time, proposes allocations, and lets the planner compare the result with other scenarios.
 
-`CONFIRMED` In the planned final interface, the planner hovers over barangay boundaries to highlight them and clicks to select or deselect one or more barangays for analysis. The interface does not require drawing circles or polygons. The planner may save, reopen, duplicate, compare, and export scenario summaries. These are approved requirements, not claims about the current synthetic demo. See `knowledge/01-user-actions.md` for diagram-ready actions.
+`CONFIRMED` In the planned final interface, all 80 coded Laoag barangays are available for selection. The planner hovers over a prepared boundary to highlight it and clicks to select or deselect one or more barangays for analysis. The interface does not require drawing circles or polygons. The planner may save, reopen, duplicate, compare, and export scenario summaries. These are approved requirements, not claims about the current synthetic demo or citywide flood-model validation. See `knowledge/01-user-actions.md` for diagram-ready actions.
 
 `UNRESOLVED` Whether use is limited to preparedness exercises or includes actual emergencies.
 
@@ -73,18 +73,18 @@ A disaster planner configures affected people, flooded roads, blocked bridges, c
 ### Inputs
 
 - `CONFIRMED` User-configurable scenario inputs: rainfall intensity/duration, expected evacuees per selected barangay (number or percentage), shelter status and usable capacity, manual road/bridge closures, available vehicles and their capacities, and an assumed travel speed for time estimates.
-- `CONFIRMED` Source population figures are read-only reference values; they are not automatically the number requiring evacuation. The planner sets scenario demand separately. The supplied Laoag workbook counts covered residents and has no stated survey year.
+- `CONFIRMED` Source population figures are read-only reference values; they are not automatically the number requiring evacuation. The planner sets scenario demand separately. The supplied Laoag workbook counts covered residents and has no stated survey year. The team recalls being told that the survey was in 2024, but the speaker and source document have not been identified, so 2024 is not verified metadata.
 - `CONFIRMED` Geographic data: local maps, roads, bridges, evacuation-center locations and capacities, available rescue resources.
 - `CONFIRMED` Elevation data (DEM): required for terrain-based flood computation. A coarse Laoag GeoTIFF has been received. UP TCAGP's LiPAD has confirmed DTM as a distributable data type, but Laoag-specific coverage, access, metadata, and suitability remain unverified. NAMRIA, SRTM, and Mapbox Terrain-RGB remain alternatives.
-- `TENTATIVE` The SFINCS evaluation path expects a finer bare-earth DTM with vertical-reference/accuracy metadata, river/channel and downstream-boundary information, dated event rainfall, river level/discharge when relevant, and geolocated flooded and dry observations. Access is assumed for planning; receipt and fitness remain unverified.
-- `CONFIRMED` Drainage infrastructure: reference map layer only; not used for flood computation.
-- `CONFIRMED` Barangay boundaries are required to map affected population; buildings, historical flood areas, accessibility, center occupancy, and facilities remain candidate additions.
+- `CONFIRMED` The SFINCS method requires suitable terrain with vertical-reference/accuracy metadata, river/channel and downstream-boundary information, dated event rainfall, river level/discharge when relevant, and geolocated flooded and dry observations for evaluation. Access is assumed for planning; receipt and fitness remain unverified.
+- `CONFIRMED` Pipes and canals: reference map layers only under the current scope. River/channel terrain and boundary information are inputs to SFINCS.
+- `CONFIRMED` Barangay boundaries are required to map affected population; all 80 coded Laoag barangays will be selectable in the planned interface. Buildings, historical flood areas, accessibility, center occupancy, and facilities remain candidate additions.
 
 ### Processing
 
-- `CONFIRMED` Process the selected DEM by decoding it into a two-dimensional NumPy grid and handling NoData values. Downsampling may be needed for performance; display scaling must preserve the original elevation values used for computation. D8 flow direction and flow accumulation provide terrain-controlled drainage direction and contributing area. Rainfall overlay and flood classification are planned extensions whose formulation and validation remain unresolved. See `knowledge/architecture/03-water-simulation.md` and `knowledge/data/01-dem-processing.md` for details.
-- `TENTATIVE` Once the assumed data are delivered, configure SFINCS with physically supported terrain, rainfall, and water boundaries; pass numerical checks; compare a dated run with independent flooded and dry observations; then decide whether its output can feed planner-reviewed road exposure and evacuation scenarios. The first SFINCS runs establish technical feasibility, not accuracy. See `knowledge/02-sfincs-pilot-plan.md`.
-- `UNRESOLVED` The water-balance or indicator formula that converts rainfall and contributing area into the value used for flood classification, including the threshold's units, calibration, and validation.
+- `CONFIRMED` Process suitable terrain rasters with documented NoData, resolution, units, and vertical datum; preserve true elevations separately from any display scaling. Configure SFINCS with physically supported rainfall, river/channel, and water-boundary inputs to produce scenario-specific flood maps. D8, if retained, supplies only a separate drainage-reference view. See `knowledge/architecture/03-water-simulation.md` and `knowledge/data/01-dem-processing.md`.
+- `CONFIRMED` Before using SFINCS output for local flood-exposure or road decisions, pass numerical and boundary checks and compare a dated run with independent flooded and dry observations. The first runs establish technical feasibility, not accuracy. A planner reviews any candidate road closures before routing and allocation; an automatic closure rule is not adopted. See `knowledge/02-sfincs-pilot-plan.md`.
+- `UNRESOLVED` The final model boundary, terrain source, infiltration and roughness parameters, local validation measures, and any road-exposure threshold or rule.
 - `TENTATIVE` Plan backend boundaries for terrain/mesh data (`/api/terrain`), water simulation (`/api/simulate`), and evacuation analysis (`/api/analyze`), subject to implementation and validation.
 - `CONFIRMED` The initial evacuation-analysis sequence removes manually closed road and bridge edges, computes weighted shortest feasible routes, assigns evacuees only to reachable centers within usable capacity, then estimates travel and vehicle trips using stated speed and capacity assumptions. Unserved demand must be reported explicitly rather than assigned to an infeasible center. NetworkX weighted paths and OR-Tools minimum-cost flow are selected implementation directions; precise edge costs, allocation objective, alternative-route rule, vehicle scheduling, and validation remain to be specified.
 - `UNRESOLVED` Precise routing weights, allocation objective and constraints beyond reachability/capacity, travel-time and vehicle-scheduling assumptions, population-behavior model, and evaluation.
@@ -109,7 +109,7 @@ The intended value is testing localized "what-if" evacuation situations before t
 - Display local geographic and hazard information through 3D terrain and water rendering, with an overhead camera view for map-like inspection.
 - Represent flooded roads, blocked bridges, affected people, center capacities, and resources.
 - Analyze routes, center allocation, evacuation time, and resource distribution.
-- Select multiple barangays by hovering over and clicking their mapped boundaries; inspect available map layers and feature details.
+- Select among all 80 coded Laoag barangays by hovering over and clicking their mapped boundaries; inspect available map layers and feature details. Model and evaluation coverage may be narrower.
 - Create, save, reopen, duplicate, compare, and export planning scenarios.
 
 `UNRESOLVED` Which capabilities are minimum requirements versus exploratory features.
@@ -152,7 +152,9 @@ A localized interactive 3D geospatial planning environment that integrates evacu
 
 ## 14. Evaluation Strategy
 
-`UNRESOLVED` No final evaluation method, baseline, dataset, participant group, or acceptance criterion is confirmed. Candidate measures requiring adviser approval include route validity, constraint satisfaction, computation time, agreement with expert plans, usability, and decision quality. For the SFINCS candidate, a dated observed event with flooded and dry locations is assumed accessible for local model evaluation; the team must preselect the comparison measures and acceptance criteria with the adviser before interpreting results. The D8 rainfall-classification threshold remains unresolved unless that method is superseded.
+`CONFIRMED` The current research plan is descriptive-developmental work organized through a design-science process and iterative software development. It uses a source-data inventory, documented functional and scenario tests, and, subject to partner participation and ethics approval, semi-structured staff interviews and task-based staff evaluation. The proposed staff instrument combines observed task completion, five-point agreement items, and open comments. Interview/comment themes will be summarized qualitatively; test/task counts and percentages and item-level response frequencies and means will be reported descriptively, with denominators and missing responses stated. No inferential test or benchmark against another software system is planned (team direction, 2026-10-17). Improvement over existing practice will not be claimed without comparative evidence.
+
+`UNRESOLVED` Laoag CDRRMO is a proposed partner, not a confirmed operator or participant source. The approximately six-person purposive interview target is provisional. Final participant access, ethics arrangements, instrument wording, task-completion criteria, datasets, local SFINCS comparison measures and acceptance thresholds, and any optional timing or sensitivity measures still require confirmation before administration or interpretation. Candidate measures include route validity, constraint satisfaction, computation time, agreement with expert plans, usability, and decision quality. For the **selected SFINCS method**, a dated observed event with flooded and dry locations is assumed accessible for local model evaluation; choose comparison measures and acceptance criteria before interpreting results. No D8 rainfall-classification threshold is planned.
 
 ## 15. Data Requirements and Sources
 
@@ -161,7 +163,7 @@ A localized interactive 3D geospatial planning environment that integrates evacu
 | Elevation data (DEM) | Required for terrain analysis | Supplied Laoag GeoTIFF; UP TCAGP/LiPAD as a confirmed prospective DTM provider; NAMRIA, SRTM, Mapbox Terrain-RGB as alternatives | Supplied grid is about 91.25 m per cell and supports broad terrain visualization and initial model experiments. LiPAD has replied, but exact Laoag coverage, NDA clearance, delivery, metadata, and use rights remain pending. Prefer a 1–5 m bare-earth DTM for detailed pilot analysis; good 5–10 m data is worth testing. These are practical acquisition targets, not universal minimums or guarantees of accuracy. Verify provenance, collection date, vertical accuracy, reference systems/units, coverage, and terms; ask whether the City Hall file is original or a reduced-resolution export. See `knowledge/data/01-dem-processing.md` and `knowledge/data/03-lipad-response.md`. |
 | Roads, intersections, bridges | Required | Supplied Laoag road shapefile and bridge inventory; OpenStreetMap, DPWH, engineering office | Local roads are available, but five shapes are empty and the graph needs connectivity checks. Bridges are listed in a report but lack geocoded network links. |
 | Evacuation centers and capacity | Required; availability unverified | Selected local DRRM office, local government, barangays | Store as geographic features with capacity/status attributes where available. |
-| Population or affected-person counts | Required; barangay population supplied for Laoag, evacuation demand unresolved | Supplied Laoag workbook; selected local government, PSA, or scenario input | Workbook counts covered residents, not people requiring evacuation; its survey year is unspecified. |
+| Population or affected-person counts | Required; barangay population supplied for Laoag, evacuation demand unresolved | Supplied Laoag workbook; selected local government, PSA, or scenario input | Workbook counts covered residents, not people requiring evacuation. No survey year is stated; the team's recollection of a verbal 2024 date needs a named source or written confirmation. |
 | Rescue vehicles and resources | Required; source unresolved | Selected local DRRM office or scenario input | |
 | Drainage infrastructure | Reference layer only; not used for flood computation | Supplied Laoag canal/creek layers; engineering office, DRRM office, NAMRIA | Verify coverage and convert chosen features to GeoJSON. |
 | Barangay boundaries | Required for affected-population mapping; supplied for Laoag | Supplied Laoag shapefile; NAMRIA, OpenStreetMap, local government | The 80 coded barangays join to the population workbook; verify CRS, accuracy, currency, and the extra Monroe Island polygon. |
@@ -178,10 +180,11 @@ Laoag City is the confirmed study area. The City Hall package is in hand, but es
 - `CONFIRMED` Flood-evacuation planning through interactive 3D scenario visualization and comparison.
 - `CONFIRMED` Road disruption, center capacity, affected population, resource conditions, and decision-support outputs.
 - `CONFIRMED` Documented drainage, road, map, evacuation-center, and deployment information is required by the adviser.
+- `CONFIRMED` SFINCS is the selected flood-scenario method, subject to input quality checks and local evaluation before flood-accuracy or road-exposure claims.
 
 ### Excluded
 
-The current architecture and scope do not include real-time flood forecasting, emergency dispatch control, or public navigation. A locally evaluated SFINCS scenario model is now a **conditional target**, not an adopted or validated capability; formal permanent exclusions remain subject to adviser approval.
+The current architecture and scope do not include real-time flood forecasting, emergency dispatch control, or public navigation. SFINCS is the **selected scenario method**, but no locally validated SFINCS implementation exists yet; formal permanent exclusions remain subject to adviser approval.
 
 ## 17. Non-Goals
 
@@ -190,7 +193,7 @@ The current architecture and scope do not include real-time flood forecasting, e
 ## 18. Constraints
 
 - Some Laoag local data has been received; its provenance, update date, accuracy, and permitted use remain unverified. Required operational datasets are still missing.
-- Laoag City and the three technical-pilot barangays are selected; final evaluation coverage and the deployment organization are not selected.
+- Laoag City and the three technical-pilot barangays are selected, and all 80 coded barangays are planned for interface selection; final observed-event evaluation coverage and the deployment organization are not selected.
 - Validity depends on data quality, scale, coordinate system, currency, and completeness.
 - Physical flood behavior cannot be claimed without a suitable model, calibration data, and validation.
 
@@ -198,7 +201,7 @@ The current architecture and scope do not include real-time flood forecasting, e
 
 - `TENTATIVE` Authorized planners define scenario conditions.
 - `CONFIRMED` Vector geographic layers use GeoJSON for interchange; DEM rasters are processed as elevation grids.
-- `CONFIRMED` The team directs planning to assume access to the finer terrain, river/boundary, dated rainfall, and observed flood evidence needed for a local SFINCS evaluation. This assumption does not establish receipt, data rights, model accuracy, or a method switch.
+- `CONFIRMED` The team directs planning to assume access to the finer terrain, river/boundary, dated rainfall, and observed flood evidence needed for a local SFINCS evaluation. This assumption does not establish receipt, data rights, or model accuracy; the SFINCS method choice is recorded separately above.
 - `UNRESOLVED` Sufficient official local data will be available.
 
 ## 20. Key Concepts and Terminology
@@ -207,7 +210,7 @@ The current architecture and scope do not include real-time flood forecasting, e
 - **Scenario:** Configured evacuation conditions such as demand, road closures, center capacities, and resources.
 - **Evacuation route:** A road-network path considered usable under a scenario's constraints.
 - **Evacuation-center allocation:** Assignment of affected groups to centers considering capacity and accessibility.
-- **Flood simulation:** The accepted D8-based proposal still has unresolved rainfall classification. SFINCS is a candidate hydraulic flood-scenario engine to evaluate if the assumed terrain, boundary, rainfall, and observed-event data are obtained; its first Laoag runs are technical demonstrations only.
+- **Flood simulation:** SFINCS is the selected hydraulic flood-scenario method. It needs suitable terrain, rainfall, and water-boundary inputs and local observed-event evaluation; the existing Laoag runs are technical demonstrations only.
 - **D8 flow direction:** A hydrological algorithm that assigns each grid cell a flow direction toward the steepest downhill neighbor among eight possible directions.
 - **Flow accumulation:** A grid operation that counts how many upstream cells drain into each cell, identifying areas where water collects.
 - **DEM (Digital Elevation Model):** A 2D grid where each cell stores ground elevation; the primary terrain input for flood computation.
@@ -231,13 +234,13 @@ The current architecture and scope do not include real-time flood forecasting, e
 
 ## 23. Open Questions
 
-1. Will the technical-pilot barangays 38-A, 38-B, and 39 also be the final evaluation area, and what geographic coverage will be implemented?
+1. Will the technical-pilot barangays 38-A, 38-B, and 39 also be the final observed-event evaluation area? What geographic coverage beyond the confirmed 80-barangay selector will support tested evacuation analysis?
 2. Which organization will operate the system, and where and how will it be deployed?
 3. Do the assumed SFINCS datasets arrive with sufficient coverage, resolution, metadata, event timing, observed locations, and permitted uses?
-4. Will a locally evaluated SFINCS model supersede the unresolved D8 rainfall-classification method, and what comparison measures and acceptance criteria will justify that decision?
+4. Which physical boundary, terrain source, parameter assumptions, comparison measures, and acceptance criteria will make the selected SFINCS model defensible for Laoag?
 5. What edge weights, allocation objective, alternative-route rule, vehicle scheduling assumptions, and validation will refine the selected weighted-routing and capacity-constrained allocation approach? What claim, if any, justifies calling a full evacuation plan optimal?
 6. Which capabilities are minimum accepted requirements?
-7. What baselines, metrics, participants, datasets, and thresholds will be used for evaluation?
+7. Which participants, datasets, task-completion criteria, SFINCS comparison measures, and thresholds will finalize the selected descriptive evaluation plan? No other-system benchmark is planned.
 8. Is use limited to preparedness or does it include active emergencies?
 9. What Chapter 1 guidance applies beyond the official BSIT template structure?
 
@@ -246,12 +249,12 @@ The current architecture and scope do not include real-time flood forecasting, e
 ```text
 PROBLEM: Flood conditions disrupt routes and change evacuation demand
   -> TARGET USER: Local disaster planners and responders
-  -> INPUT: DEM terrain data, roads (OSM), barangay boundaries, evacuation centers, population, resources
+  -> INPUT: Terrain, rainfall, river/boundary evidence, roads, barangay boundaries, centers, population, resources
   -> SYSTEM: 3D geospatial scenario visualization and decision-support analysis
-  -> PROCESSING: DEM processing -> D8 flow direction -> flow accumulation -> planned rainfall/classification method -> route/allocation/time analysis
+  -> PROCESSING: Terrain and forcing preparation -> SFINCS flood scenario -> planner-reviewed road access -> route/allocation/time analysis
   -> OUTPUT: Evacuation options, resource plans, and scenario comparisons
   -> USER ACTION: Prepare or revise an evacuation plan
   -> MEASURABLE BENEFIT: UNRESOLVED pending evaluation design
 ```
 
-The chain is coherent, but the method and measurable-benefit links are not precise enough for strong research claims.
+The selected flood method is explicit; its local validity and the measurable-benefit link still require evaluation.

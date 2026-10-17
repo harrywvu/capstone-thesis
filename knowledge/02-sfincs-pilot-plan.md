@@ -1,12 +1,12 @@
 # SFINCS Pilot Plan for OverFlow
 
-**Status:** Updated on 2026-10-16 after the [first technical run](03-sfincs-pilot-results.md) and [boundary diagnostic rerun](04-sfincs-boundary-rerun-results.md). The team now plans on gaining access to the missing terrain, river/boundary, rainfall, and observed-flood evidence. Access and suitability still need verification. SFINCS has not yet been selected as OverFlow's flood engine; the [capstone definition](00-capstone-definition.md) still records D8 as the accepted terrain method.
+**Status:** SFINCS selected as OverFlow's flood-scenario method on 2026-10-17. The [first technical run](03-sfincs-pilot-results.md) and [boundary diagnostic rerun](04-sfincs-boundary-rerun-results.md) established technical feasibility, not local flood-map accuracy. This plan now governs data acquisition, physical model setup, validation, and application handoff. The team plans on gaining access to the missing terrain, river/boundary, rainfall, and observed-flood evidence; access and suitability still need verification. See the [capstone definition](00-capstone-definition.md).
 
 ## Working data assumption and target
 
 For planning, **assume the team can obtain** (1) a finer bare-earth DTM with coverage, vertical datum and accuracy metadata; (2) mapped river/channel and defensible downstream-boundary information, including river level or discharge for an event materially driven by river flooding; (3) time-stamped rainfall for a dated Laoag event; and (4) geolocated flooded **and dry** observations from that event. These are expected inputs, **not datasets already received or verified**. Confirm use rights for thesis maps and derived results. If any item proves unavailable or unsuitable, record that finding and narrow the claim level under the decision gates below.
 
-The target is a locally evaluated SFINCS flood-scenario model that can feed OverFlow's planner-reviewed evacuation analysis. The model earns that role only after a physically supported setup, numerical checks, and comparison with observed flooding. D8 may remain a drainage-reference method if useful; it does not become a substitute flood-depth model.
+The selected method must become a locally evaluated SFINCS flood-scenario model before its maps feed OverFlow's planner-reviewed road-exposure and evacuation analysis. This requires a physically supported setup, numerical checks, and comparison with observed flooding. D8 may remain a drainage-reference method if useful; it does not become a substitute flood-depth model.
 
 ## What the first run changed
 
@@ -14,11 +14,11 @@ The City Hall DEM and SFINCS input/output pipeline worked, but the 40 mm/h rainf
 
 The next run has two distinct purposes: (1) find a numerically stable, physically defensible boundary and terrain setup; (2) evaluate its maps against observed flooding when the required local evidence arrives. A numerical pass alone must never be described as a validated flood map.
 
-## Decision this pilot must answer
+## Validation question
 
-Can a small, documented SFINCS model of a Laoag pilot area turn rainfall scenarios into flood-exposure results that are technically sound, sufficiently supported by local data, and useful for OverFlow's evacuation planning? A successful software run alone does not answer whether modeled water conditions are accurate enough to affect road decisions.
+Can a small, documented SFINCS model of a Laoag pilot area turn rainfall scenarios into flood-exposure results that are technically sound, sufficiently supported by local data, and useful for OverFlow's evacuation planning? SFINCS is already the selected method; a successful software run alone does not answer whether modeled water conditions are accurate enough to affect road decisions.
 
-If adopted, SFINCS would produce flood scenarios; OverFlow would provide barangay selection, 3D inspection, planner-reviewed road closures, routing, shelter allocation, and scenario comparison. D8 could remain an optional drainage-analysis layer but would not generate flood depth. The existing synthetic demo is a separate interface and solver demonstration, not a validation result for Laoag.
+SFINCS produces the intended flood scenarios; OverFlow provides barangay selection, 3D inspection, planner-reviewed road closures, routing, shelter allocation, and scenario comparison. D8 may remain an optional drainage-analysis layer but will not generate flood depth. The existing synthetic demo is a separate interface and solver demonstration, not a validation result for Laoag.
 
 ## Pilot boundaries
 
@@ -80,15 +80,15 @@ SFINCS outputs time-varying and maximum water-depth information in NetCDF maps; 
 
 **Deliverable:** one documented rainfall-to-map-to-planner-reviewed-closure-to-evacuation scenario, with measured run and display times. A real shelter dataset is needed before claiming that the assignment represents Laoag operations.
 
-## Decision gates
+## Validation and use gates
 
 **Technical gate before flood-map evaluation:** The high-rain case must finish, align with the input terrain, have negligible initial water, reproduce the intended rainfall, and have no material negative depths (less than −0.001 m). Its river/outlet treatment must also have a documented physical rationale. Passing the numerical checks with an arbitrary dry or closed edge does **not** pass this gate. If the required boundary or river data are unavailable, stop at a diagnostic rerun and keep all maps labelled unvalidated.
 
-| Finding | Decision |
+| Finding | Use of SFINCS output |
 |---|---|
-| Model runs reproducibly, input/output checks pass, local observations support the output at the chosen scale, and OverFlow can present results within an acceptable planning workflow | Propose SFINCS as the primary flood-scenario engine. Revise the capstone definition, architecture, manuscript, diagrams, and evaluation plan together. Retain D8 only if it adds a useful drainage view. |
-| Model runs, but fine terrain or independent event evidence is unavailable | Keep SFINCS as an **exploratory pilot only**. Do not use its output as an unreviewed road-safety decision. Continue evacuation planning with documented reference layers and planner-confirmed closures; do not claim that D8 fills the missing flood-depth capability. |
-| Model setup, data alignment, physical assumptions, or runtime are unsuitable for the intended use | Do not adopt SFINCS for the final system. Record why, then narrow the flood component to an evidence-backed scenario input rather than presenting D8 accumulation as flood depth. |
+| Model runs reproducibly, input/output checks pass, local observations support the output at the chosen scale, and OverFlow can present results within an acceptable planning workflow | Integrate the locally evaluated SFINCS scenario outputs with their assumptions and uncertainty, then test planner-reviewed road exposure and evacuation handoff. |
+| Model runs, but fine terrain or independent event evidence is unavailable | Keep SFINCS outputs **exploratory**. Do not use them as unreviewed road-safety decisions or claim local flood accuracy. Continue evacuation planning with documented reference layers and planner-confirmed closures; D8 does not fill the missing flood-depth capability. |
+| Model setup, data alignment, physical assumptions, or runtime are unsuitable for the intended use | Record the limitation and narrow what the SFINCS component displays or supports until it is corrected; do not substitute D8 accumulation as flood depth. Revisit implementation scope if the selected method cannot meet its validation gate. |
 
 The team and adviser should choose the acceptable wait time and accuracy measures **before** the final pilot comparison; the current evidence does not support an honest numeric accuracy target. Data rights may also constrain what results can be displayed or shared even when the model runs successfully.
 
@@ -98,9 +98,9 @@ The team and adviser should choose the acceptable wait time and accuracy measure
 2. Obtain and verify the finer DTM, its metadata and allowed uses; obtain river/channel and downstream-boundary information from City Engineering or another authoritative source.
 3. Obtain one dated local flood record with matching rainfall, river conditions when relevant, and both flooded and dry locations; verify dates, units, coordinates, and independence of observations.
 4. Build the revised physical boundary and terrain model, then rerun numerical and terrain-sensitivity checks without using the static susceptibility map as an observed event.
-5. Run the observed-event comparison and OverFlow handoff only after their data gates are met; then make a separate SFINCS/D8 method decision.
+5. Run the observed-event comparison and OverFlow handoff only after their data gates are met; document the supported claim level and any remaining limits of the selected SFINCS method.
 
-## Sources for the candidate model
+## Sources for the selected model
 
 - [Deltares SFINCS overview](https://www.deltares.nl/en/software-and-data/products/sfincs): supported flood drivers and scenario use.
 - [SFINCS model-input manual](https://sfincs.readthedocs.io/en/latest/input.html): terrain, active-cell, roughness, infiltration, and datum requirements.

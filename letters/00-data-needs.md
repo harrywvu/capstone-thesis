@@ -13,6 +13,8 @@ This document lists data requests for OverFlow in its confirmed study area, **La
 | Affected population per barangay | City Planning Office, CDRRMO | Spreadsheet |
 | Barangay boundaries | City Planning Office, NAMRIA | GeoJSON, Shapefile |
 | Rescue vehicles and resources | CDRRMO | Spreadsheet |
+| River/channel geometry and downstream boundary information | City Engineering Office or relevant water-management office | Survey, GIS layer, level/discharge records |
+| Dated event rainfall and observed flooded and dry locations | CDRRMO and relevant rainfall-data office | Time series and geolocated records |
 
 ## Reference and Validation Data
 
@@ -26,6 +28,6 @@ This document lists data requests for OverFlow in its confirmed study area, **La
 
 - OpenStreetMap data can be downloaded directly without requesting; used as base layer.
 - LiPAD has replied that DTM is distributable, subject to exact Laoag coverage and its NDA process. The requested Flood Hazard Maps were not confirmed in that reply.
-- Drainage is a reference map layer, not part of the planned D8 computation. Historical flood information may support validation if suitable records are available.
-- The planned 3D system uses a DEM for D8 terrain analysis; its rainfall-to-flood classification remains to be defined and validated. The synthetic working demo uses a separate method.
+- Pipes and canals remain reference map layers under the current scope; river/channel and downstream-boundary evidence are needed for SFINCS setup.
+- SFINCS is the selected flood-scenario method. Its Laoag setup needs suitable terrain, forcing, and local observed-event evaluation before flood-map accuracy can be claimed. D8 may remain only an optional drainage-reference layer. The synthetic working demo uses a separate method.
 - The primary request to local government is for CDRRMO, Engineering Office, and Planning Office data.

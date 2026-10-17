@@ -1,56 +1,26 @@
 # Water Simulation Model
 
-## Approach
+## Selected approach
 
-The planned terrain method uses D8 flow direction and flow accumulation. Those operations describe drainage paths and contributing area. The additional rainfall and flood-classification rules must be defined and evaluated before the system can present a defensible flood-affected-area result.
+**SFINCS is OverFlow's accepted flood-scenario method (team decision, 2026-10-17).** It is intended to convert documented rainfall and relevant river/boundary conditions into time-varying flood-depth and exposure maps for planning scenarios. The existing Laoag runs only demonstrate that the software pipeline works. Their dry boundary is unverified, and their maps have not been compared with a real flood. Method selection is distinct from local validation or operational forecasting.
 
-## Conditional SFINCS path
+The [development and validation plan](../02-sfincs-pilot-plan.md) and [pilot results](../03-sfincs-pilot-results.md) specify the current evidence and remaining work.
 
-The team now asks planning to assume access to finer bare-earth terrain, river/channel and water-boundary information, dated rainfall, and geolocated wet/dry observations for a Laoag flood event. Under that assumption, SFINCS is the **target for evaluation as the flood-scenario engine**, while D8 may remain a drainage-reference layer. The [pilot plan](../02-sfincs-pilot-plan.md) requires a physically supported boundary, numerical checks, and observed-event comparison before adoption. The [first run](../03-sfincs-pilot-results.md) and [boundary rerun](../04-sfincs-boundary-rerun-results.md) show technical feasibility and an artificial-edge sensitivity, not validated flood predictions. None of the assumed new datasets has been marked received.
+## Processing sequence
 
-## Accepted D8 proposal
+1. **Prepare terrain.** Inspect a suitable bare-earth DTM, its source date, resolution, vertical datum, accuracy, and NoData. Add verified river/channel elevations or other needed terrain information; preserve true elevation units for computation.
+2. **Define the physical model.** Choose a domain that includes relevant contributing and exit areas. Specify rainfall over time and river stage/discharge when relevant to the selected event. Document boundary locations, roughness, infiltration, and their uncertainty. Do not treat an arbitrary dry edge or missing river cells as a verified outlet.
+3. **Run SFINCS and check outputs.** Check completion, rain totals, initial water, grid alignment, implausible negative depths, boundary effects, and sensitivity to uncertain parameters. Export georeferenced time-varying and maximum-depth maps with scenario metadata.
+4. **Evaluate locally.** Replay a dated Laoag flood using matching forcing and compare mapped results with independent geolocated flooded and dry observations. Report disagreement and false positives/negatives at the scale supported by the source data. A static susceptibility map is contextual evidence, not an observed event.
+5. **Use in OverFlow only at a supported claim level.** Display the scenario assumptions and uncertainty. Let planners inspect candidate road exposure and confirm any closure before routing or center allocation. No automatic road-safety decision follows merely from a modeled cell depth.
 
-### Step 1: D8 Flow Direction
-- For each cell (i, j) in the elevation grid, examine 8 neighboring cells
-- Calculate slope to each neighbor: `(elevation[i][j] - elevation[neighbor]) / distance`
-- Assign flow direction to the neighbor with steepest downward slope
-- If all neighbors are higher or equal, the cell is a sink in the D8 direction grid; actual stored water has not yet been calculated
+## D8 reference option
 
-### Step 2: Flow Accumulation
-- Initialize each valid cell with one unit of contributing area; rainfall is handled separately
-- Process cells in topological order (highest to lowest elevation)
-- For each cell, add its accumulation value to the cell it flows into
-- Result: each cell's value represents total upstream contributing area, not water depth or stored volume
+D8 flow direction and flow accumulation may remain as a **separate drainage-analysis layer**. D8 assigns each terrain cell to a downhill neighbor and counts upstream contributing area. It does not produce the selected flood-depth maps, replace SFINCS, or justify a rainfall-to-flood threshold. See [O'Callaghan and Mark](../literature/07-ocallaghan-mark-1984.md) for the drainage-method boundary.
 
-### Step 3: Rainfall Overlay (planned; formulation unresolved)
-- Rainfall intensity and duration provide a scenario-wide input.
-- Uniform rainfall is the current simplifying assumption.
-- Converting rainfall into water depth, storage, or another flood indicator requires an explicit water-balance formulation that has not yet been selected.
+## Current limits
 
-### Step 4: Accumulation Over Time (unresolved)
-- The time-step scheme, outflow rule, depression handling, and conservation checks are not yet defined.
-- D8 and flow accumulation alone provide drainage direction and contributing-area information; they do not independently produce calibrated water depth or flood timing.
-
-### Step 5: Flood Classification (planned; threshold unresolved)
-- Classify cells using a documented flood indicator and threshold after the indicator's units and computation are defined.
-- Treat threshold changes as sensitivity scenarios.
-- Do not label the indicator as water depth unless its calculation and validation support that unit.
-
-## Limitations of the D8 proposal
-
-- D8 only allows flow in one direction per cell (no spreading)
-- Does not model flow velocity or volume accurately
-- No soil absorption or infiltration modeling
-- No drainage infrastructure (pipes, canals) modeled
-- Suitable for relative comparison between scenarios, not absolute flood prediction
-- The rainfall-to-indicator calculation and threshold have not been calibrated or validated.
-
-## Validation
-
-- For the SFINCS candidate, compare a dated event run with geolocated **observed flooded and dry places**, using matching rainfall and relevant river/boundary data. Reserve independent observations or a second event for evaluation after tuning.
-- Check numerical behavior and sensitivity to terrain, boundary, infiltration, and roughness assumptions before using modeled exposure in evacuation scenarios.
-- Static hazard or susceptibility maps can provide context but cannot replace dated event observations or establish model accuracy. The D8 rainfall-classification method remains unresolved and has no validated threshold.
-
-## Literature Boundary
-
-O'Callaghan and Mark's D8 work supports the drainage-direction and contributing-area foundation. It does not validate the project's proposed rainfall overlay, time stepping, water-depth calculation, or flood threshold. See `knowledge/literature/07-ocallaghan-mark-1984.md`.
+- The City Hall DEM has roughly 91.25 m cells and river-area NoData; its vertical reference and accuracy are not documented.
+- The initial SFINCS pilot's large negative depths were tied to an assumed western outflow edge. Shifting that edge removed the material negatives, but neither edge is a verified physical outlet. See the [boundary rerun](../04-sfincs-boundary-rerun-results.md).
+- Finer terrain, river/boundary evidence, dated rainfall, and flooded/dry observations are assumed accessible for planning but have not been marked received or validated.
+- No local flood-accuracy, road-safety, or operational forecast claim is supported by the current pilots.

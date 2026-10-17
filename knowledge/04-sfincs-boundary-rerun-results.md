@@ -1,5 +1,7 @@
 # Laoag SFINCS Pilot: Boundary Diagnostic Rerun
 
+**Later method decision (2026-10-17):** The team selected SFINCS for future OverFlow flood scenarios. This historical boundary test remains unvalidated; the selection does not make its assumed dry outlet physical. See the [current capstone definition](00-capstone-definition.md).
+
 **Run date:** 2026-10-16. **Claim level:** numerical sensitivity only; flood-map accuracy remains untested. This follows the [first technical result](03-sfincs-pilot-results.md) and the [updated pilot plan](02-sfincs-pilot-plan.md).
 
 ## Question and result
@@ -34,7 +36,7 @@ The terrain source and pinned SFINCS binary were unchanged (DEM SHA-256 `332465b
 
 ## Decision and next test
 
-**Keep SFINCS exploratory; make no D8 replacement decision.** The immediate numerical anomaly can be removed by shifting the dry boundary, but a physically supported model still needs (1) a documented river/channel and downstream-boundary design, (2) terrain with known datum and accuracy and preferably finer detail, and (3) a dated event with rainfall and observed wet/dry locations. Only after those inputs are available should the team rerun a locally evaluated flood scenario and test planner-reviewed road effects in OverFlow.
+**Decision at the time of the 2026-10-16 rerun: keep SFINCS exploratory; make no D8 replacement decision yet.** The team selected SFINCS as the future method on 2026-10-17, as noted at the top of this report; that later decision did not validate this map. The immediate numerical anomaly can be removed by shifting the dry boundary, but a physically supported model still needs (1) a documented river/channel and downstream-boundary design, (2) terrain with known datum and accuracy and preferably finer detail, and (3) a dated event with rainfall and observed wet/dry locations. Only after those inputs are available should the team rerun a locally evaluated flood scenario and test planner-reviewed road effects in OverFlow.
 
 Reproduce the diagnostic with [sfincs_boundary_diagnostic.py](../scripts/sfincs_boundary_diagnostic.py), Python 3.14 and the pinned [Python dependencies](../scripts/sfincs-pilot-requirements.txt), against the same pinned SFINCS binary used by the first pilot. The script writes `summary.json`, `run.log`, native NetCDF, a GeoTIFF, and diagnostic PNGs under ignored `output/sfincs-boundary-diagnostic/`. Keep source-dependent maps local until City Hall's derivative-map permissions are clear.
 

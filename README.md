@@ -9,7 +9,7 @@ The system is intended to support human planning decisions. It is not an autonom
 
 ## Current status
 
-The repository contains the capstone foundation, manuscript workspace, and an interactive controlled-demo prototype. **Laoag City, Ilocos Norte is the confirmed study area.** A Laoag City Hall package with terrain, map, and population files has been received. Pilot barangays, the partner organization, deployment environment, remaining data access, analytical methods, and evaluation design are still subject to confirmation.
+The repository contains the capstone foundation, manuscript workspace, and an interactive controlled-demo prototype. **Laoag City, Ilocos Norte is the confirmed study area, and SFINCS is the selected flood-scenario method.** A Laoag City Hall package with terrain, map, and population files has been received. Barangays 38-A, 38-B, and 39 were used for the SFINCS technical pilot; final study coverage, the partner organization, deployment environment, remaining data access, and evaluation design are still subject to confirmation.
 
 UP TCAGP's LiPAD has responded as a prospective source of DTM data, but exact Laoag coverage, access under its NDA, metadata, and delivery remain pending. Its reply did not confirm Flood Hazard Map availability. The Batac area-of-interest file in `letters/lipad-aoi/` belongs to the earlier two-city inquiry and is not part of the active study area.
 
@@ -38,7 +38,7 @@ The current project direction includes:
 - Comparing feasible evacuation routes, center allocations, estimated clearance time, and resource plans.
 - Displaying scenario conditions and results in an interactive 3D terrain view with an overhead map-like camera.
 
-The prototype uses controlled synthetic scenario data and a separate illustrative rainfall-runoff solver. The intended research method remains DEM-based D8 terrain analysis; its rainfall-to-flood-classification method still needs a defined formula and validation. Prototype outputs are demonstrations of decision-support interactions, not operational recommendations.
+The prototype uses controlled synthetic scenario data and a separate illustrative rainfall-runoff solver. **SFINCS is the selected method for rainfall-driven flood scenarios; D8 may remain an optional drainage-reference layer.** Existing Laoag SFINCS runs demonstrate technical feasibility, but their boundary conditions and flood maps are not locally validated. Suitable terrain, river/boundary information, dated rainfall, and observed wet and dry locations still need to be obtained and checked before local flood-accuracy claims. Prototype outputs are demonstrations of decision-support interactions, not operational recommendations.
 
 ## Documentation
 

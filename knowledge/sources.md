@@ -18,7 +18,7 @@
 ## Current Team Decisions
 
 - **Type:** Direct team clarification.
-- **Contains:** The approved project name and geospatial title, BSIT classification, confirmed Laoag City study area (2026-10-16), 3D system direction, split architecture, terrain-based method, and current scope limits.
+- **Contains:** The approved project name and geospatial title, BSIT classification, confirmed Laoag City study area (2026-10-16), selected SFINCS flood-scenario method (2026-10-17), 3D system direction, split architecture, and current scope limits.
 - **Authority:** Highest for current project choices; summarized in `knowledge/decisions.md` and `knowledge/00-capstone-definition.md`.
 
 ## `knowledge/architecture/`
@@ -27,11 +27,11 @@
 - **Contains:**
   - `00-overview.md` — split architecture (Python backend + TypeScript frontend), technology stack, data flow, and key decisions.
   - `01-rendering.md` — React Three Fiber rendering components (terrain, water, buildings, roads), camera/controls.
-  - `02-computation.md` — FastAPI backend, DEM processing, D8 flow direction, flow accumulation, rainfall distribution, flood threshold, and planned API endpoints.
-  - `03-water-simulation.md` — Detailed simulation algorithm (5 steps), limitations, validation approach.
-- **Authority:** High for the selected architecture. Planned interfaces and the rainfall-to-flood-classification method still require implementation and validation.
-- **Important distinction:** The system is 3D. The DEM is a two-dimensional elevation grid used to construct terrain and calculate D8 drainage; the overhead camera is a view of the 3D scene.
-- **Supports:** Chapter 2 (Technical Background), Chapter 3 (Methodology — system design), and Chapter 4 (system implementation).
+  - `02-computation.md` — FastAPI backend, terrain processing, selected SFINCS scenario pipeline, optional D8 drainage reference, and planned API endpoints.
+  - `03-water-simulation.md` — Selected SFINCS method, setup and evaluation sequence, current pilot limitations, and optional D8 reference.
+- **Authority:** High for the selected architecture. Planned interfaces need implementation, and the selected SFINCS model needs local evaluation before flood-map accuracy or road-exposure claims.
+- **Important distinction:** The system is 3D. The terrain raster is a two-dimensional elevation grid used for the 3D terrain view and SFINCS setup; the overhead camera is a view of the 3D scene.
+- **Supports:** Chapter 2 (related technical concepts), Chapter 3 (development procedures), and Chapter 4 (implemented architecture and data flow).
 
 ## `knowledge/data/`
 
@@ -43,7 +43,7 @@
   - `03-lipad-response.md` — the team's confirmed Laoag selection, LiPAD's DTM availability reply, NDA/access requirements, and the boundary between a prospective source and a delivered dataset.
 - **Important distinction:** GeoJSON is the standard for vector layers such as roads, bridges, centers, boundaries, and flood zones. DEM data may be obtained as raster/GeoTIFF and is converted to a NumPy grid; JSON-compatible structures are used for API interchange.
 - **Authority:** High for data requirements and processing workflow. The Laoag package inventory verifies file receipt and observed properties, not source fitness or permitted use. The team's direct confirmation establishes the study area; LiPAD's reply establishes a prospective DTM provider, not receipt of a dataset.
-- **Supports:** Chapter 2 (Technical Background — GIS and data formats), Chapter 3 (Methodology — data gathering and processing), and Section 15 of the capstone definition (Data Requirements).
+- **Supports:** Chapter 2 (related GIS and data concepts), Chapter 3 (data gathering and processing procedures), Chapter 4 (implemented data pipeline), and Section 15 of the capstone definition (Data Requirements).
 
 ## Supplied Laoag City Hall package
 
@@ -56,7 +56,7 @@
 
 - `DATA SOURCES AND TOOLS FOR OVERFLOW.md` consolidates the current candidate data, processing, and deployment plan.
 - `letters/` contains draft requests and area-of-interest files from the earlier two-city inquiry. Laoag is now the selected study area; the Batac files remain historical request artifacts and do not imply active scope or data access.
-- `sentinel-demo/` and `demo-api/` contain a synthetic working demonstration. Its illustrative runoff solver is separate from the planned D8-based method; the folder path is retained for the existing hosting workspace.
+- `sentinel-demo/` and `demo-api/` contain a synthetic working demonstration. Its illustrative runoff solver is separate from the selected SFINCS method; the folder path is retained for the existing hosting workspace.
 
 ## `knowledge/literature/`
 

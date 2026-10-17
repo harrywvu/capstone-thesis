@@ -1,5 +1,7 @@
 # Laoag SFINCS Pilot: Coarse-DEM Technical Result
 
+**Later method decision (2026-10-17):** The team selected SFINCS for future OverFlow flood scenarios. This historical pilot result remains a technical demonstration; the decision does not validate its maps. See the [current capstone definition](00-capstone-definition.md).
+
 **Run date:** 2026-10-16. **Claim level:** technical demonstration only. This is the execution record for the [pilot plan](02-sfincs-pilot-plan.md). It does not validate flood predictions or change the capstone's accepted method.
 
 **Follow-up:** A [boundary diagnostic rerun](04-sfincs-boundary-rerun-results.md) shifted the artificial western dry edge two DEM cells west and removed the material negative depths. It did not validate the flood map or provide a physical outlet.
