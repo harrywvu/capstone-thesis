@@ -1,69 +1,73 @@
-% Chapter 3 outline. The research design, participants, instruments, data,
-% algorithms, and statistics below are planning topics, not approved methods.
-
 \newpage
 \section{Methodology}
 \label{Methodology}
-% Provide a reproducible account of how the system and research evaluation are
-% conducted. Map every method to a specific objective or research question.
+
+This chapter presents the research design, study locale and participants, data-gathering tools, research instruments, procedures, and treatment of data for \textit{OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning}. The study is set in Laoag City, Ilocos Norte. The development, interviews, and evaluation described below are planned activities; the research team has already used formal request letters and received an initial City Hall data package.
 
 \subsection{Research Design}
-% Specify and justify:
-% - the BSIT capstone research/development design;
-% - the selected software-development process and iteration stages;
-% - the study area, partner organization, and deployment context;
-% - the simulation/optimization experiment design;
-% - the system and user-evaluation designs;
-% - participants or expert validators, sampling, inclusion criteria, and sample
-%   size when applicable;
-% - ethical review, consent, privacy, and operational-safety considerations.
-% Required decision: evaluation method and baseline.
+
+The study will use a descriptive-developmental research design. The descriptive component will document the information and procedures used by disaster-management personnel when preparing flood-evacuation arrangements. It will examine how personnel identify affected barangays, assess road access, choose evacuation centers, account for capacity and transport resources, and compare alternative plans. The developmental component will design, implement, test, and refine OverFlow using those requirements and the geographic and operational data available for Laoag City.
+
+The work will be organized using a design science process: identify the planning problem, define objectives for a solution, design and develop the system, demonstrate its use, and evaluate the resulting artifact \cite{peffers2007}. OverFlow will support human planning and preparedness decisions through configurable scenarios. Its outputs will be interpreted as estimates under stated assumptions.
+
+Software development will be iterative and incremental. The team will first prepare data and implement geographic display and barangay selection, then add scenario controls, flood analysis, evacuation analysis, and scenario comparison. For each increment, the team will define expected behavior, implement the function, test it, and revise it in response to defects or relevant staff feedback. Requirements or features added during development will be documented before inclusion in evaluation.
+
+Each development increment will be traced from a planner action to an implemented function and a documented test. These actions include barangay selection, expected-evacuee entry, rainfall assumptions, road and bridge closures, center status and capacity, vehicle and travel-speed assumptions, and saving, reopening, duplicating, comparing, and exporting scenarios. The architecture and data flow actually implemented will be documented with the system-development results in Chapter 4.
+
+SFINCS is the newly selected method for flood-scenario modeling. Deltares documents its model inputs, forcing, and output maps \cite{sfincsinput,sfincsdocs,sfincsoutput}. The team will prepare suitable terrain, rainfall, river and boundary information; document the model setup, parameters, units, spatial and temporal resolution, and limitations; and compare a dated simulation with independent flooded and dry observations before claiming local flood-map accuracy. Existing Laoag technical runs establish that the pipeline can execute, but their outflow boundary is unverified and they have not been validated against an observed event. D8 flow direction and accumulation may be shown separately as a drainage-reference layer, not as modeled flood depth or timing. The supplied flood-susceptibility map will remain a reference layer rather than an observed flood event.
+
+The evacuation-analysis component will remove manually closed road and bridge links from the traversable network, calculate feasible routes to reachable centers, and assign expected evacuees without exceeding the usable capacity specified for a scenario. NetworkX weighted paths and OR-Tools minimum-cost flow are the current implementation directions. The team will specify route weights, assignment costs, alternative-route rules, and travel and vehicle assumptions before testing the outputs. Where no feasible connection or sufficient capacity exists, the system will report unserved demand and its cause. Any automatic restriction of a road based on modeled flooding will require a separately defined and evaluated rule.
+
+OverFlow will be evaluated through documented scenarios and, subject to partner participation, staff planning tasks. It will not be benchmarked against another software system. System tests will examine whether outputs satisfy the configured road and capacity constraints and whether scenario functions behave as specified. Staff evaluation will examine task completion, the clarity and usefulness of displayed information, and problems reported during use. The study will not claim an improvement over existing practice without comparative evidence.
+
+\subsection{Locale of the Study, Population, and Sample}
+
+Laoag City, Ilocos Norte, is the study area. The planned geographic interface will include all 80 coded Laoag barangays represented in the available administrative-boundary and population files. A planner will be able to highlight a barangay by hovering over its mapped boundary and select or deselect it by clicking; multiple barangays may be selected without drawing new polygons. Barangays 38-A, 38-B, and 39 were used for the technical SFINCS pilot. Representative test scenarios may use a smaller set of barangays to exercise conditions such as a road closure, an unavailable center, or demand that exceeds reachable capacity. Interface coverage does not establish validated flood-model coverage: the final observed-event evaluation area and spatial detail will be reported alongside the quality and coverage of the data actually used.
+
+The Laoag City Disaster Risk Reduction and Management Office (CDRRMO) is the proposed partner for interviews and staff evaluation, subject to its agreement; the operating organization has not been confirmed. The intended participant group comprises personnel whose duties involve evacuation planning, disaster operations, or related decisions. Purposive selection is planned because these personnel have direct knowledge of the process the system is intended to support. The provisional interview target is approximately six eligible staff members, subject to access and ethics approval; the number invited, number participating, roles, and reasons for any difference from this target will be reported after coordination. Personnel who take part in evaluation may also have participated in the interviews, and any overlap will be disclosed.
 
 \subsection{Data Gathering Tools}
-% Describe the tools used to acquire or prepare evidence and system data:
-% - formal data requests to the selected DRRM, engineering, barangay, or other
-%   official offices;
-% - GIS extraction and digitization tools;
-% - field or document validation procedures;
-% - OpenStreetMap or other external-data acquisition procedures;
-% - versioning, metadata, and provenance records.
-% QGIS, OpenStreetMap, NAMRIA, and local-government sources are candidates only
-% until access, licensing, coverage, and quality are verified.
+
+The research team reports that formal request letters were used to obtain an initial Laoag City Hall data package, largely supplied through the City Engineering Department. The package includes elevation, barangay-boundary, population, road, flood-susceptibility, and other reference files. Further letters or coordination will seek information still needed for evacuation analysis, particularly geocoded evacuation centers and usable capacities, current vehicles and resources, bridge locations linked to road segments, and event-specific flood or road-closure records if available. UP TCAGP's LiPAD has responded as a prospective source of a finer bare-earth DTM, but no Laoag DTM has been delivered; exact coverage, metadata, NDA completion, and permitted use remain pending. Receipt of a file will be distinguished from verification of its date, coverage, accuracy, permitted use, and suitability for the intended analysis.
+
+QGIS or equivalent geographic-information-system software will be used to inspect spatial coverage, coordinate reference systems, and layer alignment and to prepare vector data for the system. Spreadsheet software will be used to inspect population and other tabular records and maintain a dataset inventory. OpenStreetMap may supplement road or geographic information where local coverage is adequate; its features will be checked against available official records. Python processing tools will prepare raster elevation data and standardized geographic layers for the backend. Interview notes and, only with separate permission, audio recordings will retain staff responses.
+
+The City Hall files require specific checks before use. The spatial layers use different coordinate systems and will be transformed to a common working reference and checked for alignment. Empty road geometries will be excluded or repaired as appropriate, road segments will be connected into a usable network, and bridge records will be linked to road edges where the evidence permits. Barangay boundaries will be joined to population records using their codes. The supplied population counts represent residents covered by the source; the workbook does not state a survey year, and the planner will enter expected evacuees separately for each scenario. The supplied elevation grid, at approximately 91~m cell spacing, can support broad terrain visualization and initial experiments but cannot alone justify detailed street-level flood claims. The team will seek finer bare-earth terrain data and its metadata if accessible.
 
 \subsection{Research Instruments}
-% Describe, develop, and validate the instruments actually used, potentially:
-% - stakeholder interview or requirements guide;
-% - geographic-data quality and completeness checklist;
-% - expert scenario and output-validation form;
-% - system test cases and expected results;
-% - usability or software-quality questionnaire;
-% - task-performance or decision-comparison instrument.
-% State instrument source/adaptation, scoring, validation, pilot testing, and
-% reliability procedures. Do not assume ISO 25010 or another standard unless
-% the adviser approves it and the constructs match the research questions.
+
+A semi-structured interview guide will be prepared for personnel of the confirmed partner office, proposed to be CDRRMO. Its core questions will address the steps used in evacuation planning, the information considered when choosing routes and centers, the handling of road closures and insufficient capacity, the use of vehicles, and the difficulties of comparing alternatives. The interviewer may ask follow-up questions when a participant identifies a relevant practice or constraint. The guide will be reviewed for clarity before use.
+
+A dataset inventory and quality checklist will record each source's provider, reference date where known, geographic coverage, format, coordinate system, relevant fields, missing values, restrictions, and proposed system use. A scenario and system test checklist will record each test's input conditions, expected behavior, observed behavior, and result. Tests will cover hover highlighting and click selection of barangays, scenario editing, closed-road avoidance, center reachability and capacity, unserved demand, and saving, reopening, comparing, and exporting scenarios. SFINCS tests will cover input/output alignment, numerical behavior, physical-boundary assumptions, and comparison with suitable observed-event data when obtained.
+
+A task-based staff evaluation form will combine observed task results, a short five-point rating questionnaire, and open comments. Proposed tasks include selecting barangays, changing evacuation demand, closing a road, adjusting center capacity, running the analysis, and comparing two scenarios. Questionnaire items will address the clarity of routes and center assignments, ease of changing scenario inputs, and usefulness of scenario comparison. Each item will use response options from 1 (strongly disagree) to 5 (strongly agree). The form will allow participants to explain confusing outputs, missing information, and desired improvements. The team will review the tasks and wording before administration and will report any changes made to the instrument.
 
 \subsection{Data Gathering Procedures}
-% Present the procedure in chronological, reproducible order:
-% 1. Confirm the study area, partner organization, users, and scope.
-% 2. Secure permissions and define data-governance responsibilities.
-% 3. Inventory and acquire road, map, drainage, hazard, population, center, and
-%    resource data required by the approved model.
-% 4. Record metadata; clean, georeference, standardize, and validate each layer.
-% 5. Define representative scenarios and ground-truth or expert references.
-% 6. Design and implement the approved routing, allocation, time, and simulation
-%    methods and the user interface.
-% 7. Conduct unit, integration, system, scenario, and data-quality tests.
-% 8. Conduct expert and/or user evaluation following approved ethics procedures.
-% 9. Analyze results and preserve anonymized evidence for reproducibility.
+
+First, the team will seek participation from Laoag CDRRMO as the proposed partner and coordinate with relevant data-holding offices to confirm access conditions and information needed for the study. Before interviewing or evaluating personnel, it will complete the university's applicable ethics review, explain the study and voluntary nature of participation, obtain consent, and establish how responses and any recordings will be stored and reported.
+
+Second, if the proposed partner agrees, the team will use the semi-structured guide to interview available planning or operations personnel. It will record responses in notes and make audio recordings only where separately permitted. The team will review the responses to identify planning steps, information needs, decision constraints, and requirements for OverFlow. It will distinguish statements made by participants from the team's interpretation.
+
+Third, the team will inventory the City Hall package and any additional records obtained. It will check source metadata, permitted use, geographic coverage, date, completeness, coordinate systems, and field meanings. The team will align spatial layers, clean and connect the road network, join population records to barangay boundaries, and prepare the elevation data. Missing center, bridge, resource, or event-specific information will be requested or recorded as a limitation. Source population will remain a reference value, while expected evacuees will be entered as scenario demand.
+
+Fourth, the team will develop OverFlow in increments. Geographic display and selection will be followed by scenario configuration, SFINCS integration and local evaluation, road and center analysis, and scenario storage and comparison. The team will specify model inputs and parameters, routing weights, allocation objective, and time and vehicle assumptions before using the related outputs in evaluation. Planners will inspect modeled road exposure and confirm closures; any automatic restriction would require a separate tested rule.
+
+Fifth, the team will execute documented unit, integration, and scenario tests after the relevant functions are implemented. It will check that manually closed links are not used, center assignments remain within usable capacity, unreachable or excess demand is reported, and saved scenarios preserve their inputs and results. SFINCS tests will examine inputs, numerical behavior, boundary sensitivity, and output alignment. A dated model run must be compared with suitable local flooded and dry observations before the team makes local flood-accuracy or modeled road-exposure claims. If suitable terrain, a defensible water boundary, or event observations cannot be obtained, SFINCS results will remain a labeled technical demonstration and will not be used to judge road safety. Evacuation scenarios can still use documented reference layers and planner-specified closures. The team's claims about flood extent, depth, and timing will be limited to what the model and validation evidence support.
+
+Sixth, participating staff from the confirmed partner office will complete defined planning tasks using the developed system. The team will record task completion and collect questionnaire ratings and open comments. Finally, it will summarize the interview themes, dataset checks, system-test outcomes, task results, and staff feedback. Records used in reporting will be de-identified according to the consent and data-use arrangements.
 
 \subsection{Statistical Treatment of Data}
-% Select analyses only after the outcome variables and evaluation design are
-% approved. Address, as applicable:
-% - frequencies, percentages, means/medians, variability, and confidence bounds;
-% - route validity, distance/time, capacity violations, allocation feasibility,
-%   computation time, and agreement with validated plans;
-% - questionnaire scoring, reliability, and interpretation;
-% - comparisons with a baseline or alternative method;
-% - assumptions, effect sizes, missing data, and decision thresholds.
-% Provide formulas, software, significance level, and interpretation rules for
-% every statistic actually used. Do not include decorative statistics.
+
+Interview notes and open comments will be analyzed qualitatively. The team will identify statements relevant to planning practices, requirements, and system limitations, group related statements into themes, and review each theme against the original notes. Verbatim quotations will be used only when accurately recorded and permitted by the participant's consent.
+
+For test and staff-task results, frequencies and percentages will summarize outcomes. If $f$ of $N$ attempted tasks meet a defined completion criterion, the completion percentage will be calculated as
+\begin{equation}
+  P = \frac{f}{N}\times 100.
+\end{equation}
+The denominator will exclude tasks not attempted and will be reported with each percentage. The same calculation may summarize passed tests, with failures and reasons also reported. Constraint-related results, including unavailable routes, capacity violations, and unserved demand, will be presented as counts or scenario-specific values under explicitly stated inputs.
+
+For each five-point questionnaire item, the team will report the frequency of each response and its arithmetic mean, calculated as
+\begin{equation}
+  \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n},
+\end{equation}
+where $x_i$ is a participant's rating and $n$ is the number of responses to that item. Missing responses will be excluded from that item's mean and the corresponding $n$ will be stated. Open comments will be considered alongside the ratings. The small, purposively selected group will be described using these measures; no inferential test or claim of improvement over another software system or existing practice is proposed.
