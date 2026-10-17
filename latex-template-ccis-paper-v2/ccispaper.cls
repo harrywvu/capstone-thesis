@@ -158,7 +158,7 @@
   \end{center}%
   \begin{doublespace}%
     \begingroup
-      \def\\{\unskip, \ignorespaces}%
+      \def\\{\unskip,\space\ignorespaces}%
       \hspace*{0.2in}This \ccis@docinline\ titled, \textbf{"\ccis@papertitle"}, prepared and submitted by \ccis@paperauthors\ in partial fulfilment of the requirements for the degree \ccis@degreename, has been examined and recommended for acceptance and approval for the oral examination.
     \endgroup
   \end{doublespace}%
