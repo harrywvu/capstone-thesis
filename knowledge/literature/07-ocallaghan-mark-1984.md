@@ -19,7 +19,7 @@ The approach later became commonly known as D8 because flow from a grid cell is 
 
 ## Relevance to OverFlow
 
-- Provides the classic foundation for the confirmed D8 flow-direction component.
+- Provides the classic foundation for an optional D8 drainage-reference component.
 - Supports deriving terrain-controlled drainage direction and contributing area from a DEM.
 - Offers a computationally simple single-flow-direction representation suitable for a prototype-scale terrain analysis.
 
@@ -34,7 +34,7 @@ D8 and contributing-area accumulation do not, by themselves, calculate:
 - infiltration, drainage infrastructure, or storage; or
 - a defensible threshold at which a cell becomes flooded.
 
-The project's rainfall overlay, time stepping, and threshold classification are additional model choices that require their own formulation and validation.
+OverFlow selected SFINCS for rainfall-driven flood scenarios. D8 is not a substitute for that model or evidence of flood-map accuracy.
 
 ## Safe Uses in the Manuscript
 
@@ -44,6 +44,6 @@ The project's rainfall overlay, time stepping, and threshold classification are 
 
 ## Do Not Infer
 
-- That O'Callaghan and Mark validate OverFlow's proposed rainfall-to-depth or flood-threshold calculations.
+- That O'Callaghan and Mark validate OverFlow's SFINCS setup or flood maps.
 - That D8 output is a flood forecast or hydraulic inundation map.
 - That high flow accumulation always means a location will flood under real conditions.

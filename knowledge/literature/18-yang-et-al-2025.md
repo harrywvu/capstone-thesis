@@ -30,7 +30,7 @@ The study examines how flood progression, warning time, human response, road and
 
 ## Relevance and Limits for OverFlow
 
-The study supports interactive comparison of warning time, affected population, roads, centers, and capacity. Its high-resolution hydrodynamic and behavioral model is substantially more detailed than OverFlow's confirmed terrain-based accumulation method.
+The study supports interactive comparison of warning time, affected population, roads, centers, and capacity. Its high-resolution hydrodynamic and behavioral model is substantially more detailed than OverFlow's currently selected but locally unvalidated SFINCS scenario workflow and initial evacuation-analysis direction.
 
 ## Safe Uses in the Manuscript
 

@@ -31,7 +31,7 @@ The study tests whether evacuees are safer when their route first minimizes trav
 
 ## Relevance and Limits for OverFlow
 
-The study shows that shortest distance, shortest time, and lowest flood exposure are distinct route objectives. Its safety calculations use hydraulic depth information that OverFlow's terrain-based accumulation does not currently provide.
+The study shows that shortest distance, shortest time, and lowest flood exposure are distinct route objectives. Its safety calculations use time-series hydraulic depth information; OverFlow's selected SFINCS method has not yet produced locally evaluated depth maps for road-safety decisions.
 
 ## Safe Uses in the Manuscript
 

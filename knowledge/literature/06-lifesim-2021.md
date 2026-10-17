@@ -37,7 +37,7 @@ LifeSim is a consequence-estimation system that simulates population redistribut
 
 - LifeSim requires behavioral, warning, traffic, vehicle, structure, and hazard data beyond OverFlow's confirmed scope.
 - It estimates consequences such as life loss; OverFlow is not authorized to make equivalent claims.
-- Its flood-hazard inputs and validation studies do not validate OverFlow's terrain-based accumulation model.
+- Its flood-hazard inputs and validation studies do not validate OverFlow's selected but locally unvalidated SFINCS setup. Optional D8 accumulation remains a drainage-reference layer only.
 - Feature similarity does not imply comparable predictive validity.
 
 ## Safe Uses in the Manuscript

@@ -32,7 +32,7 @@ The study combines flood-susceptibility assessment, safe-shelter screening, and 
 
 ## Relevance and Limits for OverFlow
 
-The workflow supports hazard screening before route calculation and demonstrates the value of time-based route costs. AHP weights and secondary datasets introduce uncertainty. The authors also identify road and bridge damage, variable flood conditions, and differing walking speeds as unresolved factors. The study does not validate OverFlow's D8-based classification.
+The workflow supports hazard screening before route calculation and demonstrates the value of time-based route costs. AHP weights and secondary datasets introduce uncertainty. The authors also identify road and bridge damage, variable flood conditions, and differing walking speeds as unresolved factors. The study does not validate OverFlow's selected SFINCS model or local road-exposure use.
 
 ## Safe Uses in the Manuscript
 

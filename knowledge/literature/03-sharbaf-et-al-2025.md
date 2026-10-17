@@ -34,7 +34,7 @@ The study develops a risk-based mathematical-programming approach for shelter-ne
 - The study addresses strategic shelter-network design, including permanent shelter infrastructure, rather than only operational assignment to an existing set of local centers.
 - It focuses on pedestrian evacuation and a Haitian application.
 - OverFlow has not adopted the paper's objective function, risk measures, data requirements, or solver.
-- The paper does not validate the proposed terrain-based flood classification in OverFlow.
+- The paper does not validate OverFlow's selected SFINCS model or local flood exposure.
 
 ## Safe Uses in the Manuscript
 

@@ -43,6 +43,6 @@ The study uses GIS to identify flood-prone zones, suitable evacuation areas, and
 
 ## Do Not Infer
 
-- That the source validates OverFlow's D8 rainfall-to-flood method.
+- That the source validates OverFlow's selected SFINCS model or Laoag flood maps.
 - That its criteria or weights should be copied without local expert review.
 - That geographic proximity makes its findings directly generalizable to the Philippines.

@@ -29,7 +29,7 @@ The study asks how an evacuation route can avoid both present inundation and flo
 
 ## Relevance and Limits for OverFlow
 
-The study shows that an open road can still be undesirable if it leads toward a moving hazard. OverFlow's current terrain-based accumulation does not provide the validated time-varying inundation forecast needed to reproduce this method.
+The study shows that an open road can still be undesirable if it leads toward a moving hazard. OverFlow's selected SFINCS setup has not yet been locally evaluated and does not provide the validated time-varying inundation forecast needed to reproduce this method.
 
 ## Safe Uses in the Manuscript
 
