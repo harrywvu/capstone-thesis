@@ -19,7 +19,7 @@ City of Batac, Ilocos Norte
 
 Dear **[HEAD NAME]**:
 
-We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning."**
+We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City."**
 
 The planned 3D geospatial system is intended to help local disaster planners visualize flood scenarios and evaluate evacuation options within [CITY NAME] if it is selected as the study area. It will integrate geographic, demographic, and infrastructure data. The DEM-based flood-classification method still requires definition and validation; the planning component is intended to analyze evacuation logistics.
 

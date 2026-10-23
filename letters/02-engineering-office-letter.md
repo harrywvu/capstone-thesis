@@ -19,7 +19,7 @@ City Engineering Office
 
 Dear **[HEAD NAME]**:
 
-We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning."**
+We are undergraduate students from the BS Information Technology program at Mariano Marcos State University, currently working on our capstone project entitled **"OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City."**
 
 The planned 3D geospatial system is intended to help local disaster planners visualize flood scenarios and evaluate evacuation options. SFINCS is the selected flood-scenario method; its local terrain and water-boundary setup and flood maps still require evaluation. Road data will support evacuation-route and center-allocation analysis. Pipes and canals will serve as reference layers under the current scope, while river/channel and downstream-boundary information is needed for the flood model.
 

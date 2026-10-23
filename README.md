@@ -1,6 +1,6 @@
 # OverFlow
 
-**OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning** is a BS Information Technology capstone project for Laoag City, Ilocos Norte. It aims to help disaster planners compare evacuation scenarios involving flood conditions, road access, expected evacuees, shelter capacity, and transport.
+**OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City** is a BS Information Technology capstone project. It aims to help disaster planners compare evacuation scenarios involving flood conditions, road access, expected evacuees, and evacuation-area capacity.
 
 SFINCS is the selected flood-scenario method, but its Laoag results are not yet locally validated. The working demo uses synthetic geography and a separate illustrative runoff model; its outputs are for demonstration, not operational decisions.
 

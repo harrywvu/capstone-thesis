@@ -1,6 +1,6 @@
 # Data Sources and Tools for OverFlow
 
-This is the current data-acquisition and processing plan for **OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning**. OverFlow is planned as a 3D geospatial planning system, not an operational flood forecast.
+This is the current data-acquisition and processing plan for **OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City**. OverFlow is planned as a 3D geospatial planning system, not an operational flood forecast.
 
 ## Study area and data status
 

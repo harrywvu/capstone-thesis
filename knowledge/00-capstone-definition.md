@@ -13,7 +13,7 @@ Status labels: `CONFIRMED`, `TENTATIVE`, and `UNRESOLVED`.
 
 - `CONFIRMED` The project idea has been accepted.
 - `CONFIRMED` **OverFlow** is the approved project name.
-- `CONFIRMED` Full capstone title: **OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning**.
+- `CONFIRMED` Full capstone title: **OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City**.
 
 **Basis:** Team clarification, 2026-10-08.
 
@@ -152,7 +152,7 @@ A localized interactive 3D geospatial planning environment that integrates evacu
 
 ## 14. Evaluation Strategy
 
-`CONFIRMED` The current research plan is descriptive-developmental work organized through a design-science process and iterative software development. It uses a source-data inventory, documented functional and scenario tests, and, subject to partner participation and ethics approval, semi-structured staff interviews and task-based staff evaluation. The proposed staff instrument combines observed task completion, five-point agreement items, and open comments. Interview/comment themes will be summarized qualitatively; test/task counts and percentages and item-level response frequencies and means will be reported descriptively, with denominators and missing responses stated. No inferential test or benchmark against another software system is planned (team direction, 2026-10-17). Improvement over existing practice will not be claimed without comparative evidence.
+`CONFIRMED` The current research plan is descriptive-developmental work organized through a design-science process and iterative and incremental software development. It uses a source-data inventory, documented functional and scenario tests, and, subject to partner participation and ethics approval, semi-structured staff interviews and task-based staff evaluation. The proposed staff instrument combines observed task completion, five-point agreement items, and open comments. Interview/comment themes will be summarized qualitatively; test/task counts and percentages and item-level response frequencies and means will be reported descriptively, with denominators and missing responses stated. No inferential test or benchmark against another software system is planned (team direction, 2026-10-17). Improvement over existing practice will not be claimed without comparative evidence.
 
 `UNRESOLVED` Laoag CDRRMO is a proposed partner, not a confirmed operator or participant source. The approximately six-person purposive interview target is provisional. Final participant access, ethics arrangements, instrument wording, task-completion criteria, datasets, local SFINCS comparison measures and acceptance thresholds, and any optional timing or sensitivity measures still require confirmation before administration or interpretation. Candidate measures include route validity, constraint satisfaction, computation time, agreement with expert plans, usability, and decision quality. For the **selected SFINCS method**, a dated observed event with flooded and dry locations is assumed accessible for local model evaluation; choose comparison measures and acceptance criteria before interpreting results. No D8 rainfall-classification threshold is planned.
 

@@ -4,7 +4,7 @@ This index maps the official CCIS BSIT LaTeX template to the current capstone fo
 
 ## Front Matter
 
-- **Title and approval pages:** Metadata in `latex-template-ccis-paper-v2/main.tex` uses **OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning**. The adviser and dean are Dr. Saturnina F. Nisperos. Retain the original panel-name placeholders as instructed by the team. The August 2026 cover date is provisional, and the approval-sheet examination date is marked for confirmation.
+- **Title and approval pages:** Metadata in `latex-template-ccis-paper-v2/main.tex` uses **OverFlow: Flood Simulation and Satellite-Derived Flood Information for Scenario-Based Evacuation Planning in Laoag City**. The adviser and dean are Dr. Saturnina F. Nisperos. Retain the original panel-name placeholders as instructed by the team. The August 2026 cover date is provisional, and the approval-sheet examination date is marked for confirmation.
 - **Acknowledgment:** Complete near submission using verified names and contributions.
 - **Abstract:** Write last, based only on completed methods and results.
 - **Contents and lists:** Generated automatically by the template.
@@ -47,7 +47,7 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter3.tex`
 - Data Gathering Procedures
 - Statistical Treatment of Data
 
-The current research plan uses a descriptive-developmental, design-science process, iterative development, a dataset inventory, functional and scenario tests, and proposed staff interviews and task evaluation. Descriptive counts, percentages, item-level rating summaries, and qualitative themes are planned; no other-system baseline comparison is planned. Laoag CDRRMO is the proposed partner, not a confirmed operator or participant source. Final observed-event evaluation coverage, participant access, exact instruments and task criteria, SFINCS measures and thresholds, ethics arrangements, obtainable datasets, and deployment still require confirmation. The synthetic demo uses a separate runoff solver. Chapter 3 should describe procedures and their conditional data/participation gates without presenting implementation architecture as a required methodology subsection.
+The current research plan uses a descriptive-developmental, design-science process, iterative and incremental software development, a dataset inventory, functional and scenario tests, and proposed staff interviews and task evaluation. Descriptive counts, percentages, item-level rating summaries, and qualitative themes are planned; no other-system baseline comparison is planned. Laoag CDRRMO is the proposed partner, not a confirmed operator or participant source. Final observed-event evaluation coverage, participant access, exact instruments and task criteria, SFINCS measures and thresholds, ethics arrangements, obtainable datasets, and deployment still require confirmation. The synthetic demo uses a separate runoff solver. Chapter 3 should describe procedures and their conditional data/participation gates without presenting implementation architecture as a required methodology subsection.
 
 Data reference: Methodology draws on `knowledge/data/` and the SFINCS pilot plan for acquisition, source checks, terrain preparation, forcing, and observed-event evaluation. The design documents in `knowledge/architecture/` guide development but are reported as implemented evidence in Chapter 4.
 
@@ -58,7 +58,7 @@ Template file: `latex-template-ccis-paper-v2/chapters/bsit/chapter4.tex`
 - System Development and Scenario-Analysis Results
 - System Evaluation Results
 
-This chapter remains an evidence-reporting outline. It should document the architecture and data flow actually implemented, alongside system and evaluation results; it must not contain predicted or invented results.
+Chapter 4 now includes the ten design diagrams and descriptive text from the supplied Chapter4.docx draft. The diagrams are presented as design artifacts, not as proof of completed implementation. Scenario-analysis and evaluation findings remain pending recorded tests, participant data, and validated results; predicted or invented findings must not be added.
 
 ## Chapter 5 - Conclusions and Recommendations
 
