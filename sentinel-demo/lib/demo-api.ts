@@ -26,8 +26,8 @@ export type TerrainResponse = { sectorId: string; sectorLabel: string; synthetic
 export type FloodFrame = { elapsedMinutes: number; depthsM: number[]; wetCells: number; maxDepthM: number };
 export type FloodResponse = {
   sectorId: string; synthetic: true; validated: false; frames: FloodFrame[]; peakDepthsM: number[];
-  floodMask: boolean[]; floodedCells: number; totalCells: number; floodedRoads: Record<string, boolean>;
-  maxDepthM: number; depthUnit: 'm'; visibleDepthM: number; roadClosureDepthM: number;
+  floodMask: boolean[]; floodedCells: number; totalCells: number; exposedRoads: Record<string, boolean>;
+  maxDepthM: number; depthUnit: 'm'; visibleDepthM: number; roadExposureDepthM: number;
   cellSizeM: number; infiltrationMmHr: number; manningN: number; durationMinutes: number;
   waterBalanceM3: { rainfall: number; infiltration: number; outflow: number; stored: number; error: number };
 };

@@ -4,7 +4,7 @@ from math import hypot
 import numpy as np
 
 from model import (EDGES, GRID_SIZE, NODES, analyze, d8_flow, distance_to_segment,
-                   flood_result, height_at, road_flood_status, route_water_step,
+                   flood_result, height_at, road_exposure_status, route_water_step,
                    scene_geometry, shortest_route)
 
 
@@ -41,7 +41,7 @@ class ModelTests(unittest.TestCase):
         self.assertGreater(next_water[1, 1], 0)
         self.assertTrue(np.all(next_water >= 0))
 
-    def test_road_closure_uses_peak_depth_threshold(self):
+    def test_road_exposure_uses_peak_depth_threshold(self):
         depth = [0.0] * (GRID_SIZE * GRID_SIZE)
         ax, az = NODES["central"]
         bx, bz = NODES["bridge"]
@@ -50,8 +50,8 @@ class ModelTests(unittest.TestCase):
             col = round((ax + (bx - ax) * ratio) * (GRID_SIZE - 1))
             row = round((az + (bz - az) * ratio) * (GRID_SIZE - 1))
             depth[row * GRID_SIZE + col] = 0.26
-        self.assertTrue(road_flood_status(depth)["bridge"])
-        self.assertFalse(road_flood_status([0.0] * len(depth))["bridge"])
+        self.assertTrue(road_exposure_status(depth)["bridge"])
+        self.assertFalse(road_exposure_status([0.0] * len(depth))["bridge"])
 
     def test_manual_road_closures_change_routes(self):
         normal = shortest_route("north", {})[0]
@@ -59,14 +59,18 @@ class ModelTests(unittest.TestCase):
         self.assertNotEqual(normal, closed)
         self.assertTrue(closed)
 
-    def test_analysis_uses_flooded_roads_and_capacity(self):
+    def test_analysis_uses_manual_closures_and_capacity(self):
         normal = analyze(0, 0, 348, 6, {})
+        rainy = analyze(90, 3, 348, 6, {})
         constrained = analyze(90, 3, 650, 4, {"bridge": True, "riverside": True, "market": True})
         self.assertGreater(constrained["floodedCells"], normal["floodedCells"])
+        self.assertTrue(flood_result(90, 3)["exposedRoads"]["bridge"])
+        self.assertFalse(any(rainy["roadBlocked"].values()))
+        self.assertEqual(normal["routePath"], rainy["routePath"])
         self.assertGreater(constrained["unassigned"], 0)
         self.assertNotEqual(normal["routePath"], constrained["routePath"])
         self.assertEqual(sum(normal["vehicleAllocations"]), 6)
-        self.assertEqual(constrained["vehicleAllocations"], [0, 0, 4])
+        self.assertEqual(sum(constrained["vehicleAllocations"]), 4)
 
     def test_scene_geometry_has_complete_grid(self):
         geometry = scene_geometry()

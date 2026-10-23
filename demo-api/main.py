@@ -1,4 +1,4 @@
-"""Loopback API for the offline OverFlow title-defense demo."""
+"""Loopback API for the offline OverFlow initial-defense prototype."""
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware

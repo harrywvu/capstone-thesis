@@ -36,7 +36,7 @@ const localBindingConfig = {
 
 export default defineConfig(async ({ command }) => {
   if (command === 'serve') {
-    // The title-defense demo runs fully offline against the loopback FastAPI service.
+    // The initial-defense prototype runs fully offline against the loopback FastAPI service.
     // Hosting plugins remain enabled for production builds below.
     return {
       css: { postcss: { plugins: [tailwindcss()] } },

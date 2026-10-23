@@ -16,14 +16,14 @@ export default function SelectArea() {
   return (
     <main className="selection-page">
       <header className="selection-topbar">
-        <div className="defense-brand"><span><strong>OverFlow</strong><small>Title-defense demonstration</small></span></div>
+        <div className="defense-brand"><span><strong>OverFlow</strong><small>Initial-defense prototype</small></span></div>
         <span className="demo-pill">SYNTHETIC · OFFLINE DEMO</span>
       </header>
       <div className="selection-layout">
         <section className="selection-intro">
           <div className="eyebrow"><MapPinned size={15} /> STEP 01 / 02 · AREA SELECTION</div>
           <h1>Choose an area to explore.</h1>
-          <p>Explore a conceptual Laoag City demo, then see how OverFlow could build terrain and compare rainfall scenarios for evacuation planning. Laoag and Batac remain candidate study areas; this demo does not select a final site.</p>
+          <p>Laoag City is the chosen study area. Explore an illustrative prototype of how OverFlow could display terrain and compare flood-evacuation planning scenarios. The scene below is synthetic and does not represent Laoag geography.</p>
           <div className="selection-note"><Mountain size={19} /><span><strong>Demonstration geography</strong><small>This overview is illustrative and not to scale. All three selections use the same synthetic terrain; no OSM, DEM, or live geographic data is used.</small></span></div>
           <div className="sector-picker" aria-label="Demo sector">
             {sectors.map((sector, index) => (

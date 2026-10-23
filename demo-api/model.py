@@ -19,7 +19,7 @@ CELL_SIZE_M = 20.0
 INFILTRATION_MM_HR = 8.0
 MANNING_N = 0.07
 VISIBLE_DEPTH_M = 0.05
-ROAD_CLOSURE_DEPTH_M = 0.25
+ROAD_EXPOSURE_DEPTH_M = 0.25
 OUTLET_SLOPE = 0.001
 STEP_SECONDS = 1.25
 FRAME_SECONDS = 600.0
@@ -378,11 +378,11 @@ def flood_result(intensity_mm_hr: float, duration_hr: float) -> dict:
         "floodMask": peak_mask,
         "floodedCells": sum(peak_mask),
         "totalCells": count,
-        "floodedRoads": road_flood_status(peak_depth.ravel().tolist()),
+        "exposedRoads": road_exposure_status(peak_depth.ravel().tolist()),
         "maxDepthM": round(float(peak_depth.max()), 3),
         "depthUnit": "m",
         "visibleDepthM": VISIBLE_DEPTH_M,
-        "roadClosureDepthM": ROAD_CLOSURE_DEPTH_M,
+        "roadExposureDepthM": ROAD_EXPOSURE_DEPTH_M,
         "cellSizeM": CELL_SIZE_M,
         "infiltrationMmHr": INFILTRATION_MM_HR,
         "manningN": MANNING_N,
@@ -394,7 +394,7 @@ def flood_result(intensity_mm_hr: float, duration_hr: float) -> dict:
     }
 
 
-def road_flood_status(depths_m: list[float]) -> dict[str, bool]:
+def road_exposure_status(depths_m: list[float]) -> dict[str, bool]:
     status = {}
     for start, end, key in EDGES:
         ax, az = NODES[start]
@@ -404,7 +404,7 @@ def road_flood_status(depths_m: list[float]) -> dict[str, bool]:
             ratio = step / 20
             col = round((ax + (bx - ax) * ratio) * (GRID_SIZE - 1))
             row = round((az + (bz - az) * ratio) * (GRID_SIZE - 1))
-            flooded += int(depths_m[row * GRID_SIZE + col] >= ROAD_CLOSURE_DEPTH_M)
+            flooded += int(depths_m[row * GRID_SIZE + col] >= ROAD_EXPOSURE_DEPTH_M)
         status[key] = flooded >= 4
     return status
 
@@ -442,9 +442,8 @@ def analyze(
     manual_closures: dict[str, bool],
 ) -> dict:
     flood = flood_result(intensity_mm_hr, duration_hr)
-    blocked = dict(flood["floodedRoads"])
-    for key in ("bridge", "riverside", "market"):
-        blocked[key] = blocked.get(key, False) or manual_closures.get(key, False)
+    # Synthetic depth flags possible exposure; only the planner closes a road.
+    blocked = {key: bool(manual_closures.get(key, False)) for _, _, key in EDGES}
 
     center_routes = [shortest_route(center["node"], blocked) for center in CENTERS]
     limits = [center["capacity"] if path else 0 for center, (path, _) in zip(CENTERS, center_routes)]
@@ -470,7 +469,7 @@ def analyze(
     if selected is None:
         route_path: list[str] = []
         route_name = "No accessible center"
-        route_detail = "Change closures or rainfall conditions"
+        route_detail = "Change the manually selected road closures"
     else:
         index, route_path, distance = selected
         route_name = f"Demo origin → {CENTERS[index]['name']}"
