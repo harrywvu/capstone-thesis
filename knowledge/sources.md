@@ -41,6 +41,7 @@
   - `01-dem-processing.md` — DEM definition, processing steps (load or fetch, decode, clean, prepare for display, export), and resolution/performance guidance.
   - `02-laoag-city-hall-package.md` — read-only inventory and quality assessment of the supplied Laoag files, with source paths, limitations, and follow-up requests.
   - `03-lipad-response.md` — the team's confirmed Laoag selection, LiPAD's DTM availability reply, NDA/access requirements, and the boundary between a prospective source and a delivered dataset.
+  - `04-laoag-sar-2026-08-31-audit.md` — the 31 August 2026 PhilSA Sentinel-1C flood-vector overlay with 80 Laoag barangays, local event comparison, and limits on map accuracy and road use.
 - **Important distinction:** GeoJSON is the standard for vector layers such as roads, bridges, centers, boundaries, and flood zones. DEM data may be obtained as raster/GeoTIFF and is converted to a NumPy grid; JSON-compatible structures are used for API interchange.
 - **Authority:** High for data requirements and processing workflow. The Laoag package inventory verifies file receipt and observed properties, not source fitness or permitted use. The team's direct confirmation establishes the study area; LiPAD's reply establishes a prospective DTM provider, not receipt of a dataset.
 - **Supports:** Chapter 2 (related GIS and data concepts), Chapter 3 (data gathering and processing procedures), Chapter 4 (implemented data pipeline), and Section 15 of the capstone definition (Data Requirements).
