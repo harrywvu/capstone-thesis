@@ -1,47 +1,67 @@
 \newpage
 \section{Methodology}
 \label{Methodology}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
 
-This chapter describes the design, data sources, instruments, procedures, and analysis used to develop and evaluate OverFlow in Laoag City.
+This chapter describes how the study will prepare Laoag's geographic data, develop the proposed planning functions, and evaluate their results.
 
 \subsection{Research Design}
 
-The study uses a descriptive-developmental design. Interviews document how disaster-management personnel identify affected areas, assess access and shelter capacity, and compare evacuation arrangements. An iterative development process translates these requirements into system functions and tests. The work follows the design science stages of problem identification, solution design, demonstration, and evaluation \cite{peffers2007}.
+The study will use a descriptive-developmental design organized through design-science research. The descriptive component will examine the available data and document local evacuation-planning practices if personnel participate. The developmental component will build and evaluate a geospatial tool that responds to those requirements. Design science structures the work from problem identification and solution objectives through development, demonstration, evaluation, and communication \cite{peffers2007}.
 
-SFINCS is used for rainfall-driven flood scenarios \cite{sfincsinput,sfincsdocs,sfincsoutput}. Model setup records the terrain, rainfall, boundary conditions, parameters, and spatial and temporal resolution. A dated simulation is compared with independent flooded and dry observations before local flood-accuracy claims are made. Where this comparison is not possible, the output is presented as a technical demonstration.
+\subsection{Software Development Process}
 
-Evacuation analysis excludes road links marked closed by the planner, calculates paths to reachable centers, and assigns expected evacuees within usable center capacities. NetworkX weighted paths and OR-Tools minimum-cost flow are the implementation directions. Route weights, assignment costs, and travel and vehicle assumptions are specified before testing. Results report unserved demand where access or capacity is insufficient.
+Within the design-science study, OverFlow will be built through iterative and incremental software development. Each iteration will plan, design, implement, test, and review a set of functions. Feedback can revise the current increment before work proceeds to the next one. The planned increments add Laoag maps and barangay selection; scenario entry, routes, and center assignment; barangay-based flood simulation and satellite-derived reference layers; then scenario comparison. Figure~\ref{fig:development-process} shows this cycle. The initial synthetic prototype demonstrates the interaction; later increments will use prepared Laoag data.
 
-Evaluation uses functional and scenario tests, followed by staff planning tasks if the partner office participates. Tests check the configured road and capacity constraints, scenario storage, and displayed results. The study does not compare OverFlow with another software system.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{chapter3/development-process.pdf}
+\caption{Iterative and incremental software development process for OverFlow}
+\label{fig:development-process}
+\end{figure}
 
-\subsection{Locale of the Study, Population, and Sample}
+\subsection{Locale and Participants}
 
-The study area is Laoag City, Ilocos Norte. The interface allows selection among all 80 coded barangays through hover highlighting and click selection. Barangays 38-A Mangato East, 38-B Mangato West, and 39 Sta. Rosa form the technical SFINCS pilot. The area used for observed-event evaluation is determined by the available flood evidence.
+The study area is Laoag City, Ilocos Norte. The planning interface will include all 80 barangays. Each flood scenario will focus on a selected barangay, with the SFINCS domain extending beyond its boundary where required to represent incoming or outgoing water. Figure~\ref{fig:laoag-setting} shows the city's channels and landforms in an earlier geomorphological study; the barangay boundaries used for OverFlow will come from the Laoag City Government data.
 
-Laoag CDRRMO is the proposed partner for interviews and staff evaluation. Personnel involved in evacuation planning or operations will be selected purposively. Approximately six staff members form the provisional interview target; the final participant count and roles will be reported after recruitment.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.76\linewidth,height=0.46\textheight,keepaspectratio]{chapter3/laoag-geomorphology.png}
+\caption{Geomorphological map of Laoag City, reproduced from Beroya and Aydin \cite{beroya2007}}
+\label{fig:laoag-setting}
+\end{figure}
 
-\subsection{Data Gathering Tools}
+Personnel involved in evacuation planning or response will be invited purposively for interviews and task-based evaluation, subject to institutional permission and ethics requirements. The Laoag City Disaster Risk Reduction and Management Office is a proposed source of participants. The final number and roles of participants will be reported after recruitment.
 
-Formal request letters produced an initial City Hall package, largely through the City Engineering Department, containing elevation, barangay boundaries, population, roads, and flood-susceptibility information. Additional requests seek geocoded center and capacity records, current vehicle resources, bridge locations, and observations from dated flood events. LiPAD is a prospective source of finer bare-earth terrain data.
+\subsection{Data Sources and Gathering Tools}
 
-QGIS and Python tools will be used to inspect, align, and prepare geographic layers. Roads will be cleaned and connected for network analysis, and barangay codes will link boundaries to population records. A dataset inventory will record source, date, coverage, coordinate system, completeness, and permitted use. Population counts serve as references; expected evacuees are entered separately for each scenario.
+The study will examine the barangay boundaries, roads, population records, elevation grid, and flood-susceptibility layer received from the Laoag City Government. Philippine Statistics Authority barangay population data will provide a dated population reference \cite{psalaoag}. Listed evacuation areas will be checked for location and status; until usable capacities are verified, capacities entered by a planner will remain scenario assumptions.
+
+The historical flood layer will come from the Philippine Space Agency's August 31, 2026 SAR product \cite{philsa2026flood}. Its acquisition time, coverage, classes, and known detection limits will be recorded. A location without a SAR detection will not automatically be classified as dry.
+
+GIS and programming tools will be used to inspect coordinate systems, align layers, check missing data, and prepare a connected road network. An inventory will retain each dataset's source, date, coverage, resolution where applicable, and restrictions on use.
 
 \subsection{Research Instruments}
 
-A semi-structured interview guide covers planning steps, road closures, center choice, capacity, transport, and comparison of alternatives. A dataset checklist records source quality and preparation decisions. A system-test checklist records each scenario's inputs, expected behavior, observed output, and result.
+A data-inventory form will document whether each source is suitable for its proposed use. A semi-structured interview guide will ask participating personnel how they identify affected communities, determine road access, select evacuation areas, and review alternative plans. The guide will provide consistent topics while allowing participants to explain practices not anticipated by the researchers.
 
-The staff evaluation form combines task completion, a five-point rating questionnaire, and open comments. Tasks include selecting barangays, changing demand, closing a road, adjusting center capacity, and comparing scenarios. Ratings address the clarity of outputs, ease of editing inputs, and usefulness of comparisons. Instruments and task criteria will be reviewed before use.
+A system-test sheet will record each test's inputs, expected result, observed result, and outcome. For staff evaluation, a task sheet will direct participants to select a barangay, change demand, close a road, adjust a center's capacity, and compare scenarios. Task completion will show whether the workflow can be carried out. A brief questionnaire and open comments will separately capture participants' judgments about the clarity and usefulness of the results. The instruments will be reviewed for clarity and alignment with the study objectives before administration.
 
-\subsection{Data Gathering Procedures}
+\subsection{Data Gathering and Analysis Procedures}
 
-The team will coordinate with the proposed partner office, complete the applicable ethics review, and obtain informed consent before interviews or staff evaluation. Interviews will identify planning practices and requirements; audio will be recorded only with separate permission.
+The researchers will first secure the permissions required to use the datasets and to conduct any activities involving personnel. Interviews and staff tasks will proceed only after the applicable ethics review and informed consent. Participation and findings will be reported without identifying individual staff members.
 
-The City Hall files and any additional records will be inventoried, checked, aligned, and prepared for system use. Development then proceeds through geographic display, scenario configuration, SFINCS integration, evacuation analysis, and scenario comparison. Each function will be tested against defined inputs and expected behavior.
+Geographic records will then be checked and prepared. Barangay boundaries and population will be matched by code. Road lines will be examined for missing segments, intersections, and connectivity. Each barangay used in an analysis will have a documented access point on the road network. Evacuation areas will be included only when their identity and location can be established; unverified capacity will be clearly identified as a scenario input.
 
-SFINCS evaluation will examine input alignment, numerical behavior, boundary conditions, and agreement with observations from a dated event. Without suitable terrain, boundary evidence, and observations, its maps will remain labeled technical demonstrations and will not be used to judge road safety. Planners will review modeled exposure and specify road closures for evacuation scenarios.
+For each scenario, the planner will enter expected evacuees, usable center capacities, and closed road segments. Closed segments will be removed from the traversable network. Routes to reachable centers will be calculated using mapped road length as the weight. Center assignment will first serve as many evacuees as the network and capacities permit, then favor shorter total road distance among feasible assignments. The output will identify unreachable origins, full centers, and unserved demand. These calculations will use aggregate evacuee counts and will not estimate vehicle schedules or travel time.
 
-Functional tests will check barangay selection, closed-road avoidance, center reachability and capacity, unserved demand, and preservation of saved scenarios. Participating staff will then complete planning tasks and provide ratings and comments. The report will present dataset checks, test results, task outcomes, and staff feedback without identifying participants.
+Elevation, flood susceptibility, and SAR will be displayed as distinct sources of information. SFINCS simulations will use prepared terrain, rainfall, and boundary inputs, followed by numerical checks \cite{sfincsinput,sfincsdocs,sfincsoutput}. Local flood accuracy will be assessed only if suitable dated observations and event inputs are available. Road closures will remain a planner input.
 
-\subsection{Statistical Treatment of Data}
+Functional tests will use controlled cases with known routes and capacities to check closures, reachability, assignment, and unserved demand. Selected cases will then be repeated with prepared Laoag data to identify data-related gaps. If staff participation is obtained, participants will complete the task sheet and provide ratings and comments after using the system.
 
-Interview notes and open comments will be grouped into themes and checked against the original responses. Task completion and test outcomes will be reported as counts and percentages, with the number attempted stated. Five-point ratings will be summarized by response frequency and item mean; missing responses will be excluded from that item's mean. These descriptive results will be interpreted alongside staff comments and scenario-test evidence. No inferential test or claim of superiority over another system is planned.
+\subsection{Treatment of Data}
+
+Dataset findings will be reported by source and type of limitation. Functional tests and staff tasks will be summarized as counts and percentages, with the number attempted stated. Scenario results will report route distance, assigned evacuees, capacity use, and unserved demand under the stated inputs.
+
+Questionnaire responses will be presented as frequencies and item-level means on the five-point scale, with the number of responses for each item. Interview responses and open comments will be grouped into themes relevant to planning requirements and system use.

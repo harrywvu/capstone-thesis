@@ -1,36 +1,116 @@
-% Chapter 4 outline. Populate only after the methods in Chapter 3 have been
-% executed. Report unfavorable, null, and unexpected results alongside expected
-% findings; do not write anticipated results as completed evidence.
-
 \newpage
 \section{Results and Discussion}
 \label{Results and Discussion}
-% Organize results in the same order as the approved research questions and
-% objectives. For each result: present evidence, interpret it, compare it with
-% related literature/systems, and explain its practical meaning and limitations.
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
 
-\subsection{System Development and Scenario-Analysis Results}
-% Report evidence on:
-% - final study area, partner office, users, and deployment environment;
-% - acquired datasets, provenance, completeness, cleaning, and limitations;
-% - implemented architecture, modules, data flow, and the reasons for material design choices;
-% - implemented routing, center-allocation, time-estimation, resource, and flood
-%   or hazard-scenario methods;
-% - representative scenario inputs and generated map/decision outputs;
-% - functional, integration, and scenario-test outcomes; include processing
-%   performance only if its measure and procedure were defined in Chapter 3;
-% - how blocked roads and full centers change recommendations;
-% - traceability from requirements to completed capabilities.
-% Add verified maps, diagrams, tables, and screenshots with descriptive captions.
+This chapter presents the system design, the initial interaction prototype, and preliminary Laoag flood-data and model checks.
 
-\subsection{System Evaluation Results}
-% Report evidence using the approved evaluation plan:
-% - participant/validator characteristics without exposing private information;
-% - instrument reliability and data-quality checks;
-% - route, allocation, time, usability, or decision-support metrics actually
-%   defined in Chapter 3; include processing performance only if measured;
-% - checks against stated scenario expectations and relevant staff feedback;
-% - findings for each research question and objective;
-% - practical implications for the partner organization;
-% - threats to validity, dataset limitations, and generalizability.
-% Do not claim effectiveness beyond the measured study conditions.
+\subsection{System Design}
+
+The proposed workflow begins when a planner selects one of Laoag City's 80 barangays and defines a scenario. The planner enters rainfall assumptions and expected evacuees, identifies usable evacuation areas and their capacities, and marks any roads that should be treated as closed. SFINCS is the selected method for simulating flooding in a bounded area around the chosen barangay. The model area may extend beyond the administrative boundary where needed to represent water entering or leaving it, while the scenario results focus on the selected barangay.
+
+The interface wireflow in Figure~\ref{fig:chapter4-1} traces the planned movement from barangay selection and scenario entry to map viewing and result comparison. The sequence does not require the user to draw an analysis boundary; selection is based on prepared barangay polygons.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-1.png}
+\caption{Proposed interface wireflow}
+\label{fig:chapter4-1}
+\end{figure}
+
+The context diagram in Figure~\ref{fig:chapter4-2} places the planner, geographic records, and potential external data sources around OverFlow.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-2.png}
+\caption{Proposed system context}
+\label{fig:chapter4-2}
+\end{figure}
+
+Figures~\ref{fig:chapter4-3} and \ref{fig:chapter4-4} show the proposed exchange between the interface, scenario processing, flood simulation, and evacuation analysis. They distinguish the data entered for a particular scenario from the geographic records prepared for repeated use.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-3.png}
+\caption{Proposed scenario sequence}
+\label{fig:chapter4-3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-4.png}
+\caption{Proposed high-level architecture}
+\label{fig:chapter4-4}
+\end{figure}
+
+The data model in Figure~\ref{fig:chapter4-5} organizes barangays, roads, evacuation areas, scenarios, and results. Its separation of source records from scenario values allows a planner to change demand or usable capacity without treating those assumptions as permanent facts about Laoag.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-5.png}
+\caption{Proposed entity-relationship model}
+\label{fig:chapter4-5}
+\end{figure}
+
+Figure~\ref{fig:chapter4-6} shows the intended arrangement of the interface, processing services, and data storage.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-6.png}
+\caption{Proposed deployment}
+\label{fig:chapter4-6}
+\end{figure}
+
+The data-flow and backend diagrams in Figures~\ref{fig:chapter4-7} and \ref{fig:chapter4-8} trace how prepared geographic inputs and planner-defined conditions would produce flood displays, routes, center assignments, and unserved-demand reports. Road exposure shown by a flood layer prompts review; the planner determines which road segments to close before routes are recalculated.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-7.png}
+\caption{Proposed data flow}
+\label{fig:chapter4-7}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-8.png}
+\caption{Proposed backend components}
+\label{fig:chapter4-8}
+\end{figure}
+
+The activity diagram in Figure~\ref{fig:chapter4-9} summarizes the planner's decisions from entering a scenario to reviewing and comparing its outputs. It includes the opportunity to revise inputs when roads are inaccessible or evacuation areas cannot accommodate the entered demand.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-9.png}
+\caption{Proposed planning activity}
+\label{fig:chapter4-9}
+\end{figure}
+
+Figure~\ref{fig:chapter4-10} illustrates the intended three-dimensional map and results dashboard. Its displayed values are placeholders.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{chapter4/figure-4-10.png}
+\caption{Illustrative dashboard mockup; all displayed metrics are placeholders}
+\label{fig:chapter4-10}
+\end{figure}
+
+\clearpage
+\subsection{Initial Prototype}
+
+The prototype demonstrates area selection, scenario controls, a three-dimensional terrain view, rainfall and water-depth playback, manual road closures, center allocation, and comparison of results. Its three demo sectors share a synthetic landscape, and the water animation uses a simplified runoff calculation rather than SFINCS. It therefore demonstrates the intended interaction, not Laoag flood or evacuation outcomes.
+
+Eight automated checks passed on the prototype, including tests that closures change routes and capacity limits can leave demand unassigned.
+
+\subsection{Preliminary Flood-Data and Model Checks}
+
+The Laoag data include barangay boundaries, roads, a DEM, and flood-susceptibility information. The DEM's approximately 91-metre cells and undocumented elevation accuracy limit local flood interpretation.
+
+A review of the Philippine Space Agency's August 31, 2026 SAR layer found possible flood detections intersecting 49 of Laoag's 80 barangays \cite{philsa2026flood}. This layer provides a dated historical reference, but the detections do not establish road passability.
+
+An initial SFINCS test used the supplied DEM to produce a mapped output. Adjusting an assumed boundary resolved a numerical problem in an earlier run. Since the test did not reproduce a documented flood event, it demonstrates the modeling pipeline but does not establish local flood accuracy.
+
+\subsection{System Evaluation}
+
+Evaluation to date covers the synthetic prototype and preliminary data-processing steps. Functional tests using Laoag data, comparison of SFINCS results with suitable observations, and staff planning tasks remain to be completed.

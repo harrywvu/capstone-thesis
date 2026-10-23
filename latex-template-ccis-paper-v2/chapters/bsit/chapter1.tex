@@ -1,58 +1,64 @@
 \section{Introduction}
 \label{Introduction}
 
-Flood-evacuation planning brings together decisions about affected communities, usable roads, shelter space, and transport. A road closure can change which center is reachable; a full center can change the route or leave some evacuees unassigned. Planners need to examine these conditions together.
+\subsection{Background of the Study}
 
-This study develops \textit{OverFlow: A Geospatial Decision Support System for Flood Evacuation Planning} for Laoag City, Ilocos Norte. The system uses an interactive three-dimensional (3D) environment to help local disaster personnel configure and compare evacuation scenarios.
+Flood evacuation requires decisions that change with each event. The number of people needing assistance, the roads they can use, and the space available in evacuation centers may differ from one situation to another. In Laoag City, these decisions can involve communities across its 80 barangays \cite{psalaoag}. The Department of Social Welfare and Development recorded 78 Laoag barangays and 45,498 people affected by the combined effects of the Southwest Monsoon and Super Typhoon Egay in 2023 \cite{dswdegay2023}. These figures describe overall storm impacts, rather than the number of people flooded or evacuated. More recently, the Philippine Space Agency published a radar-derived map of possible flood extents from the August 2026 Southwest Monsoon \cite{philsa2026flood}.
 
-\subsection{Project Context}
+Geographic records can help locate communities, roads, and flood-prone areas, but they do not directly answer planning questions. If a road becomes unusable, a center reaches capacity, or more residents require evacuation, planners need to know which destinations remain reachable and how many people cannot be accommodated. The Laoag datasets available for this study contain barangay boundaries, roads, population records, elevation, and flood-susceptibility information. These sources provide a basis for mapping, while evacuation demand, road access, and usable center capacity must be specified for a particular planning scenario.
 
-Laoag City Hall has provided terrain, barangay, road, population, and flood-susceptibility records for the study. These layers locate communities and infrastructure, but a planning decision also depends on event-specific demand, road access, center capacity, and available transport. OverFlow connects the geographic records with those operational conditions.
+These changing conditions need to be examined together. OverFlow is proposed to combine flood information with route and evacuation-center analysis. It will help planners compare alternatives, including cases where roads or listed centers cannot serve everyone.
 
-The system treats population figures as references for setting evacuation demand and the supplied flood-susceptibility map as background hazard information. SFINCS provides the rainfall-driven flood-scenario method. Keeping these sources distinct allows planners to understand what a scenario represents and compare its resulting evacuation arrangements.
+\subsection{Statement of the Problem}
 
-\subsection{Purpose and Description}
+This study addresses the difficulty of determining feasible evacuation routes and center assignments when demand, road access, and center capacity change. Specifically, it asks:
 
-OverFlow enables planners to select any of Laoag City's 80 coded barangays, individually or in groups. Hovering highlights a barangay boundary; clicking selects or deselects it. The system presents geographic layers in 3D and overhead views.
-
-For each scenario, the planner specifies expected evacuees, rainfall conditions, road and bridge closures, center availability and capacity, vehicle resources, and travel assumptions. The analysis identifies feasible routes and center assignments, estimates travel and vehicle requirements, and reports demand that cannot be served. Scenarios can be saved, reopened, compared, and exported for planning discussions. Modeled road exposure is presented for review; a road is excluded from routing only when the planner marks it closed.
-
-\subsection{Objectives of the Study}
-
-The general objective is to develop and evaluate OverFlow as a geospatial tool for configuring and comparing flood-evacuation scenarios in Laoag City. Specifically, the study aims to:
 \begin{enumerate}
-  \item integrate relevant terrain, barangay, road, population, center, and resource data;
-  \item provide barangay-based scenario controls for demand, flooding, road access, shelter capacity, and transport;
-  \item develop SFINCS flood scenarios and evaluate their local applicability;
-  \item calculate feasible routes and capacity-constrained center assignments, including unserved demand and resource estimates;
-  \item present and compare scenario inputs and results in an interactive geographic interface; and
-  \item evaluate system functions and their usefulness in planning tasks.
+  \item How can available Laoag geographic, population, evacuation-area, and flood information be organized for planning across all 80 barangays?
+  \item How do changes in expected evacuees, road closures, and usable center capacity affect reachable routes, center assignments, and unserved demand?
+  \item How well does the proposed system perform its specified planning tasks, and how do intended users assess those tasks if staff participation is obtained?
+\end{enumerate}
+
+\subsection{Purpose and Objectives of the Study}
+
+The purpose of the study is to develop and evaluate a geospatial tool for preparing and comparing flood-evacuation scenarios in Laoag City. A planner will select a barangay, set the expected number of evacuees, identify closed roads, and enter the usable capacities of listed evacuation areas. The proposed system will then calculate routes by mapped road distance, assign people to reachable centers within capacity, and report those who remain unserved.
+
+The study specifically aims to:
+
+\begin{enumerate}
+  \item Assess and prepare the available Laoag data for scenario planning across its 80 barangays, including the identification of missing or uncertain inputs.
+  \item Design and develop an interface for viewing geographic and flood information, configuring evacuation conditions, and comparing scenarios.
+  \item Implement and test distance-based routing and capacity-limited center assignment under planner-specified road closures.
+  \item Examine the feasible uses and limitations of elevation data, barangay-based SFINCS flood simulation, and dated satellite radar flood maps within the proposed system.
+  \item Evaluate the planning functions through documented tests and, if participation is secured, tasks completed by intended users.
 \end{enumerate}
 
 \subsection{Significance of the Study}
 
-For disaster planners and responders, OverFlow provides a common view of how changing road access, demand, shelter capacity, and transport affect an evacuation arrangement. Reporting unserved demand makes capacity and connectivity constraints visible. Saved scenarios support review and discussion across offices.
+For disaster planners, the proposed system offers a means of examining how a change in road access or center capacity affects an evacuation arrangement. Its report of unreachable locations and unserved demand can draw attention to constraints that require further planning.
 
-Residents are indirect beneficiaries of better-informed preparedness planning. The study also provides researchers and developers with an evaluated example of combining local geographic data, flood scenarios, and constrained evacuation analysis in one planning tool.
+Laoag residents are the intended indirect beneficiaries of more thoroughly examined evacuation options. The study may also help identify which local data require verification or updating before a geospatial planning tool can be relied upon in practice.
 
 \subsection{Scope and Delimitations of the Study}
 
-The interface covers all 80 coded Laoag barangays. Barangays 38-A Mangato East, 38-B Mangato West, and 39 Sta. Rosa form the technical SFINCS pilot area. The geographic extent of the final flood-model evaluation will follow the available terrain, boundary data, and observations from a dated flood event. Interface coverage does not imply that flood results have been validated citywide.
+The study covers evacuation-scenario planning for Laoag City's 80 barangays. Its proposed functions include barangay selection, entry of evacuation demand and usable center capacities, manual road closures, route and center analysis, geographic display, and scenario comparison. Assignments will use listed evacuation areas and available road connections. Where these data do not support an assignment, the result will be reported as a gap.
 
-The study covers scenario configuration, flood modeling, geographic display, road and center analysis, travel and vehicle estimates, and scenario comparison. Population figures are reference values; the planner supplies expected evacuees and usable capacities for each scenario. Flood exposure informs review, while planner-confirmed closures determine which roads the route analysis excludes.
+The digital elevation model (DEM) provides terrain for barangay-based SFINCS simulations. The model domain may extend beyond the selected barangay to represent water entering or leaving it. Flood-susceptibility data and satellite radar (SAR) detections provide separate reference layers. Given the available terrain and event data, simulated depths will be treated as exploratory, and road closures will remain a planner input.
 
-The supplied elevation grid has approximately 91~m cell spacing, so detailed street-level flood claims require finer terrain and local evaluation. Outputs are planning estimates under stated assumptions. The system is designed for preparedness analysis rather than real-time forecasting, public navigation, or emergency dispatch.
+The study is delimited to preparedness planning and scenario comparison. It does not provide real-time forecasts, emergency dispatch, public navigation, or operational estimates of vehicle requirements and clearance time. Routes are calculated by distance under entered closures; they do not establish travel speed or safety.
 
 \subsection{Operational Definition of Terms}
 
-\textbf{Evacuation Demand.} The expected number of evacuees specified for a selected barangay in a scenario.
+\textbf{Evacuation demand} refers to the number of people expected to evacuate from a barangay in a specified scenario.
 
-\textbf{Evacuation-Center Allocation.} Assignment of evacuees to reachable centers within the usable capacities set for a scenario.
+\textbf{Usable capacity} refers to the number of evacuees a listed evacuation area can accommodate under the conditions entered for that scenario.
 
-\textbf{Feasible Evacuation Route.} A road-network path from an origin to a center under the access conditions specified in a scenario.
+\textbf{Reachable route} refers to a path through the mapped road network after the planner's specified closures have been applied.
 
-\textbf{Flood-Evacuation Scenario.} A set of selected barangays, rainfall and demand assumptions, road access, center availability and capacity, and transport resources used to examine an evacuation arrangement.
+\textbf{Unserved demand} refers to evacuees who cannot be assigned to a reachable evacuation area within its usable capacity.
 
-\textbf{Unserved Demand.} Evacuees who cannot be assigned to a reachable center within the available capacity.
+\textbf{DEM} refers to a grid of elevation values used to represent terrain.
 
-\textbf{Usable Capacity.} The number of evacuees a center can accommodate under the conditions specified for a scenario.
+\textbf{SAR flood extent} refers to an area classified as possible surface water from satellite radar data acquired at a stated time.
+
+\textbf{SFINCS} refers to the flood-simulation method selected for barangay-based scenarios.

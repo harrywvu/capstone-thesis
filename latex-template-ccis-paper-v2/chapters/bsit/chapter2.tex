@@ -1,6 +1,10 @@
 \newpage
 \section{Review of Related Literature}
 \label{Review of Related Literature}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\setcounter{table}{0}
 
 \subsection{Introduction}
 
@@ -44,4 +48,106 @@ Observed behavior also differs from a mathematically shortest path. Lim et al. f
 
 The literature establishes strong methods for flood mapping, road analysis, shelter assessment, and evacuation simulation, but these functions are often studied separately or within data-intensive models. Philippine studies provide evidence on route behavior, center suitability, flooded roads, and location-routing decisions \cite{lim2019,bolanio2023,abuzo2024,develuz2023}. The reviewed local applications do not combine these concerns in one city-level interface for comparing flood and operational scenarios.
 
-OverFlow addresses this gap by bringing flood-scenario information, confirmed road closures, evacuation demand, reachable-center capacity, and resource assumptions into one planning workflow. Its evaluation examines the flood model, route and assignment constraints, system functions, and staff use as distinct questions. This structure allows the study to report what each component demonstrates without requiring readers to treat a route calculation as proof of road safety or an estimated travel time as a prediction of actual evacuation behavior.
+OverFlow addresses this gap by bringing flood-scenario information, road closures, evacuation demand, and reachable-center capacity into one planning workflow. Its evaluation will examine the flood model, route and assignment constraints, system functions, and staff use separately.
+
+\subsection{Review of Related Systems}
+
+The following systems provide concrete comparisons for OverFlow's proposed combination of flood information and evacuation planning. They differ in purpose, data requirements, and the decisions they support.
+
+\textbf{Las Nieves evacuation-center web map.} Bolanio et al. developed a web application for viewing evacuation-center status and spatial capacity in Las Nieves, Agusan del Norte. Their study also assessed existing centers against a flood scenario and mapped site suitability. The system demonstrates the value of keeping local center records and hazard information accessible to planners; the reported application does not describe assigning evacuees through a road network under changing center capacities \cite{bolanio2023}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth,height=0.31\textheight,keepaspectratio]{chapter2/las-nieves-dashboard.png}
+\caption{Las Nieves evacuation-center system dashboard (screenshot provided for this study; system described in \cite{bolanio2023})}
+\label{fig:related-las-nieves}
+\end{figure}
+
+\textbf{Iowa Routing Decision Support System.} Alabbad et al. developed a web application for comparing road conditions, routes to critical facilities, service areas, and possible emergency-facility locations under different flood extents. Its Iowa cases show how inundation can divide a road network and change reachable destinations. Its facility-location analysis selects sites for services, whereas OverFlow proposes assigning scenario demand to listed evacuation areas within entered usable capacities \cite{alabbad2024}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\linewidth,height=0.31\textheight,keepaspectratio]{chapter2/iowa-rdss.png}
+\caption{Iowa Routing Decision Support System interface (screenshot provided for this study; system described in \cite{alabbad2024})}
+\label{fig:related-iowa-rdss}
+\end{figure}
+
+\textbf{Evacuation Management System.} Gonz\'alez-Villa et al. presented a GIS-based system that links assembly points, shelters, routes, and pedestrian and vehicle movement. An operator can revise conditions and run the evacuation again to compare strategies. Its reported case concerns a wildfire in Gran Canaria, so its movement estimates do not establish flood behavior or travel times for Laoag \cite{gonzalezvilla2022}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\linewidth,height=0.31\textheight,keepaspectratio]{chapter2/evacuation-management-system.png}
+\caption{Evacuation Management System map interface (screenshot provided for this study; system described in \cite{gonzalezvilla2022})}
+\label{fig:related-ems}
+\end{figure}
+
+\textbf{LifeSim 2.0.} The U.S. Army Corps of Engineers' LifeSim represents evacuation decisions and movement as flood conditions develop. It uses road, destination, population, warning, and hazard inputs to examine traffic and potential consequences. This provides a more detailed example of flood-evacuation simulation, but its behavioral and traffic requirements exceed the data available for OverFlow's initial distance-based analysis \cite{lifesim2021}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\linewidth,height=0.31\textheight,keepaspectratio]{chapter2/lifesim.png}
+\caption{LifeSim project interface (screenshot provided for this study; system described in \cite{lifesim2021})}
+\label{fig:related-lifesim}
+\end{figure}
+
+These systems show different ways to connect hazards, accessibility, destinations, and scenario analysis. OverFlow adopts a narrower planning task: for a selected Laoag barangay, it proposes a flood scenario and an explicit report of routes, center assignments, and demand that cannot be served under the planner's stated conditions.
+
+\subsection{Review of Related Systems Matrix}
+
+Table~\ref{tab:related-systems} compares documented functions of the reviewed systems with those proposed for OverFlow. The symbols are defined below the table.
+
+\begin{table}[htbp]
+\centering
+\caption{Functions documented in related systems and proposed for OverFlow}
+\label{tab:related-systems}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{4.7cm}ccccc}
+\hline
+\textbf{Function} & \shortstack{\textbf{Las Nieves}\\\textbf{web map}} & \shortstack{\textbf{Iowa}\\\textbf{RDSS}} & \textbf{EMS} & \textbf{LifeSim} & \textbf{OverFlow}\\
+\hline
+Spatial hazard information & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+Road routing or accessibility & X & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+Center or destination information & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+Capacity-limited evacuee assignment & X & X & X & X & $\checkmark$\\
+Comparison of changed scenarios & X & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+Flood simulation within the planning workflow & X & X & X & X & $\checkmark$\\
+\hline
+\end{tabular}
+
+\smallskip
+\parbox{0.94\linewidth}{\footnotesize \textit{Note.} $\checkmark$ = documented in a cited source, or proposed for OverFlow; X = not described in the cited source. Iowa RDSS = Iowa Routing Decision Support System; EMS = Evacuation Management System. Source descriptions: \cite{bolanio2023,alabbad2024,gonzalezvilla2022,lifesim2021}.}
+\end{table}
+
+The comparison highlights two choices in the proposed design. OverFlow will report capacity-limited assignments and unserved demand rather than treating the presence of a center as sufficient. It will also distinguish a SFINCS scenario from historical SAR detections and flood-susceptibility information so that each layer is interpreted according to its source and evidence.
+
+\subsection{Conceptual Framework}
+
+Figure~\ref{fig:overflow-framework} links the planning problem, the proposed analysis, and the results to be examined. The inputs combine prepared Laoag geographic records with values entered for a particular scenario. Terrain, rainfall, and boundary information support a SFINCS run focused on the selected barangay; the model area may extend beyond its boundary to represent water entering or leaving it. SAR and susceptibility layers provide separate hazard references. Road closures, expected evacuees, and usable center capacities govern the evacuation analysis.
+
+\begin{figure}[htbp]
+\centering
+\setlength{\fboxsep}{5pt}
+\fbox{\begin{minipage}[c][3.35cm][c]{0.235\linewidth}
+\centering\small
+\textbf{Problem and inputs}\\[5pt]
+Laoag geographic records, flood information, and planner-entered scenario conditions
+\end{minipage}}
+\hspace{0.01\linewidth}$\longrightarrow$\hspace{0.01\linewidth}
+\fbox{\begin{minipage}[c][3.35cm][c]{0.235\linewidth}
+\centering\small
+\textbf{OverFlow analysis}\\[5pt]
+Barangay-based SFINCS scenario, road routing, center assignment, and planner review
+\end{minipage}}
+\hspace{0.01\linewidth}$\longrightarrow$\hspace{0.01\linewidth}
+\fbox{\begin{minipage}[c][3.35cm][c]{0.235\linewidth}
+\centering\small
+\textbf{Planning outputs}\\[5pt]
+Flood display, reachable routes, center allocation, unserved demand, and scenario comparison
+\end{minipage}}
+\caption{Conceptual framework of the proposed OverFlow system}
+\label{fig:overflow-framework}
+\end{figure}
+
+The framework places the planner between the flood display and the road-access decision. A road is removed from route calculation only when the planner marks it closed. Chapter 3 describes how the data, model, and planning functions will be evaluated.

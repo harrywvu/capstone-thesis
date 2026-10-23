@@ -18,6 +18,13 @@
 *.synctex.gz
 *.toc
 *.xdv
+*.4ct
+*.4tc
+*.dvi
+*.idv
+*.lg
+*.tmp
+*.xref
 
 # Editor and operating-system files
 .DS_Store
